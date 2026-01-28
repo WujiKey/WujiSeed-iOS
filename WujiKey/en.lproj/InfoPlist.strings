@@ -1,0 +1,8 @@
+/*
+  InfoPlist.strings
+  WUJI Key
+  English localization
+*/
+
+CFBundleDisplayName = "WUJI Key";
+CFBundleName = "WUJI Key";
