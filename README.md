@@ -1,8 +1,8 @@
-# WUJI Key (無忌)
+# WUJI Seed (無忌)
 
 > Turn unforgettable memories into recoverable seed phrases.
 
-WUJI Key is an iOS app that generates high-entropy BIP39 mnemonic phrases from memorable personal inputs — your identity, geographic locations, and associated memories. Unlike traditional random number generators, WUJI Key allows you to deterministically regenerate the same mnemonic offline, anytime.
+WUJI Seed is an iOS app that generates high-entropy BIP39 mnemonic phrases from memorable personal inputs — your identity, geographic locations, and associated memories. Unlike traditional random number generators, WUJI Seed allows you to deterministically regenerate the same mnemonic offline, anytime.
 
 English | [中文](README.zh-CN.md)
 
@@ -75,4 +75,4 @@ Apache License 2.0
 
 ---
 
-**WUJI Key** — For the Memories That Never Fade | 無忌 無記 無所顧忌
+**WUJI Seed** — For the Memories That Never Fade | 無忌 無記 無所顧忌

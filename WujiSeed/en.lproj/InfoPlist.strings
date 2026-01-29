@@ -1,8 +1,8 @@
 /*
   InfoPlist.strings
-  WUJI Key
+  WUJI Seed
   English localization
 */
 
-CFBundleDisplayName = "WUJI Key";
-CFBundleName = "WUJI Key";
+CFBundleDisplayName = "WUJI Seed";
+CFBundleName = "WUJI Seed";

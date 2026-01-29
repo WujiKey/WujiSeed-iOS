@@ -152,7 +152,7 @@
 "guide.memory.warning.tips" = "Etiquetas muy simples, abstractas o sin sentido son fáciles de olvidar y adivinar";
 "guide.memory.warning.title" = "⚠️ Evita etiquetas así";
 "guide.memory.warning.location" = "⚠️ Los 5 lugares deben estar en diferentes regiones — mientras más separados, más seguro";
-"home.app.name" = "WUJI Key";
+"home.app.name" = "WUJI Seed";
 "home.enslogan" = "For the Memories That Never Fade.";
 "home.f9location" = "Ubicación F9";
 "home.manual" = "Manual de usuario";
@@ -175,8 +175,8 @@
 "manual.flow.recover.steps" = "Código de Posición + Identificador + 5 Lugares";
 "manual.flow.recover.title" = "Método de Recuperación 2";
 "manual.flow.title" = "Flujo de Recuperación";
-"manual.intro.content" = "Reconstruye tu frase semilla con secretos que nunca olvidarás.\nLas frases semilla tradicionales son difíciles de recordar — piérdelas y desaparecen para siempre.\nWUJI Key: memorable, recuperable, infiltrable.";
-"manual.intro.title" = "¿Qué es WUJI Key?";
+"manual.intro.content" = "Reconstruye tu frase semilla con secretos que nunca olvidarás.\nLas frases semilla tradicionales son difíciles de recordar — piérdelas y desaparecen para siempre.\nWUJI Seed: memorable, recuperable, infiltrable.";
+"manual.intro.title" = "¿Qué es WUJI Seed?";
 "manual.principle" = "Identificador Personal + 5 Lugares con Recuerdos\n→ Frase Semilla Única de 24 Palabras";
 "manual.guides.coords.title" = "Cómo Obtener Coordenadas";
 "manual.guides.memory.title" = "Cómo Escribir Recuerdos";
@@ -189,7 +189,7 @@
 "manual.tips.verify.title" = "Prueba Tu Memoria";
 "manual.tips.verify.content" = "Después de preparar en papel, espera unos días y completa la información de memoria. Compara ambas versiones. Si coinciden, tu conjunto de recuerdos es confiable para generar la frase semilla.";
 "manual.onboarding.title" = "Ver guía de inicio";
-"manual.about.title" = "Acerca de WUJI Key";
+"manual.about.title" = "Acerca de WUJI Seed";
 "manual.title" = "Manual";
 "namesalt.context" = "Ingrese un nombre fácil de recordar";
 "namesalt.error.empty" = "Por favor ingrese un identificador personal";
@@ -388,8 +388,8 @@
 
 /* About */
 "about.current_version" = "Versión actual";
-"about.title" = "Acerca de WUJI Key";
-"about.description" = "WUJI Key está permanentemente fuera de línea y no puede conectarse a internet. Totalmente de código abierto, código transparente, gratis para siempre.";
+"about.title" = "Acerca de WUJI Seed";
+"about.description" = "WUJI Seed está permanentemente fuera de línea y no puede conectarse a internet. Totalmente de código abierto, código transparente, gratis para siempre.";
 "about.open_source_title" = "Repositorio de código abierto";
 "about.open_github" = "Ver en GitHub";
 "about.feedback" = "¿Preguntas? Comentarios en GitHub";
@@ -397,8 +397,8 @@
 
 /* Donation */
 "donation.current_version" = "Versión actual";
-"donation.title" = "Apoya WUJI Key";
-"donation.description" = "WUJI Key es un proyecto de código abierto,\ntransparente y gratuito para siempre.\n\nSi esta herramienta te resulta útil,\nconsidera invitar al desarrollador a un café ☕";
+"donation.title" = "Apoya WUJI Seed";
+"donation.description" = "WUJI Seed es un proyecto de código abierto,\ntransparente y gratuito para siempre.\n\nSi esta herramienta te resulta útil,\nconsidera invitar al desarrollador a un café ☕";
 "donation.supported_coins" = "Acepta BTC / ETH / USDT / USDC / SOL / ADA / XRP";
 "donation.address_title" = "Dirección de donación";
 "donation.copy_address" = "Copiar dirección";
@@ -408,19 +408,19 @@
 /* Onboarding */
 "onboarding.skip" = "Omitir";
 "onboarding.page1.title" = "No Necesitas Memorizar 24 Palabras";
-"onboarding.page1.message" = "En lo profundo de tu cerebro\nyace una llave ancestral\n\nMemoria espacial\nel instinto más antiguo y sólido de la humanidad\nencendida por el hipocampo\ngrabada en las profundidades de tu mente\nconvirtiéndose en tu recuerdo más perdurable\n\nUsa WUJI Key\npara despertarla";
+"onboarding.page1.message" = "En lo profundo de tu cerebro\nyace una llave ancestral\n\nMemoria espacial\nel instinto más antiguo y sólido de la humanidad\nencendida por el hipocampo\ngrabada en las profundidades de tu mente\nconvirtiéndose en tu recuerdo más perdurable\n\nUsa WUJI Seed\npara despertarla";
 "onboarding.page2.title" = "F9Grid";
 "onboarding.page2.message" = "Haciendo la memoria espacial utilizable\ncortamos la Tierra en celdas uniformes\ncomprimiendo el caos en orden\n\nError de área menor al 14.2857%\nfusionado con direcciones Luoshu\nincluso 11 metros de desviación\ncaen en la misma celda\n\nLa ubicación es la clave";
 "onboarding.page2.before.title" = "Método Tradicional";
 "onboarding.page2.before.content" = "Memoriza 24 palabras aleatorias que nunca recordarás";
-"onboarding.page2.after.title" = "Método WUJI Key";
+"onboarding.page2.after.title" = "Método WUJI Seed";
 "onboarding.page2.after.content" = "Genera esas 24 palabras a partir de recuerdos que nunca olvidarás";
 "onboarding.page3.title" = "¿Por Qué Es Seguro?";
 "onboarding.page3.point1" = "Anti-rainbow table: salt único por nombre";
 "onboarding.page3.point2" = "Alta entropía: 245+ bits siguiendo instrucciones";
 "onboarding.page3.point3" = "Anti-GPU/ASIC/cuántico: Argon2id de alto parámetro";
 "onboarding.page3.point4" = "Umbral 3-de-5: recupera aunque olvides 2 lugares";
-"onboarding.page3.point5" = "WUJI Key totalmente offline, sin conexión a red";
+"onboarding.page3.point5" = "WUJI Seed totalmente offline, sin conexión a red";
 "onboarding.page4.title" = "Cómo Funciona";
 "onboarding.page4.step1" = "Nombre Único";
 "onboarding.page4.step2" = "Coordenadas de Lugar";
@@ -428,4 +428,4 @@
 "onboarding.page4.step4" = "Frase Semilla de 24 Palabras";
 "onboarding.page5.title" = "¿Listo?";
 "onboarding.page5.message" = "Comienza a crear tu clave basada en memoria";
-"onboarding.page5.button" = "Comenzar con WUJI Key";
+"onboarding.page5.button" = "Comenzar con WUJI Seed";

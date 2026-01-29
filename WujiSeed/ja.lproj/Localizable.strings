@@ -109,7 +109,7 @@
 "guide.coords.china.content" = "百度、高徳、テンセント、Appleの地図座標は暗号化されており使用できません。Googleの衛星画像を推奨。";
 "guide.coords.china.title" = "中国本土の座標について：";
 "guide.coords.example" = "例：";
-"guide.coords.f9.step1" = "1. WUJI Keyホームで「F9ロケーション」をタップ";
+"guide.coords.f9.step1" = "1. WUJI Seedホームで「F9ロケーション」をタップ";
 "guide.coords.f9.step2" = "2. 屋外の開けた場所でしばらく待機";
 "guide.coords.f9.step3" = "3. 下部に現在の座標が表示";
 "guide.coords.f9.tips" = "最適：現地取得、最も正確";
@@ -153,7 +153,7 @@
 "guide.memory.warning.tips" = "シンプルすぎる、抽象的すぎる、意味のないタグは忘れやすく推測されやすい";
 "guide.memory.warning.title" = "⚠️ こういうタグは避けて";
 "guide.memory.warning.location" = "⚠️ 5つの場所は異なる地域に分散させる — 離れているほど安全";
-"home.app.name" = "WUJI Key";
+"home.app.name" = "WUJI Seed";
 "home.enslogan" = "For the Memories That Never Fade.";
 "home.f9location" = "F9位置情報";
 "home.manual" = "ユーザーマニュアル";
@@ -176,8 +176,8 @@
 "manual.flow.recover.steps" = "位置コード + 識別子 + 全5つの場所";
 "manual.flow.recover.title" = "復元方法2";
 "manual.flow.title" = "復元フロー";
-"manual.intro.content" = "忘れない秘密で、シードフレーズを再構築。\n従来のシードフレーズは覚えにくく、失うと取り戻せません。\nWUJI Key：記憶できる、復元できる、漏洩しない。";
-"manual.intro.title" = "WUJI Keyとは？";
+"manual.intro.content" = "忘れない秘密で、シードフレーズを再構築。\n従来のシードフレーズは覚えにくく、失うと取り戻せません。\nWUJI Seed：記憶できる、復元できる、漏洩しない。";
+"manual.intro.title" = "WUJI Seedとは？";
 "manual.principle" = "個人識別子 + 5つの場所と記憶\n→ 唯一の24単語シードフレーズ";
 "manual.guides.coords.title" = "座標の取得方法";
 "manual.guides.memory.title" = "記憶の書き方";
@@ -190,12 +190,12 @@
 "manual.tips.verify.title" = "記憶をテスト";
 "manual.tips.verify.content" = "紙に準備した後、数日待ってから記憶だけで再入力し、両方を比較してください。一致すれば、その記憶セットはシードフレーズ生成に信頼できます。";
 "manual.onboarding.title" = "初心者ガイドを見る";
-"manual.about.title" = "WUJI Keyについて";
+"manual.about.title" = "WUJI Seedについて";
 "manual.title" = "ユーザーマニュアル";
 "namesalt.context" = "シードフレーズに名前を付ける";
 "namesalt.error.empty" = "個人識別子を入力してください";
 "namesalt.error.too_short" = "個人識別子が短すぎます（最低2文字または4文字）";
-"namesalt.example" = "例：無忌@wuji.lab";
+"namesalt.example" = "例：無忌@wujikey.com";
 "namesalt.placeholder" = "失われない個人識別子を入力";
 "namesalt.security_warning" = "本名、ID番号、メールアドレス、ウォレットアドレスなどを使用できます\n個性的で失われない情報アンカーとして";
 "places.alert.confirm_clear_message" = "5つの場所すべてがクリアされ、元に戻せません。続けますか？";
@@ -389,8 +389,8 @@
 
 /* About */
 "about.current_version" = "現在のバージョン";
-"about.title" = "WUJI Key について";
-"about.description" = "WUJI Key は完全オフラインでネットワーク接続不可、完全オープンソースのプロジェクトです。コードは公開透明、永久無料で使用できます。";
+"about.title" = "WUJI Seed について";
+"about.description" = "WUJI Seed は完全オフラインでネットワーク接続不可、完全オープンソースのプロジェクトです。コードは公開透明、永久無料で使用できます。";
 "about.open_source_title" = "オープンソースリポジトリ";
 "about.open_github" = "GitHub で見る";
 "about.feedback" = "ご質問はGitHubでフィードバック";
@@ -398,8 +398,8 @@
 
 /* Donation */
 "donation.current_version" = "現在のバージョン";
-"donation.title" = "WUJI Key を応援";
-"donation.description" = "WUJI Key は完全オープンソースのプロジェクトです。\nコードは公開され、永久に無料で使用できます。\n\nこのツールが役に立ったら、\n開発者にコーヒーをおごってください ☕";
+"donation.title" = "WUJI Seed を応援";
+"donation.description" = "WUJI Seed は完全オープンソースのプロジェクトです。\nコードは公開され、永久に無料で使用できます。\n\nこのツールが役に立ったら、\n開発者にコーヒーをおごってください ☕";
 "donation.supported_coins" = "BTC / ETH / USDT / USDC / SOL / ADA / XRP に対応";
 "donation.address_title" = "寄付アドレス";
 "donation.copy_address" = "アドレスをコピー";
@@ -409,19 +409,19 @@
 /* Onboarding */
 "onboarding.skip" = "スキップ";
 "onboarding.page1.title" = "24単語を覚える必要なし";
-"onboarding.page1.message" = "あなたの脳の奥深くに\n古代の鍵が眠っている\n\n空間記憶\n人類最古にして最も強固な本能\n海馬によって点火され\n脳の深層に刻まれ\n最も失われにくい記憶となる\n\nWUJI Keyで\n呼び覚まそう";
+"onboarding.page1.message" = "あなたの脳の奥深くに\n古代の鍵が眠っている\n\n空間記憶\n人類最古にして最も強固な本能\n海馬によって点火され\n脳の深層に刻まれ\n最も失われにくい記憶となる\n\nWUJI Seedで\n呼び覚まそう";
 "onboarding.page2.title" = "F9Gridグリッド";
 "onboarding.page2.message" = "空間記憶を実用化する\n地球を等形グリッドに分割\n混沌を秩序に圧縮\n\n面積誤差は14.2857%未満\n洛書九宮の方位と融合\n11メートルの誤差でも\n同じグリッドに収まる\n\n位置が鍵となる";
 "onboarding.page2.before.title" = "従来の方法";
 "onboarding.page2.before.content" = "覚えられない24個の単語を暗記する";
-"onboarding.page2.after.title" = "WUJI Keyの方法";
+"onboarding.page2.after.title" = "WUJI Seedの方法";
 "onboarding.page2.after.content" = "忘れられない記憶から24個の単語を生成する";
 "onboarding.page3.title" = "なぜ安全？";
 "onboarding.page3.point1" = "レインボーテーブル対策：独立した名前ソルト";
 "onboarding.page3.point2" = "高エントロピー：指示に従えば245+ビット";
 "onboarding.page3.point3" = "GPU/ASIC/量子対策：高パラメータArgon2id";
 "onboarding.page3.point4" = "3-of-5閾値：2地点忘れても復元可能";
-"onboarding.page3.point5" = "WUJI Key完全オフライン、ネットワーク接続不可";
+"onboarding.page3.point5" = "WUJI Seed完全オフライン、ネットワーク接続不可";
 "onboarding.page4.title" = "仕組み";
 "onboarding.page4.step1" = "独立した名前";
 "onboarding.page4.step2" = "場所の座標";
@@ -429,4 +429,4 @@
 "onboarding.page4.step4" = "24単語のシードフレーズ";
 "onboarding.page5.title" = "準備はできましたか？";
 "onboarding.page5.message" = "記憶ベースの鍵を作成しましょう";
-"onboarding.page5.button" = "WUJI Keyを始める";
+"onboarding.page5.button" = "WUJI Seedを始める";

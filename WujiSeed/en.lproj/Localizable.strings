@@ -109,7 +109,7 @@
 "guide.coords.china.content" = "Baidu, Amap, Tencent, and Apple Maps coordinates are encrypted and unusable. Use Google satellite layer.";
 "guide.coords.china.title" = "China Region Coordinates:";
 "guide.coords.example" = "Example:";
-"guide.coords.f9.step1" = "1. Tap F9 Location on WUJI Key home page";
+"guide.coords.f9.step1" = "1. Tap F9 Location on WUJI Seed home page";
 "guide.coords.f9.step2" = "2. Wait in an open outdoor area";
 "guide.coords.f9.step3" = "3. Current coordinates shown at bottom";
 "guide.coords.f9.tips" = "Best for: On-site capture, most accurate";
@@ -153,7 +153,7 @@
 "guide.memory.warning.tips" = "Tags that are too simple, abstract, or meaningless are easy to forget and guess";
 "guide.memory.warning.title" = "⚠️ Avoid Tags Like These";
 "guide.memory.warning.location" = "⚠️ Spread 5 places across different regions — the wider apart, the safer";
-"home.app.name" = "WUJI Key";
+"home.app.name" = "WUJI Seed";
 "home.enslogan" = "For the Memories That Never Fade.";
 "home.f9location" = "F9 Location";
 "home.manual" = "User Manual";
@@ -176,8 +176,8 @@
 "manual.flow.recover.steps" = "Position Code + Identifier + All 5 Places & Memories";
 "manual.flow.recover.title" = "Recovery Method 2";
 "manual.flow.title" = "Recovery Flow";
-"manual.intro.content" = "Rebuild your seed phrase with secrets you'll never forget.\nTraditional seed phrases are hard to remember — lose them and they're gone forever.\nWUJI Key: memorable, recoverable, unleakable.";
-"manual.intro.title" = "What is WUJI Key?";
+"manual.intro.content" = "Rebuild your seed phrase with secrets you'll never forget.\nTraditional seed phrases are hard to remember — lose them and they're gone forever.\nWUJI Seed: memorable, recoverable, unleakable.";
+"manual.intro.title" = "What is WUJI Seed?";
 "manual.principle" = "Personal Identifier + 5 Places with Memories\n→ Unique 24-word Seed Phrase";
 "manual.guides.coords.title" = "How to Get Coordinates";
 "manual.guides.memory.title" = "How to Write Memories";
@@ -190,12 +190,12 @@
 "manual.tips.verify.title" = "Test Your Memory";
 "manual.tips.verify.content" = "After preparing on paper, wait a few days and fill in the information again from memory. Compare both versions. If they match, your memory set is reliable for seed phrase generation.";
 "manual.onboarding.title" = "View Onboarding Guide";
-"manual.about.title" = "About WUJI Key";
+"manual.about.title" = "About WUJI Seed";
 "manual.title" = "User Manual";
 "namesalt.context" = "Add a personal ID to your seed phrase";
 "namesalt.error.empty" = "Please enter a personal identifier";
 "namesalt.error.too_short" = "Personal identifier is too short (min 2 CJK or 4 characters)";
-"namesalt.example" = "Example: 無忌@wuji.lab";
+"namesalt.example" = "Example: 無忌@wujikey.com";
 "namesalt.placeholder" = "Enter a personal identifier";
 "namesalt.security_warning" = "Use your real name, ID number, email, or even wallet address\nas a personalized anchor you'll never lose";
 "places.alert.confirm_clear_message" = "This will clear all 5 places and cannot be undone. Continue?";
@@ -389,8 +389,8 @@
 
 /* About */
 "about.current_version" = "Current Version";
-"about.title" = "About WUJI Key";
-"about.description" = "WUJI Key is permanently offline and cannot connect to the internet. Fully open-source, transparent code, free to use forever.";
+"about.title" = "About WUJI Seed";
+"about.description" = "WUJI Seed is permanently offline and cannot connect to the internet. Fully open-source, transparent code, free to use forever.";
 "about.open_source_title" = "Open Source Repository";
 "about.open_github" = "View on GitHub";
 "about.feedback" = "Questions? Feedback on GitHub";
@@ -399,19 +399,19 @@
 /* Onboarding */
 "onboarding.skip" = "Skip";
 "onboarding.page1.title" = "No Need to Memorize 24 Words";
-"onboarding.page1.message" = "Deep within your brain\nlies an ancient key\n\nSpatial memory\nhumanity's oldest, strongest instinct\nignited by the hippocampus\netched into the depths of your mind\nbecoming your most enduring memory\n\nUse WUJI Key\nto awaken it";
+"onboarding.page1.message" = "Deep within your brain\nlies an ancient key\n\nSpatial memory\nhumanity's oldest, strongest instinct\nignited by the hippocampus\netched into the depths of your mind\nbecoming your most enduring memory\n\nUse WUJI Seed\nto awaken it";
 "onboarding.page2.title" = "F9Grid";
 "onboarding.page2.message" = "Making spatial memory truly usable\nwe slice Earth into uniform grids\ncompressing chaos into order\n\nArea error below 14.2857%\nfused with Luoshu 9-palace directions\neven 11 meters of drift\nstill falls in the same grid\n\nLocation is the key";
 "onboarding.page2.before.title" = "Traditional Way";
 "onboarding.page2.before.content" = "Memorize 24 random words you'll never remember";
-"onboarding.page2.after.title" = "WUJI Key Way";
+"onboarding.page2.after.title" = "WUJI Seed Way";
 "onboarding.page2.after.content" = "Generate those 24 words from memories you'll never forget";
 "onboarding.page3.title" = "Why Is It Secure?";
 "onboarding.page3.point1" = "Anti-rainbow table: unique name-based salt";
 "onboarding.page3.point2" = "High entropy: 245+ bits when following instructions";
 "onboarding.page3.point3" = "Anti-GPU/ASIC/quantum: high-param Argon2id KDF";
 "onboarding.page3.point4" = "3-of-5 threshold: recover even if 2 locations forgotten";
-"onboarding.page3.point5" = "WUJI Key is fully offline, cannot connect to network";
+"onboarding.page3.point5" = "WUJI Seed is fully offline, cannot connect to network";
 "onboarding.page4.title" = "How It Works";
 "onboarding.page4.step1" = "Unique Name";
 "onboarding.page4.step2" = "Location Coordinates";
@@ -419,4 +419,4 @@
 "onboarding.page4.step4" = "24-Word Seed Phrase";
 "onboarding.page5.title" = "Ready?";
 "onboarding.page5.message" = "Start creating your memory-based key";
-"onboarding.page5.button" = "Start Using WUJI Key";
+"onboarding.page5.button" = "Start Using WUJI Seed";
