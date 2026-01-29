@@ -54,15 +54,15 @@
 
 ```bash
 # 克隆仓库
-git clone https://github.com/WujiKey/WujiKey.git
-cd WujiKey
+git clone https://github.com/WujiSeed/WujiSeed.git
+cd WujiSeed
 
 # 打开项目
-open WujiKey.xcodeproj
+open WujiSeed.xcodeproj
 
 # 命令行构建
-xcodebuild -project WujiKey.xcodeproj \
-  -scheme WujiKey \
+xcodebuild -project WujiSeed.xcodeproj \
+  -scheme WujiSeed \
   -configuration Release \
   -destination 'platform=iOS Simulator,name=iPhone 15' \
   build
@@ -71,20 +71,20 @@ xcodebuild -project WujiKey.xcodeproj \
 ### 运行测试
 
 ```bash
-xcodebuild test -project WujiKey.xcodeproj \
-  -scheme WujiKey \
+xcodebuild test -project WujiSeed.xcodeproj \
+  -scheme WujiSeed \
   -destination 'platform=iOS Simulator,name=iPhone 15'
 ```
 
 ## 依赖
 
 - [Swift-Sodium](https://github.com/jedisct1/swift-sodium) 0.9.1 — Argon2id 实现
-- [F9Grid](https://github.com/WujiTech/F9Grid) — 地理网格编码
+- [F9Grid](https://github.com/WujiKey/F9Grid) — 地理网格编码
 
 ## 文档
 
-- [WujiKey 协议规范 (中文)](Docs/WujiKey-Technical-Specification-zh.md)
-- [WujiKey Protocol Specification (English)](Docs/WujiKey-Technical-Specification.md)
+- [WujiSeed 协议规范 (中文)](Docs/WujiSeed-Technical-Specification-zh.md)
+- [WujiSeed Protocol Specification (English)](Docs/WujiSeed-Technical-Specification.md)
 
 ## 安全注意事项
 

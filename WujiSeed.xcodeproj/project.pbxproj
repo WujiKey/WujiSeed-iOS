@@ -1,0 +1,657 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D756FAE92EE2F7380070A308 /* F9Grid in Frameworks */ = {isa = PBXBuildFile; productRef = D756FAE82EE2F7380070A308 /* F9Grid */; };
+		D7C50BC32EACC159006E1FBC /* Clibsodium in Frameworks */ = {isa = PBXBuildFile; productRef = D7C50BC22EACC159006E1FBC /* Clibsodium */; };
+		D7C50BC52EACC159006E1FBC /* Sodium in Frameworks */ = {isa = PBXBuildFile; productRef = D7C50BC42EACC159006E1FBC /* Sodium */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D794FFE72EA1D5A4007B1A94 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D794FFC82EA1D5A1007B1A94 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D794FFCF2EA1D5A1007B1A94;
+			remoteInfo = WujiSeed;
+		};
+		D794FFF12EA1D5A4007B1A94 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D794FFC82EA1D5A1007B1A94 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D794FFCF2EA1D5A1007B1A94;
+			remoteInfo = WujiSeed;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D794FFD02EA1D5A1007B1A94 /* WujiSeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WujiSeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D794FFE62EA1D5A4007B1A94 /* WujiSeedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WujiSeedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D794FFF02EA1D5A4007B1A94 /* WujiSeedUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WujiSeedUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		D794FFF82EA1D5A4007B1A94 /* Exceptions for "WujiSeed" folder in "WujiSeed" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = D794FFCF2EA1D5A1007B1A94 /* WujiSeed */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		D794FFD22EA1D5A1007B1A94 /* WujiSeed */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				D794FFF82EA1D5A4007B1A94 /* Exceptions for "WujiSeed" folder in "WujiSeed" target */,
+			);
+			path = WujiSeed;
+			sourceTree = "<group>";
+		};
+		D794FFE92EA1D5A4007B1A94 /* WujiSeedTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = WujiSeedTests;
+			sourceTree = "<group>";
+		};
+		D794FFF32EA1D5A4007B1A94 /* WujiSeedUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = WujiSeedUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D794FFCD2EA1D5A1007B1A94 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D7C50BC32EACC159006E1FBC /* Clibsodium in Frameworks */,
+				D7C50BC52EACC159006E1FBC /* Sodium in Frameworks */,
+				D756FAE92EE2F7380070A308 /* F9Grid in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D794FFE32EA1D5A4007B1A94 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D794FFED2EA1D5A4007B1A94 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D794FFC72EA1D5A1007B1A94 = {
+			isa = PBXGroup;
+			children = (
+				D794FFD22EA1D5A1007B1A94 /* WujiSeed */,
+				D794FFE92EA1D5A4007B1A94 /* WujiSeedTests */,
+				D794FFF32EA1D5A4007B1A94 /* WujiSeedUITests */,
+				D794FFD12EA1D5A1007B1A94 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D794FFD12EA1D5A1007B1A94 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D794FFD02EA1D5A1007B1A94 /* WujiSeed.app */,
+				D794FFE62EA1D5A4007B1A94 /* WujiSeedTests.xctest */,
+				D794FFF02EA1D5A4007B1A94 /* WujiSeedUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D794FFCF2EA1D5A1007B1A94 /* WujiSeed */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D794FFF92EA1D5A4007B1A94 /* Build configuration list for PBXNativeTarget "WujiSeed" */;
+			buildPhases = (
+				D794FFCC2EA1D5A1007B1A94 /* Sources */,
+				D794FFCD2EA1D5A1007B1A94 /* Frameworks */,
+				D794FFCE2EA1D5A1007B1A94 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				D794FFD22EA1D5A1007B1A94 /* WujiSeed */,
+			);
+			name = WujiSeed;
+			packageProductDependencies = (
+				D7C50BC22EACC159006E1FBC /* Clibsodium */,
+				D7C50BC42EACC159006E1FBC /* Sodium */,
+				D756FAE82EE2F7380070A308 /* F9Grid */,
+			);
+			productName = WujiSeed;
+			productReference = D794FFD02EA1D5A1007B1A94 /* WujiSeed.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D794FFE52EA1D5A4007B1A94 /* WujiSeedTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D794FFFE2EA1D5A4007B1A94 /* Build configuration list for PBXNativeTarget "WujiSeedTests" */;
+			buildPhases = (
+				D794FFE22EA1D5A4007B1A94 /* Sources */,
+				D794FFE32EA1D5A4007B1A94 /* Frameworks */,
+				D794FFE42EA1D5A4007B1A94 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D794FFE82EA1D5A4007B1A94 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				D794FFE92EA1D5A4007B1A94 /* WujiSeedTests */,
+			);
+			name = WujiSeedTests;
+			packageProductDependencies = (
+			);
+			productName = WujiSeedTests;
+			productReference = D794FFE62EA1D5A4007B1A94 /* WujiSeedTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D794FFEF2EA1D5A4007B1A94 /* WujiSeedUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D79400012EA1D5A4007B1A94 /* Build configuration list for PBXNativeTarget "WujiSeedUITests" */;
+			buildPhases = (
+				D794FFEC2EA1D5A4007B1A94 /* Sources */,
+				D794FFED2EA1D5A4007B1A94 /* Frameworks */,
+				D794FFEE2EA1D5A4007B1A94 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D794FFF22EA1D5A4007B1A94 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				D794FFF32EA1D5A4007B1A94 /* WujiSeedUITests */,
+			);
+			name = WujiSeedUITests;
+			packageProductDependencies = (
+			);
+			productName = WujiSeedUITests;
+			productReference = D794FFF02EA1D5A4007B1A94 /* WujiSeedUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D794FFC82EA1D5A1007B1A94 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1630;
+				LastUpgradeCheck = 1630;
+				TargetAttributes = {
+					D794FFCF2EA1D5A1007B1A94 = {
+						CreatedOnToolsVersion = 16.3;
+					};
+					D794FFE52EA1D5A4007B1A94 = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = D794FFCF2EA1D5A1007B1A94;
+					};
+					D794FFEF2EA1D5A4007B1A94 = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = D794FFCF2EA1D5A1007B1A94;
+					};
+				};
+			};
+			buildConfigurationList = D794FFCB2EA1D5A1007B1A94 /* Build configuration list for PBXProject "WujiSeed" */;
+			developmentRegion = "zh-Hans";
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				"zh-Hans",
+				"zh-Hant",
+				en,
+				Base,
+				es,
+				ja,
+			);
+			mainGroup = D794FFC72EA1D5A1007B1A94;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				D7C50BC12EACBF7F006E1FBC /* XCRemoteSwiftPackageReference "swift-sodium" */,
+				D756FAE72EE2F7380070A308 /* XCRemoteSwiftPackageReference "F9Grid" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = D794FFD12EA1D5A1007B1A94 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D794FFCF2EA1D5A1007B1A94 /* WujiSeed */,
+				D794FFE52EA1D5A4007B1A94 /* WujiSeedTests */,
+				D794FFEF2EA1D5A4007B1A94 /* WujiSeedUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D794FFCE2EA1D5A1007B1A94 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D794FFE42EA1D5A4007B1A94 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D794FFEE2EA1D5A4007B1A94 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D794FFCC2EA1D5A1007B1A94 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D794FFE22EA1D5A4007B1A94 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D794FFEC2EA1D5A4007B1A94 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D794FFE82EA1D5A4007B1A94 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D794FFCF2EA1D5A1007B1A94 /* WujiSeed */;
+			targetProxy = D794FFE72EA1D5A4007B1A94 /* PBXContainerItemProxy */;
+		};
+		D794FFF22EA1D5A4007B1A94 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D794FFCF2EA1D5A1007B1A94 /* WujiSeed */;
+			targetProxy = D794FFF12EA1D5A4007B1A94 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		D79400002EA1D5A4007B1A94 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BB68EPF2FA;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wujikey.WujiSeedTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WujiSeed.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/WujiSeed";
+			};
+			name = Release;
+		};
+		D79400022EA1D5A4007B1A94 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BB68EPF2FA;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wujikey.WujiSeedUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = WujiSeed;
+			};
+			name = Debug;
+		};
+		D79400032EA1D5A4007B1A94 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BB68EPF2FA;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wujikey.WujiSeedUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = WujiSeed;
+			};
+			name = Release;
+		};
+		D794FFFA2EA1D5A4007B1A94 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = BB68EPF2FA;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WujiSeed/Info.plist;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access is needed to scan QR codes for seed phrase recovery.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "F9 Location needs access to your location to display GPS coordinates and F9Grid position code.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Photo library access is needed to save encrypted backup QR codes.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Photo library access is needed to select QR code images for recovery.";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wujikey.WujiSeed;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D794FFFB2EA1D5A4007B1A94 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = BB68EPF2FA;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WujiSeed/Info.plist;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access is needed to scan QR codes for seed phrase recovery.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "F9 Location needs access to your location to display GPS coordinates and F9Grid position code.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Photo library access is needed to save encrypted backup QR codes.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Photo library access is needed to select QR code images for recovery.";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wujikey.WujiSeed;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		D794FFFC2EA1D5A4007B1A94 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = BB68EPF2FA;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D794FFFD2EA1D5A4007B1A94 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = BB68EPF2FA;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D794FFFF2EA1D5A4007B1A94 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BB68EPF2FA;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wujikey.WujiSeedTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WujiSeed.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/WujiSeed";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D79400012EA1D5A4007B1A94 /* Build configuration list for PBXNativeTarget "WujiSeedUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D79400022EA1D5A4007B1A94 /* Debug */,
+				D79400032EA1D5A4007B1A94 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D794FFCB2EA1D5A1007B1A94 /* Build configuration list for PBXProject "WujiSeed" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D794FFFC2EA1D5A4007B1A94 /* Debug */,
+				D794FFFD2EA1D5A4007B1A94 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D794FFF92EA1D5A4007B1A94 /* Build configuration list for PBXNativeTarget "WujiSeed" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D794FFFA2EA1D5A4007B1A94 /* Debug */,
+				D794FFFB2EA1D5A4007B1A94 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D794FFFE2EA1D5A4007B1A94 /* Build configuration list for PBXNativeTarget "WujiSeedTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D794FFFF2EA1D5A4007B1A94 /* Debug */,
+				D79400002EA1D5A4007B1A94 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D756FAE72EE2F7380070A308 /* XCRemoteSwiftPackageReference "F9Grid" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WujiKey/F9Grid.git";
+			requirement = {
+				kind = exactVersion;
+				version = 1.1.0;
+			};
+		};
+		D7C50BC12EACBF7F006E1FBC /* XCRemoteSwiftPackageReference "swift-sodium" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jedisct1/swift-sodium";
+			requirement = {
+				kind = exactVersion;
+				version = 0.9.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D756FAE82EE2F7380070A308 /* F9Grid */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D756FAE72EE2F7380070A308 /* XCRemoteSwiftPackageReference "F9Grid" */;
+			productName = F9Grid;
+		};
+		D7C50BC22EACC159006E1FBC /* Clibsodium */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D7C50BC12EACBF7F006E1FBC /* XCRemoteSwiftPackageReference "swift-sodium" */;
+			productName = Clibsodium;
+		};
+		D7C50BC42EACC159006E1FBC /* Sodium */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D7C50BC12EACBF7F006E1FBC /* XCRemoteSwiftPackageReference "swift-sodium" */;
+			productName = Sodium;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = D794FFC82EA1D5A1007B1A94 /* Project object */;
+}

@@ -1,8 +1,0 @@
-/*
-  InfoPlist.strings
-  WujiKey (简体中文)
-*/
-
-"CFBundleDisplayName" = "无忌";
-"CFBundleName" = "无忌";
-"NSCameraUsageDescription" = "需要使用相机拍照以获取字符串";

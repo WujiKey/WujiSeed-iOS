@@ -1,10 +1,10 @@
-# WujiKey Privacy Policy
+# WujiSeed Privacy Policy
 
 **Last Updated: January 2026**
 
 ## Overview
 
-WujiKey is a fully offline application that does not collect, store, or transmit any user data. Your privacy is our top priority.
+WujiSeed is a fully offline application that does not collect, store, or transmit any user data. Your privacy is our top priority.
 
 ## Data Collection
 
@@ -60,17 +60,17 @@ We may update this Privacy Policy from time to time. Any changes will be reflect
 
 If you have any questions about this Privacy Policy, please submit an issue on GitHub:
 
-**GitHub:** https://github.com/WujiKey/WujiKey/issues
+**GitHub:** https://github.com/WujiSeed/WujiSeed/issues
 
 ---
 
-# WujiKey 隐私政策
+# WujiSeed 隐私政策
 
 **最后更新：2026年1月**
 
 ## 概述
 
-WujiKey 是一款完全离线运行的应用，不收集、存储或传输任何用户数据。您的隐私是我们的首要考虑。
+WujiSeed 是一款完全离线运行的应用，不收集、存储或传输任何用户数据。您的隐私是我们的首要考虑。
 
 ## 数据收集
 
@@ -126,4 +126,4 @@ WujiKey 是一款完全离线运行的应用，不收集、存储或传输任何
 
 如果您对本隐私政策有任何疑问，请通过 GitHub 提交 Issue：
 
-**GitHub：** https://github.com/WujiKey/WujiKey/issues
+**GitHub：** https://github.com/WujiSeed/WujiSeed/issues

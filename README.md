@@ -54,12 +54,12 @@ English | [中文](README.zh-CN.md)
 ## Dependencies
 
 - [Swift-Sodium](https://github.com/jedisct1/swift-sodium) 0.9.1 — Argon2id implementation
-- [F9Grid](https://github.com/WujiTech/F9Grid) — Geographic grid encoding
+- [F9Grid](https://github.com/WujiKey/F9Grid) — Geographic grid encoding
 
 ## Documentation
 
-- [WujiKey Protocol Specification (English)](Docs/WujiKey-Technical-Specification.md)
-- [WujiKey 协议规范 (中文)](Docs/WujiKey-Technical-Specification-zh.md)
+- [WujiSeed Protocol Specification (English)](Docs/WujiSeed-Technical-Specification.md)
+- [WujiSeed 协议规范 (中文)](Docs/WujiSeed-Technical-Specification-zh.md)
 
 ## Security Notes
 
