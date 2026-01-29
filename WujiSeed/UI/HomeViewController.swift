@@ -839,7 +839,7 @@ class HomeViewController: UIViewController {
     }
 
     @objc private func wujiLocationButtonTapped() {
-        let locationVC = WujiLocationViewController()
+        let locationVC = F9LocationViewController()
 
         #if DEBUG
         // Apply mock coordinate from test config if debug mode is enabled

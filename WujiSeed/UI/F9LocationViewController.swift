@@ -1,5 +1,5 @@
 //
-//  WujiLocationViewController.swift
+//  F9LocationViewController.swift
 //  WujiSeed
 //
 //  F9 Location - displays current GPS location with F9Grid visualization
@@ -9,7 +9,7 @@ import UIKit
 import CoreLocation
 import F9Grid
 
-class WujiLocationViewController: UIViewController {
+class F9LocationViewController: UIViewController {
 
     // MARK: - Constants
 
@@ -407,7 +407,7 @@ class WujiLocationViewController: UIViewController {
 
 // MARK: - UILabel Extension for Copy Menu
 
-extension WujiLocationViewController {
+extension F9LocationViewController {
     override var canBecomeFirstResponder: Bool {
         return true
     }
@@ -422,7 +422,7 @@ extension WujiLocationViewController {
 
 // MARK: - CLLocationManagerDelegate
 
-extension WujiLocationViewController: CLLocationManagerDelegate {
+extension F9LocationViewController: CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let realLocation = locations.last else { return }
