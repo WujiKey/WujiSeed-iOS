@@ -387,6 +387,12 @@ class PlaceInputRowView: UIView, UITextFieldDelegate, TagInputViewDelegate {
             name: .debugModeDidChange,
             object: nil
         )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(screenshotModeDidChange),
+            name: .screenshotModeDidChange,
+            object: nil
+        )
         #endif
     }
 
@@ -506,6 +512,11 @@ class PlaceInputRowView: UIView, UITextFieldDelegate, TagInputViewDelegate {
 
         // Setup keyboard observers
         setupKeyboardObservers()
+
+        // Initial test button visibility
+        #if DEBUG
+        updateTestButtonVisibility()
+        #endif
     }
 
     deinit {
@@ -514,7 +525,23 @@ class PlaceInputRowView: UIView, UITextFieldDelegate, TagInputViewDelegate {
 
     #if DEBUG
     @objc private func debugModeDidChange() {
-        testButton.isHidden = !DebugModeManager.shared.isEnabled
+        updateTestButtonVisibility()
+    }
+
+    @objc private func screenshotModeDidChange() {
+        updateTestButtonVisibility()
+    }
+
+    private func updateTestButtonVisibility() {
+        // Hide Test button if debug mode is off
+        if !DebugModeManager.shared.isEnabled {
+            testButton.isHidden = true
+            return
+        }
+
+        // In screenshot mode: invisible but still tappable
+        testButton.isHidden = false
+        testButton.alpha = TestConfig.shared.screenshotMode ? 0 : 1
     }
     #endif
 
@@ -1093,6 +1120,14 @@ class PlaceInputRowView: UIView, UITextFieldDelegate, TagInputViewDelegate {
     }
 
     @objc private func pasteCoordinate() {
+        #if DEBUG
+        // In screenshot mode, paste button triggers test data fill
+        if TestConfig.shared.screenshotMode {
+            onFillTestData?()
+            return
+        }
+        #endif
+
         // Check pasteboard content
         guard let pasteboardString = UIPasteboard.general.string else {
             return

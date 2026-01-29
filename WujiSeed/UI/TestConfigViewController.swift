@@ -201,6 +201,38 @@ class TestConfigViewController: UIViewController {
         return button
     }()
 
+    // Screenshot mode section
+    private let screenshotModeCard: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.systemGreen.withAlphaComponent(0.1)
+        view.layer.cornerRadius = 12
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor.systemGreen.withAlphaComponent(0.3).cgColor
+        return view
+    }()
+
+    private let screenshotModeLabel: UILabel = {
+        let label = UILabel()
+        label.text = "截图模式"
+        label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        label.textColor = .systemGreen
+        return label
+    }()
+
+    private let screenshotModeDescLabel: UILabel = {
+        let label = UILabel()
+        label.text = "隐藏Test按钮，F9定位显示为真实状态"
+        label.font = UIFont.systemFont(ofSize: 13)
+        label.numberOfLines = 0
+        return label
+    }()
+
+    private let screenshotModeSwitch: UISwitch = {
+        let sw = UISwitch()
+        sw.onTintColor = .systemGreen
+        return sw
+    }()
+
     // Onboarding section
     private let onboardingCard: UIView = {
         let view = UIView()
@@ -281,6 +313,12 @@ class TestConfigViewController: UIViewController {
         masterSwitchCard.addSubview(masterSwitchDescLabel)
         masterSwitchCard.addSubview(masterSwitch)
 
+        contentView.addSubview(screenshotModeCard)
+        screenshotModeCard.addSubview(screenshotModeLabel)
+        screenshotModeCard.addSubview(screenshotModeDescLabel)
+        screenshotModeCard.addSubview(screenshotModeSwitch)
+        screenshotModeDescLabel.textColor = Self.secondaryLabelColor
+
         contentView.addSubview(wujiSectionLabel)
         contentView.addSubview(wujiStatusCard)
         wujiStatusCard.addSubview(wujiStatusLabel)
@@ -333,6 +371,10 @@ class TestConfigViewController: UIViewController {
         masterSwitchLabel.translatesAutoresizingMaskIntoConstraints = false
         masterSwitchDescLabel.translatesAutoresizingMaskIntoConstraints = false
         masterSwitch.translatesAutoresizingMaskIntoConstraints = false
+        screenshotModeCard.translatesAutoresizingMaskIntoConstraints = false
+        screenshotModeLabel.translatesAutoresizingMaskIntoConstraints = false
+        screenshotModeDescLabel.translatesAutoresizingMaskIntoConstraints = false
+        screenshotModeSwitch.translatesAutoresizingMaskIntoConstraints = false
         wujiSectionLabel.translatesAutoresizingMaskIntoConstraints = false
         wujiStatusCard.translatesAutoresizingMaskIntoConstraints = false
         wujiStatusLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -384,8 +426,24 @@ class TestConfigViewController: UIViewController {
             masterSwitchDescLabel.trailingAnchor.constraint(equalTo: masterSwitchCard.trailingAnchor, constant: -16),
             masterSwitchDescLabel.bottomAnchor.constraint(equalTo: masterSwitchCard.bottomAnchor, constant: -16),
 
+            // Screenshot mode card
+            screenshotModeCard.topAnchor.constraint(equalTo: masterSwitchCard.bottomAnchor, constant: 12),
+            screenshotModeCard.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            screenshotModeCard.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+
+            screenshotModeLabel.topAnchor.constraint(equalTo: screenshotModeCard.topAnchor, constant: 16),
+            screenshotModeLabel.leadingAnchor.constraint(equalTo: screenshotModeCard.leadingAnchor, constant: 16),
+
+            screenshotModeSwitch.centerYAnchor.constraint(equalTo: screenshotModeLabel.centerYAnchor),
+            screenshotModeSwitch.trailingAnchor.constraint(equalTo: screenshotModeCard.trailingAnchor, constant: -16),
+
+            screenshotModeDescLabel.topAnchor.constraint(equalTo: screenshotModeLabel.bottomAnchor, constant: 8),
+            screenshotModeDescLabel.leadingAnchor.constraint(equalTo: screenshotModeCard.leadingAnchor, constant: 16),
+            screenshotModeDescLabel.trailingAnchor.constraint(equalTo: screenshotModeCard.trailingAnchor, constant: -16),
+            screenshotModeDescLabel.bottomAnchor.constraint(equalTo: screenshotModeCard.bottomAnchor, constant: -16),
+
             // F9 Section
-            wujiSectionLabel.topAnchor.constraint(equalTo: masterSwitchCard.bottomAnchor, constant: 32),
+            wujiSectionLabel.topAnchor.constraint(equalTo: screenshotModeCard.bottomAnchor, constant: 32),
             wujiSectionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
 
             wujiStatusCard.topAnchor.constraint(equalTo: wujiSectionLabel.bottomAnchor, constant: 12),
@@ -450,6 +508,7 @@ class TestConfigViewController: UIViewController {
     private func setupActions() {
         closeButton.addTarget(self, action: #selector(closeTapped), for: .touchUpInside)
         masterSwitch.addTarget(self, action: #selector(masterSwitchChanged), for: .valueChanged)
+        screenshotModeSwitch.addTarget(self, action: #selector(screenshotModeSwitchChanged), for: .valueChanged)
         wujiClearButton.addTarget(self, action: #selector(clearWujiMockLocation), for: .touchUpInside)
         securityCheckResetButton.addTarget(self, action: #selector(resetSecurityCheck), for: .touchUpInside)
         onboardingResetButton.addTarget(self, action: #selector(resetOnboarding), for: .touchUpInside)
@@ -460,9 +519,12 @@ class TestConfigViewController: UIViewController {
     private func loadCurrentState() {
         #if DEBUG
         masterSwitch.isOn = DebugModeManager.shared.isEnabled
+        screenshotModeSwitch.isOn = TestConfig.shared.screenshotMode
         #else
         masterSwitch.isOn = false
         masterSwitch.isEnabled = false
+        screenshotModeSwitch.isOn = false
+        screenshotModeSwitch.isEnabled = false
         #endif
 
         updateF9StatusDisplay()
@@ -520,6 +582,16 @@ class TestConfigViewController: UIViewController {
         if !masterSwitch.isOn {
             TestConfig.shared.wujiMockCoordinate = nil
             updateF9StatusDisplay()
+        }
+    }
+
+    @objc private func screenshotModeSwitchChanged() {
+        TestConfig.shared.screenshotMode = screenshotModeSwitch.isOn
+
+        // Brief feedback
+        if #available(iOS 10.0, *) {
+            let generator = UIImpactFeedbackGenerator(style: .light)
+            generator.impactOccurred()
         }
     }
 
@@ -592,10 +664,30 @@ class TestConfigViewController: UIViewController {
 class TestConfig {
     static let shared = TestConfig()
 
-    private init() {}
+    private let screenshotModeKey = "WujiSeed.screenshotMode"
+
+    private init() {
+        // Load saved screenshot mode state
+        _screenshotMode = UserDefaults.standard.bool(forKey: screenshotModeKey)
+    }
 
     /// Mock coordinate for F9Location
     var wujiMockCoordinate: CLLocationCoordinate2D?
+
+    /// Screenshot mode - hides Test buttons and makes F9 look real
+    private var _screenshotMode: Bool = false
+    var screenshotMode: Bool {
+        get { _screenshotMode }
+        set {
+            _screenshotMode = newValue
+            UserDefaults.standard.set(newValue, forKey: screenshotModeKey)
+            NotificationCenter.default.post(name: .screenshotModeDidChange, object: nil)
+        }
+    }
+}
+
+extension Notification.Name {
+    static let screenshotModeDidChange = Notification.Name("screenshotModeDidChange")
 }
 
 #endif

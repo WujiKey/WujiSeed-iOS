@@ -205,8 +205,13 @@ class WujiLocationViewController: UIViewController {
 
         gridMapView.maxAcceptableAccuracy = maxAcceptableAccuracy
 
-        // Show debug info (k values) only when using mock location
-        gridMapView.showDebugInfo = (mockCoordinate != nil)
+        #if DEBUG
+        // Show debug info (k values) only when using mock location AND screenshot mode is off
+        let isScreenshotMode = TestConfig.shared.screenshotMode
+        gridMapView.showDebugInfo = (mockCoordinate != nil) && !isScreenshotMode
+        #else
+        gridMapView.showDebugInfo = false
+        #endif
     }
 
     private func setupConstraints() {

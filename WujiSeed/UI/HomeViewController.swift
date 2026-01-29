@@ -884,7 +884,8 @@ class HomeViewController: UIViewController {
 
         // iPad requires popover position
         if let popoverController = alert.popoverPresentationController {
-            popoverController.barButtonItem = navigationItem.rightBarButtonItem
+            popoverController.sourceView = languageButton
+            popoverController.sourceRect = languageButton.bounds
         }
 
         present(alert, animated: true)
@@ -953,6 +954,12 @@ class HomeViewController: UIViewController {
             name: .debugModeDidChange,
             object: nil
         )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(screenshotModeDidChange),
+            name: .screenshotModeDidChange,
+            object: nil
+        )
         #endif
     }
 
@@ -960,8 +967,13 @@ class HomeViewController: UIViewController {
         updateDebugIndicator()
     }
 
+    @objc private func screenshotModeDidChange() {
+        updateDebugIndicator()
+    }
+
     private func updateDebugIndicator() {
         #if DEBUG
+        // Only hide TEST indicator if debug mode is off (screenshot mode does NOT hide it)
         debugIndicator.isHidden = !DebugModeManager.shared.isEnabled
         #else
         debugIndicator.isHidden = true

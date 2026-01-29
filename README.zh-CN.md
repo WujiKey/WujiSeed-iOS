@@ -54,7 +54,7 @@
 
 ```bash
 # 克隆仓库
-git clone https://github.com/WujiSeed/WujiSeed.git
+git clone https://github.com/WujiKey/WujiSeed.git
 cd WujiSeed
 
 # 打开项目
