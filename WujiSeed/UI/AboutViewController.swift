@@ -145,11 +145,11 @@ class AboutViewController: UIViewController {
         feedbackButton.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            // Close button (top right)
-            closeButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 8),
+            // Close button (top right, using safe area and minimum 44pt touch target)
+            closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
             closeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
-            closeButton.widthAnchor.constraint(equalToConstant: 30),
-            closeButton.heightAnchor.constraint(equalToConstant: 30),
+            closeButton.widthAnchor.constraint(equalToConstant: 44),
+            closeButton.heightAnchor.constraint(equalToConstant: 44),
 
             // App icon (title bar, with top margin)
             appIconView.topAnchor.constraint(equalTo: view.topAnchor, constant: 12),
