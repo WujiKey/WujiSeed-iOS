@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, UIAdaptivePresentationControllerDelegate {
 
     // MARK: - UI Components
 
@@ -184,8 +184,7 @@ class HomeViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
 
         // Ensure corner buttons are visible (fix for view hierarchy issue after modal dismiss)
-        view.bringSubviewToFront(securityButton)
-        view.bringSubviewToFront(languageButton)
+        ensureCornerButtonsVisible()
 
         // IMPORTANT: Do NOT clear state here!
         // User might return from wizard to view other content, clearing would cause data loss
@@ -193,6 +192,27 @@ class HomeViewController: UIViewController {
         // 1. When user taps "Generate Seed Phrase" button to start new flow
         // 2. When user explicitly taps "Exit" button
         // 3. After completing the entire flow
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        // Defensive: ensure corner buttons are always visible and on top
+        // This covers cases where viewWillAppear might not fire (e.g., pageSheet dismiss on iOS 13+)
+        ensureCornerButtonsVisible()
+    }
+
+    /// Ensure security and language buttons are visible and on top of the view hierarchy
+    private func ensureCornerButtonsVisible() {
+        securityButton.isHidden = false
+        languageButton.isHidden = false
+        view.bringSubviewToFront(securityButton)
+        view.bringSubviewToFront(languageButton)
+
+        // Clean up any stale dimView (pre-generation notice) that might block interaction
+        if let dimView = view.viewWithTag(8888) {
+            dimView.removeFromSuperview()
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -556,7 +576,16 @@ class HomeViewController: UIViewController {
                 sheet.prefersGrabberVisible = true
             }
         }
+        // Set delegate to handle dismiss (viewWillAppear not called for pageSheet on iOS 13+)
+        aboutVC.presentationController?.delegate = self
         present(aboutVC, animated: true)
+    }
+
+    // MARK: - UIAdaptivePresentationControllerDelegate
+
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        // Called when pageSheet is dismissed by swipe — viewWillAppear is not called in this case
+        ensureCornerButtonsVisible()
     }
 
     // MARK: - Button Actions

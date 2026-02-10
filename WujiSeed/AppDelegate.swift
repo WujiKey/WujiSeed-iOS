@@ -242,6 +242,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             ])
         }
 
+        // Don't intercept touch events (indicator is display-only)
+        containerView.isUserInteractionEnabled = false
+
         offlineIndicator = containerView
 
         // Fade in animation
