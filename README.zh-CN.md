@@ -100,4 +100,4 @@ Apache License 2.0
 
 ---
 
-**无迹** — 無跡 無記 無所顧忌 | For the Memories That Never Fade
+**无迹** — 無跡 無記 不留蹤跡 | For the Memories That Never Fade

@@ -75,4 +75,4 @@ Apache License 2.0
 
 ---
 
-**WUJI Seed** — For the Memories That Never Fade | 無跡 無記 無所顧忌
+**WUJI Seed** — For the Memories That Never Fade | 無跡 無記 不留蹤跡
