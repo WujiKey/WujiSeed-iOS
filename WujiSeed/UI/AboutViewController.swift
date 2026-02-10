@@ -111,9 +111,9 @@ class AboutViewController: UIViewController {
     // MARK: - Setup
 
     private func setupUI() {
-        view.addSubview(closeButton)
         view.addSubview(appIconView)  // Title bar area
         view.addSubview(scrollView)
+        view.addSubview(closeButton)  // Add close button last so it's on top
         scrollView.addSubview(contentView)
 
         contentView.addSubview(versionLabel)
@@ -151,9 +151,10 @@ class AboutViewController: UIViewController {
             closeButton.widthAnchor.constraint(equalToConstant: 44),
             closeButton.heightAnchor.constraint(equalToConstant: 44),
 
-            // App icon (title bar, with top margin)
+            // App icon (title bar, with top margin and width constraint)
             appIconView.topAnchor.constraint(equalTo: view.topAnchor, constant: 12),
             appIconView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            appIconView.widthAnchor.constraint(equalToConstant: 200),
             appIconView.heightAnchor.constraint(equalToConstant: 50),
 
             // ScrollView
