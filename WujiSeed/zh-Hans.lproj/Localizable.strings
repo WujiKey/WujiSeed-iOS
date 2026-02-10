@@ -231,6 +231,10 @@
 "places.error.process_failed" = "地点数据处理失败";
 "places.error.same_memory_in_location" = "同一地点的记忆一和记忆二不能相同：地点";
 "places.error.same_memory_in_location_inline" = "记忆一和记忆二不能相同";
+"places.alert.data_invalid_title" = "数据有误";
+"places.error.coord_invalid" = "经纬度格式或范围有误，请检查输入";
+"places.error.memo_invalid" = "记忆标签未填写完整";
+"places.error.data_invalid" = "当前地点数据有误，请检查输入";
 "places.guide.coords.title" = "如何获取地点坐标";
 "places.guide.notes.title" = "推荐示例";
 "places.hint.coordinates" = "使用真实经纬度\n切勿使用住处和邮递地址";

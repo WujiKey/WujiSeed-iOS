@@ -712,15 +712,39 @@ class PlaceInputRowView: UIView, UITextFieldDelegate, TagInputViewDelegate {
     }
 
     private func setupToolbar() {
-        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 44))
-        let decimalButton = UIBarButtonItem(title: ".", style: .plain, target: self, action: #selector(insertDecimal))
-        let negativeButton = UIBarButtonItem(title: "-", style: .plain, target: self, action: #selector(insertNegative))
-        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let doneButton = UIBarButtonItem(title: Lang("common.done"), style: .done, target: self, action: #selector(dismissKeyboard))
-        toolbar.items = [negativeButton, decimalButton, flexSpace, doneButton]
+        // Latitude toolbar: - . ° ' " N S
+        let latToolbar = UIToolbar()
+        latToolbar.sizeToFit()
+        let latItems: [UIBarButtonItem] = [
+            UIBarButtonItem(title: "-", style: .plain, target: self, action: #selector(insertNegative)),
+            UIBarButtonItem(title: ".", style: .plain, target: self, action: #selector(insertDecimal)),
+            UIBarButtonItem(title: "°", style: .plain, target: self, action: #selector(insertDegree)),
+            UIBarButtonItem(title: "'", style: .plain, target: self, action: #selector(insertMinute)),
+            UIBarButtonItem(title: "\"", style: .plain, target: self, action: #selector(insertSecond)),
+            UIBarButtonItem(title: "N", style: .plain, target: self, action: #selector(insertN)),
+            UIBarButtonItem(title: "S", style: .plain, target: self, action: #selector(insertS)),
+            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
+            UIBarButtonItem(title: Lang("common.done"), style: .done, target: self, action: #selector(dismissKeyboard))
+        ]
+        latToolbar.items = latItems
+        latitudeField.inputAccessoryView = latToolbar
 
-        latitudeField.inputAccessoryView = toolbar
-        longitudeField.inputAccessoryView = toolbar
+        // Longitude toolbar: - . ° ' " E W
+        let lonToolbar = UIToolbar()
+        lonToolbar.sizeToFit()
+        let lonItems: [UIBarButtonItem] = [
+            UIBarButtonItem(title: "-", style: .plain, target: self, action: #selector(insertNegative)),
+            UIBarButtonItem(title: ".", style: .plain, target: self, action: #selector(insertDecimal)),
+            UIBarButtonItem(title: "°", style: .plain, target: self, action: #selector(insertDegree)),
+            UIBarButtonItem(title: "'", style: .plain, target: self, action: #selector(insertMinute)),
+            UIBarButtonItem(title: "\"", style: .plain, target: self, action: #selector(insertSecond)),
+            UIBarButtonItem(title: "E", style: .plain, target: self, action: #selector(insertE)),
+            UIBarButtonItem(title: "W", style: .plain, target: self, action: #selector(insertW)),
+            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
+            UIBarButtonItem(title: Lang("common.done"), style: .done, target: self, action: #selector(dismissKeyboard))
+        ]
+        lonToolbar.items = lonItems
+        longitudeField.inputAccessoryView = lonToolbar
     }
 
     private func setupConstraints() {
@@ -1006,12 +1030,28 @@ class PlaceInputRowView: UIView, UITextFieldDelegate, TagInputViewDelegate {
             return (false, "", Theme.MinimalTheme.textSecondary)
         }
 
-        guard let latValue = Double(lat), let lonValue = Double(lon) else {
+        // Try decimal format first, then DMS format
+        let latValue: Double?
+        let lonValue: Double?
+
+        if let v = Double(lat) {
+            latValue = v
+        } else {
+            latValue = parseSingleDMS(lat)
+        }
+
+        if let v = Double(lon) {
+            lonValue = v
+        } else {
+            lonValue = parseSingleDMS(lon)
+        }
+
+        guard let latVal = latValue, let lonVal = lonValue else {
             return (false, Lang("places.validation.format_error"), .systemRed)
         }
 
-        let latValid = latValue >= -90 && latValue <= 90
-        let lonValid = lonValue >= -180 && lonValue <= 180
+        let latValid = latVal >= -90 && latVal <= 90
+        let lonValid = lonVal >= -180 && lonVal <= 180
 
         if !latValid {
             return (false, Lang("places.validation.lat_range_error"), .systemRed)
@@ -1024,8 +1064,56 @@ class PlaceInputRowView: UIView, UITextFieldDelegate, TagInputViewDelegate {
         return (true, "", Theme.MinimalTheme.stable)
     }
 
+    /// Parse a single DMS coordinate string to decimal degrees
+    /// Supports formats: 18°41'57"N, 18°41'57.5", 98°55'21"E, etc.
+    private func parseSingleDMS(_ input: String) -> Double? {
+        let trimmed = input.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        // Pattern: degrees°minutes'seconds"[direction]
+        // Seconds can have decimal point, direction is optional
+        let pattern = #"^(-?\d+)[°]\s*(\d+)['''′]\s*(\d+(?:\.\d+)?)[""\"″]?\s*([NSEWnsew北南东西])?$"#
+
+        guard let regex = try? NSRegularExpression(pattern: pattern, options: []) else {
+            return nil
+        }
+
+        let nsString = trimmed as NSString
+        let range = NSRange(location: 0, length: nsString.length)
+
+        guard let match = regex.firstMatch(in: trimmed, options: [], range: range) else {
+            return nil
+        }
+
+        let degrees = Double(nsString.substring(with: match.range(at: 1))) ?? 0
+        let minutes = Double(nsString.substring(with: match.range(at: 2))) ?? 0
+        let seconds = Double(nsString.substring(with: match.range(at: 3))) ?? 0
+
+        var result = abs(degrees) + minutes / 60.0 + seconds / 3600.0
+
+        // Apply sign from original degrees (for negative values like -18°...)
+        if degrees < 0 {
+            result = -result
+        }
+
+        // Apply direction if present
+        if match.range(at: 4).location != NSNotFound {
+            let direction = nsString.substring(with: match.range(at: 4)).uppercased()
+            if direction == "S" || direction == "W" || direction == "南" || direction == "西" {
+                result = -abs(result)
+            }
+        }
+
+        return result
+    }
+
     /// Validate coordinate precision (at least 4 decimal places for ~11m accuracy)
+    /// DMS format with seconds is considered precise enough (skip decimal check)
     private func validateCoordinatePrecision(_ value: String, coordName: String) -> String? {
+        // DMS format: contains ° character, precision is inherent in seconds
+        if value.contains("°") {
+            return nil
+        }
+
         guard let dotIndex = value.firstIndex(of: ".") else {
             return Lang("places.error.dd_precision_short")
         }
@@ -1142,6 +1230,56 @@ class PlaceInputRowView: UIView, UITextFieldDelegate, TagInputViewDelegate {
         }
     }
 
+    @objc private func insertN() {
+        insertDirection("N")
+    }
+
+    @objc private func insertS() {
+        insertDirection("S")
+    }
+
+    @objc private func insertE() {
+        insertDirection("E")
+    }
+
+    @objc private func insertW() {
+        insertDirection("W")
+    }
+
+    /// Insert or replace direction character at end of coordinate
+    private func insertDirection(_ dir: String) {
+        if let activeField = [latitudeField, longitudeField].first(where: { $0.isFirstResponder }) {
+            var text = activeField.text ?? ""
+            // Remove existing direction suffix if present
+            if let last = text.last, "NSEWnsew".contains(last) {
+                text.removeLast()
+            }
+            activeField.text = text + dir
+            inputChanged()
+        }
+    }
+
+    @objc private func insertDegree() {
+        if let activeField = [latitudeField, longitudeField].first(where: { $0.isFirstResponder }) {
+            activeField.insertText("°")
+            inputChanged()
+        }
+    }
+
+    @objc private func insertMinute() {
+        if let activeField = [latitudeField, longitudeField].first(where: { $0.isFirstResponder }) {
+            activeField.insertText("'")
+            inputChanged()
+        }
+    }
+
+    @objc private func insertSecond() {
+        if let activeField = [latitudeField, longitudeField].first(where: { $0.isFirstResponder }) {
+            activeField.insertText("\"")
+            inputChanged()
+        }
+    }
+
     @objc private func insertDecimal() {
         if let activeField = [latitudeField, longitudeField].first(where: { $0.isFirstResponder }),
            !(activeField.text?.contains(".") ?? false) {
@@ -1172,7 +1310,8 @@ class PlaceInputRowView: UIView, UITextFieldDelegate, TagInputViewDelegate {
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField == latitudeField || textField == longitudeField {
-            let allowedCharacters = CharacterSet(charactersIn: "0123456789.-")
+            // Allow decimal digits, decimal point, negative sign, and DMS characters
+            let allowedCharacters = CharacterSet(charactersIn: "0123456789.-°'\"′″ NSEWnsew")
             let characterSet = CharacterSet(charactersIn: string)
 
             if !allowedCharacters.isSuperset(of: characterSet) {
@@ -1183,7 +1322,10 @@ class PlaceInputRowView: UIView, UITextFieldDelegate, TagInputViewDelegate {
                 return false
             }
 
-            if string == "." && (textField.text?.contains(".") ?? false) {
+            // Only restrict duplicate "." for pure decimal input (no DMS characters)
+            let currentText = textField.text ?? ""
+            let isDMS = currentText.contains("°") || string.contains("°")
+            if !isDMS && string == "." && currentText.contains(".") {
                 return false
             }
         }

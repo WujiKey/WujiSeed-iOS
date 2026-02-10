@@ -134,14 +134,16 @@ Each location contains three components:
 ```
 Spot = {
   place:       WujiPlace,    // Geographic coordinates
-  memory1Tags: [String],   // First memory keyword tags (minimum 3 tags)
-  memory2Tags: [String]    // Second memory keyword tags (minimum 3 tags)
+  memory1Tags: [String],   // First memory keyword tags (1-3 tags, recommended 1 highly personal keyword)
+  memory2Tags: [String]    // Second memory keyword tags (1-3 tags, recommended 1 highly personal keyword)
 }
 ```
 
 **Memory Tags Processing:**
-- Each location has two memory input areas, each requiring minimum 3 keyword tags
-- Total minimum 6 tags per location (3 + 3)
+- Each location has two memory input areas, each requiring 1-3 keyword tags
+- Recommended: 1 highly personal keyword per memory area for strongest security
+- Minimum: 1 tag per memory area (total 2 tags per location)
+- Maximum: 3 tags per memory area (total 6 tags per location)
 - Each tag is normalized individually (NFKC → CaseFold → Trim → AsciiPunctNorm)
 - Within each memory area: tags are deduplicated, sorted by Unicode order, and concatenated without separators
 
@@ -602,9 +604,7 @@ Word "zoo"     -> index 2047 -> binary "11111111111"
 
 | Version | Date | Changes |
 |---------|------|---------|
-| 1.0 | 2024-12 | Initial specification |
-| 2.0 | 2024-12 | Whitepaper format restructure, added security analysis and best practices |
-| 2.1 | 2026-01 | Replaced free-text memory with tag-based input (2 memory areas × 3 tags = 6 tags per location) |
+| 1.0 | 2026-01 | Initial specification |
 
 ---
 

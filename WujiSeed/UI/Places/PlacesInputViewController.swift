@@ -279,8 +279,12 @@ class PlacesInputViewController: KeyboardAwareViewController {
             }
         } else {
             // Not at last location, go to next location
-            dataManager.goToNext()
-            updateUI()
+            if dataManager.goToNext() {
+                updateUI()
+            } else {
+                // Data invalid - show error alert instead of silently refreshing
+                showDataInvalidAlert()
+            }
         }
     }
 
@@ -417,6 +421,26 @@ class PlacesInputViewController: KeyboardAwareViewController {
     }
 
     /// Show alert for incomplete location
+    private func showDataInvalidAlert() {
+        let currentLoc = dataManager.getCurrentLocation()
+        var details: [String] = []
+        if !currentLoc.isCoordinateValid {
+            details.append(Lang("places.error.coord_invalid"))
+        }
+        if !currentLoc.isMemosValid {
+            details.append(Lang("places.error.memo_invalid"))
+        }
+        let message = details.isEmpty ? Lang("places.error.data_invalid") : details.joined(separator: "\n")
+
+        let alert = UIAlertController(
+            title: Lang("places.alert.data_invalid_title"),
+            message: message,
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: Lang("common.ok"), style: .default))
+        present(alert, animated: true)
+    }
+
     private func showIncompleteLocationAlert(_ locationNumber: Int) {
         let alert = UIAlertController(
             title: Lang("places.alert.incomplete_title"),

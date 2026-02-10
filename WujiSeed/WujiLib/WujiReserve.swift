@@ -185,7 +185,7 @@ enum WujiReserve {
     ///   - nameSalt: 32-byte name salt derived from user's name (used as Argon2id salt)
     ///   - progressCallback: Optional callback for progress updates (called on current thread)
     /// - Returns: Result containing encrypted data or error
-    static func encrypt(mnemonics: [String], keyMaterials: [Data], positionCodes: [Int], nameSalt: Data, progressCallback: ProgressCallback? = nil) -> EncryptResult {
+    static func encrypt(mnemonics: [String], keyMaterials: [Data], positionCodes: [Int], nameSalt: Data, argon2Params: CryptoUtils.Argon2Parameters = .standard, progressCallback: ProgressCallback? = nil) -> EncryptResult {
         // Validate input
         guard mnemonics.count == mnemonicCount else {
             return .failure(.invalidMnemonicCount(mnemonics.count))
@@ -242,7 +242,7 @@ enum WujiReserve {
                 password.append(km)
             }
 
-            guard let key = CryptoUtils.argon2id(password: password, salt: nameSalt) else {
+            guard let key = CryptoUtils.argon2id(password: password, salt: nameSalt, parameters: argon2Params) else {
                 return .failure(.keyDerivationFailed(index + 1))
             }
 
@@ -320,7 +320,7 @@ enum WujiReserve {
     ///   - nameSalt: 32-byte name salt derived from user's name (used as Argon2id salt)
     ///   - progressCallback: Optional callback for progress updates (called on current thread)
     /// - Returns: Result containing decrypted seed phrase or error
-    static func decrypt(data: Data, spots: [WujiSpot], positionCodes: [Int], nameSalt: Data, progressCallback: ProgressCallback? = nil) -> DecryptResult {
+    static func decrypt(data: Data, spots: [WujiSpot], positionCodes: [Int], nameSalt: Data, argon2Params: CryptoUtils.Argon2Parameters = .standard, progressCallback: ProgressCallback? = nil) -> DecryptResult {
         // Validate input count (must be exactly 5 spots for full verification)
         guard spots.count == locationCount else {
             return .failure(.invalidLocationCount(spots.count))
@@ -387,7 +387,7 @@ enum WujiReserve {
                 password.append(km)
             }
 
-            guard let key = CryptoUtils.argon2id(password: password, salt: nameSalt) else { continue }
+            guard let key = CryptoUtils.argon2id(password: password, salt: nameSalt, parameters: argon2Params) else { continue }
 
             // Try this key against all encrypted blocks
             for block in reserveData.encryptedBlocks {
@@ -431,6 +431,7 @@ enum WujiReserve {
         let allPositionCodes: [Int]              // All 5 position codes from backup
         let nameSalt: Data                       // Name salt
         let capsuleData: Data                    // Encrypted capsule data
+        var argon2Params: CryptoUtils.Argon2Parameters = .standard  // Argon2id parameters (overridable for tests)
     }
 
     /// Decrypt WujiReserve with recovery mode - tries all position code combinations
@@ -674,7 +675,7 @@ enum WujiReserve {
 
                 // Compute Argon2id (the slow operation)
                 let argon2Start = Date()
-                guard let key = CryptoUtils.argon2id(password: password, salt: nameSalt) else {
+                guard let key = CryptoUtils.argon2id(password: password, salt: nameSalt, parameters: input.argon2Params) else {
                     lock.lock()
                     currentAttempt += 1
                     let progress = Float(currentAttempt) / Float(totalAttempts)

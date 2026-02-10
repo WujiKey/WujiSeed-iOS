@@ -231,6 +231,10 @@
 "places.error.process_failed" = "地點數據處理失敗";
 "places.error.same_memory_in_location" = "同一地點的記憶一和記憶二不能相同：地點";
 "places.error.same_memory_in_location_inline" = "記憶一和記憶二不能相同";
+"places.alert.data_invalid_title" = "資料有誤";
+"places.error.coord_invalid" = "經緯度格式或範圍有誤，請檢查輸入";
+"places.error.memo_invalid" = "記憶標籤未填寫完整";
+"places.error.data_invalid" = "當前地點資料有誤，請檢查輸入";
 "places.guide.coords.title" = "如何獲取地點座標";
 "places.guide.notes.title" = "推薦示例";
 "places.hint.coordinates" = "使用真實經緯度\n切勿使用住處和郵遞地址";

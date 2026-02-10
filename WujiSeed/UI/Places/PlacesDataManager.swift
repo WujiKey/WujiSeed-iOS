@@ -23,13 +23,36 @@ class PlacesDataManager {
         }
 
         var isCoordinateValid: Bool {
-            guard let lat = Double(latitude),
-                  let lon = Double(longitude),
+            guard let lat = parseCoordinate(latitude),
+                  let lon = parseCoordinate(longitude),
                   lat >= -90 && lat <= 90,
                   lon >= -180 && lon <= 180 else {
                 return false
             }
             return true
+        }
+
+        /// Parse coordinate string (supports decimal and DMS formats)
+        private func parseCoordinate(_ value: String) -> Double? {
+            // Try decimal first
+            if let v = Double(value) { return v }
+            // Try DMS format: e.g. 18°41'57"N
+            let trimmed = value.trimmingCharacters(in: .whitespacesAndNewlines)
+            let pattern = #"^(-?\d+)[°]\s*(\d+)['''′]\s*(\d+(?:\.\d+)?)[""\"″]?\s*([NSEWnsew北南东西])?$"#
+            guard let regex = try? NSRegularExpression(pattern: pattern, options: []) else { return nil }
+            let nsString = trimmed as NSString
+            let range = NSRange(location: 0, length: nsString.length)
+            guard let match = regex.firstMatch(in: trimmed, options: [], range: range) else { return nil }
+            let degrees = Double(nsString.substring(with: match.range(at: 1))) ?? 0
+            let minutes = Double(nsString.substring(with: match.range(at: 2))) ?? 0
+            let seconds = Double(nsString.substring(with: match.range(at: 3))) ?? 0
+            var result = abs(degrees) + minutes / 60.0 + seconds / 3600.0
+            if degrees < 0 { result = -result }
+            if match.range(at: 4).location != NSNotFound {
+                let dir = nsString.substring(with: match.range(at: 4)).uppercased()
+                if dir == "S" || dir == "W" || dir == "南" || dir == "西" { result = -abs(result) }
+            }
+            return result
         }
 
         var isMemosValid: Bool {
@@ -70,19 +93,19 @@ class PlacesDataManager {
 
     // Test memory1 and memory2 (keyword tag arrays)
     static let testMemos1Tags: [[String]] = [
-        ["女娲", "补天石", "诞生"],
-        ["八九年", "学礼", "找神仙"],
-        ["小美学会骑车", "奖励冰激凌"],
-        ["三番五次", "菩萨", "帮忙"],
-        ["释迦摩尼", "成佛", "圣地"]
+        ["女娲补天石"],
+        ["七十二变", "筋斗云"],
+        ["齐天大圣"],
+        ["西海龙王三太子", "白龙马"],
+        ["九九八十一难"]
     ]
 
     static let testMemos2Tags: [[String]] = [
-        ["山腰", "水帘洞", "花果山"],
-        ["菩提祖师", "七十二变", "筋斗云"],
-        ["银行里有什么", "全家福"],
-        ["白龙马", "取经", "西天"],
-        ["九九八十一难", "法门", "修行"]
+        ["水帘洞", "称王"],
+        ["孙悟空"],
+        ["如意金箍棒", "一万三千五百斤"],
+        ["西天取经"],
+        ["通天河老鼋"]
     ]
     #endif
 

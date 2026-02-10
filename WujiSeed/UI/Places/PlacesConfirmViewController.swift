@@ -1154,7 +1154,7 @@ class PlacesConfirmViewController: UIViewController {
         #if DEBUG
         WujiLogger.info("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
         WujiLogger.info("🔐 Starting Argon2id calculation")
-        WujiLogger.info("   Params: memory=256MB, iterations=17, parallelism=1")
+        WujiLogger.info("   Params: memory=\(CryptoUtils.WujiArgon2idMem / 1024)MB, iterations=\(CryptoUtils.WujiArgon2idTimes), parallelism=\(CryptoUtils.WujiArgon2idParallel)")
         WujiLogger.info("   Estimated time: 20-40s (depends on device performance)")
         WujiLogger.info("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
         #endif

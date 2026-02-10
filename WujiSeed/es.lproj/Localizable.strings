@@ -230,6 +230,10 @@
 "places.error.process_failed" = "Error de procesamiento";
 "places.error.same_memory_in_location" = "Memoria 1 y 2 no pueden ser iguales en ubicación";
 "places.error.same_memory_in_location_inline" = "Memoria 1 y 2 no pueden ser iguales";
+"places.alert.data_invalid_title" = "Datos inválidos";
+"places.error.coord_invalid" = "Formato o rango de coordenadas inválido";
+"places.error.memo_invalid" = "Las etiquetas de memoria están incompletas";
+"places.error.data_invalid" = "Los datos de la ubicación actual son inválidos";
 "places.guide.coords.title" = "Cómo ingresar coordenadas";
 "places.guide.notes.title" = "Cómo escribir notas";
 "places.hint.coordinates" = "Use coordenadas reales\nNunca use dirección de casa o postal";

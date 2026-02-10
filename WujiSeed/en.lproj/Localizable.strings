@@ -231,6 +231,10 @@
 "places.error.process_failed" = "Location data processing failed";
 "places.error.same_memory_in_location" = "Memory 1 and Memory 2 cannot be the same in location";
 "places.error.same_memory_in_location_inline" = "Memory 1 and Memory 2 cannot be the same";
+"places.alert.data_invalid_title" = "Invalid Data";
+"places.error.coord_invalid" = "Coordinate format or range is invalid";
+"places.error.memo_invalid" = "Memory tags are incomplete";
+"places.error.data_invalid" = "Current location data is invalid, please check your input";
 "places.guide.coords.title" = "How to Get Coordinates";
 "places.guide.notes.title" = "Examples";
 "places.hint.coordinates" = "Use actual latitude and longitude\nNever use home or mailing address";

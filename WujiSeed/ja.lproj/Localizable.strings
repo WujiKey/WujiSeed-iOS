@@ -231,6 +231,10 @@
 "places.error.process_failed" = "位置データの処理に失敗しました";
 "places.error.same_memory_in_location" = "同じ場所の記憶1と記憶2は同じにできません：場所";
 "places.error.same_memory_in_location_inline" = "記憶1と記憶2は同じにできません";
+"places.alert.data_invalid_title" = "データエラー";
+"places.error.coord_invalid" = "座標の形式または範囲が無効です";
+"places.error.memo_invalid" = "記憶タグが未入力です";
+"places.error.data_invalid" = "現在の場所データが無効です。入力を確認してください";
 "places.guide.coords.title" = "座標の取得方法";
 "places.guide.notes.title" = "メモの例";
 "places.hint.coordinates" = "実際の緯度経度を使用\n自宅や郵便住所は使用しないでください";

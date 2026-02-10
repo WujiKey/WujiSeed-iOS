@@ -5,16 +5,38 @@
 //  WujiSpot unit tests
 //  Tests location record with merged memory processing
 //
+//  Data source: wujikey_v1_vector_1.json (for coordinates and memory data)
+//
 
 import XCTest
 @testable import WujiSeed
 
 class WujiSpotTests: XCTestCase {
 
+    // MARK: - Test Data
+
+    /// Test vector loaded from wujikey_v1_vector_1.json
+    private var testVector: GoldenTestVector!
+
+    // MARK: - Setup
+
+    override func setUpWithError() throws {
+        try super.setUpWithError()
+
+        // Load test vector from JSON
+        guard let vector = GoldenVectorLoader.load("wujikey_v1_vector_1") else {
+            XCTFail("Failed to load wujikey_v1_vector_1.json")
+            return
+        }
+        testVector = vector
+    }
+
     // MARK: - Initialization Tests
 
     func testBasicInitialization() {
-        let spot = WujiSpot(coordinates: "34.617090, 119.191840", memory: "山腰水帘洞花果山")
+        // Use first location from test vector
+        let location = testVector.locations[0]
+        let spot = WujiSpot(coordinates: location.coordinate, memory: "山腰水帘洞花果山")
         XCTAssertNotNil(spot, "Should create WujiSpot with valid inputs")
         XCTAssertEqual(spot?.place.latitude, "34.61709", "Latitude should match")
         XCTAssertEqual(spot?.place.longitude, "119.19184", "Longitude should match")
@@ -27,12 +49,14 @@ class WujiSpotTests: XCTestCase {
     }
 
     func testInitializationWithEmptyMemory() {
-        let spot = WujiSpot(coordinates: "34.617090, 119.191840", memory: "")
+        let location = testVector.locations[0]
+        let spot = WujiSpot(coordinates: location.coordinate, memory: "")
         XCTAssertNil(spot, "Should return nil for empty memory")
     }
 
     func testInitializationWithWhitespaceOnlyMemory() {
-        let spot = WujiSpot(coordinates: "34.617090, 119.191840", memory: "   ")
+        let location = testVector.locations[0]
+        let spot = WujiSpot(coordinates: location.coordinate, memory: "   ")
         XCTAssertNil(spot, "Should return nil for whitespace-only memory")
     }
 
@@ -40,13 +64,15 @@ class WujiSpotTests: XCTestCase {
 
     func testMemoryNormalization() {
         // Memory should be normalized using WujiNormalizer
-        let spot = WujiSpot(coordinates: "34.617090, 119.191840", memory: "  Hello  WORLD  ")
+        let location = testVector.locations[0]
+        let spot = WujiSpot(coordinates: location.coordinate, memory: "  Hello  WORLD  ")
         XCTAssertNotNil(spot)
         XCTAssertEqual(spot?.memory.normalized, "hello world", "Memory should be normalized")
     }
 
     func testMemoryWithChinesePunctuation() {
-        let spot = WujiSpot(coordinates: "34.617090, 119.191840", memory: "你好，世界！")
+        let location = testVector.locations[0]
+        let spot = WujiSpot(coordinates: location.coordinate, memory: "你好，世界！")
         XCTAssertNotNil(spot)
         XCTAssertEqual(spot?.memory.normalized, "你好,世界!", "Chinese punctuation should be converted")
     }
@@ -54,7 +80,8 @@ class WujiSpotTests: XCTestCase {
     // MARK: - KeyMaterial Tests
 
     func testKeyMaterialGeneration() {
-        let spot = WujiSpot(coordinates: "34.617090, 119.191840", memory: "testmemory")
+        let location = testVector.locations[0]
+        let spot = WujiSpot(coordinates: location.coordinate, memory: "testmemory")
         XCTAssertNotNil(spot)
 
         let keyMaterial = spot?.keyMaterial()
@@ -68,7 +95,8 @@ class WujiSpotTests: XCTestCase {
     }
 
     func testKeyMaterialDeterminism() {
-        let spot = WujiSpot(coordinates: "34.617090, 119.191840", memory: "女娲山腰水帘洞补天石花果山诞生")
+        let location = testVector.locations[0]
+        let spot = WujiSpot(coordinates: location.coordinate, memory: "女娲山腰水帘洞补天石花果山诞生")
         XCTAssertNotNil(spot)
 
         var results = Set<Data>()
@@ -84,36 +112,25 @@ class WujiSpotTests: XCTestCase {
     // MARK: - Position Code Tests
 
     func testPositionCode() {
-        let spot = WujiSpot(coordinates: "34.617090, 119.191840", memory: "test")
+        let location = testVector.locations[0]
+        let spot = WujiSpot(coordinates: location.coordinate, memory: "test")
         XCTAssertNotNil(spot)
 
         let positionCode = spot?.positionCode()
         XCTAssertNotNil(positionCode, "Should calculate position code")
         XCTAssertTrue((1...9).contains(positionCode!), "Position code should be 1-9")
+
+        // Verify it matches the golden vector
+        XCTAssertEqual(positionCode, location.positionCode,
+            "Position code should match golden vector value")
     }
 
     // MARK: - Batch Processing Tests
 
     func testBatchProcessing() {
-        // Create 5 spots with merged memory strings (Unicode sorted order)
-        let testData: [(coord: String, memory: String)] = [
-            ("34.617090, 119.191840", "女娲山腰水帘洞花果山补天石诞生"),
-            ("35.066260, 107.614560", "七十二变八九年学礼找神仙筋斗云菩提祖师"),
-            ("11.373300, 142.591700", "一万三千五百斤借兵器如意金箍棒定海神针敖广行头"),
-            ("29.976330, 122.389360", "三番五次取经帮忙白龙马菩萨西天"),
-            ("24.695100, 84.991300", "九九八十一难修行圣地成佛法门释迦摩尼"),
-        ]
-
-        var spots: [WujiSpot] = []
-        for data in testData {
-            guard let spot = WujiSpot(coordinates: data.coord, memory: data.memory) else {
-                XCTFail("Failed to create spot")
-                return
-            }
-            spots.append(spot)
-        }
-
-        XCTAssertEqual(spots.count, 5, "Should have 5 spots")
+        // Use test vector data (Journey to the West locations)
+        let spots = testVector.spots
+        XCTAssertEqual(spots.count, 5, "Should have 5 spots from test vector")
 
         // Process spots
         let result = WujiSpot.process(spots)
@@ -129,28 +146,18 @@ class WujiSpotTests: XCTestCase {
                 XCTAssertTrue((1...9).contains(code), "Position code \(code) should be 1-9")
             }
 
+            // Verify position codes match golden vector
+            XCTAssertEqual(processResult.positionCodes, testVector.positionCodes,
+                "Position codes should match golden vector")
+
         case .failure(let error):
             XCTFail("Processing failed: \(error)")
         }
     }
 
     func testBatchProcessingDeterminism() {
-        let testData: [(coord: String, memory: String)] = [
-            ("34.617090, 119.191840", "女娲山腰水帘洞花果山补天石诞生"),
-            ("35.066260, 107.614560", "七十二变八九年学礼找神仙筋斗云菩提祖师"),
-            ("11.373300, 142.591700", "一万三千五百斤借兵器如意金箍棒定海神针敖广行头"),
-            ("29.976330, 122.389360", "三番五次取经帮忙白龙马菩萨西天"),
-            ("24.695100, 84.991300", "九九八十一难修行圣地成佛法门释迦摩尼"),
-        ]
-
-        var spots: [WujiSpot] = []
-        for data in testData {
-            guard let spot = WujiSpot(coordinates: data.coord, memory: data.memory) else {
-                XCTFail("Failed to create spot")
-                return
-            }
-            spots.append(spot)
-        }
+        // Use test vector data
+        let spots = testVector.spots
 
         // Process multiple times
         var combinedResults = Set<Data>()
@@ -165,14 +172,21 @@ class WujiSpotTests: XCTestCase {
 
         XCTAssertEqual(combinedResults.count, 1, "Combined data should be deterministic")
         XCTAssertEqual(positionCodeResults.count, 1, "Position codes should be deterministic")
+
+        // Verify the deterministic result matches golden vector
+        if case .success(let result) = WujiSpot.process(spots) {
+            XCTAssertEqual(result.positionCodes, testVector.positionCodes,
+                "Deterministic result should match golden vector")
+        }
     }
 
     // MARK: - Equatable Tests
 
     func testEquatable() {
-        let spot1 = WujiSpot(coordinates: "34.617090, 119.191840", memory: "test")
-        let spot2 = WujiSpot(coordinates: "34.617090, 119.191840", memory: "test")
-        let spot3 = WujiSpot(coordinates: "34.617090, 119.191840", memory: "different")
+        let location = testVector.locations[0]
+        let spot1 = WujiSpot(coordinates: location.coordinate, memory: "test")
+        let spot2 = WujiSpot(coordinates: location.coordinate, memory: "test")
+        let spot3 = WujiSpot(coordinates: location.coordinate, memory: "different")
 
         XCTAssertEqual(spot1, spot2, "Same inputs should be equal")
         XCTAssertNotEqual(spot1, spot3, "Different memory should not be equal")
@@ -189,8 +203,9 @@ class WujiSpotTests: XCTestCase {
         let allTags = memory1Tags + memory2Tags
         let processedMemory = WujiMemoryTagProcessor.process(allTags)
 
-        // Create spot with processed memory
-        let spot = WujiSpot(coordinates: "34.617090, 119.191840", memory: processedMemory)
+        // Create spot with processed memory using test vector coordinate
+        let location = testVector.locations[0]
+        let spot = WujiSpot(coordinates: location.coordinate, memory: processedMemory)
         XCTAssertNotNil(spot, "Should create spot with processed memory")
 
         // Verify memory is correctly stored

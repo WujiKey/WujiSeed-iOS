@@ -1,0 +1,98 @@
+{
+  "version": "1.0",
+  "description": "Golden test vector for WujiSeed - Moses Exodus with extreme geographic distribution (PRODUCTION PARAMETERS: 256MB/7 iterations)",
+  "name" : "Moses: Exodus",
+  "normalizedName" : "moses: exodus",
+  "nameSaltHex" : "44f1a9b9256c525f3351073d906b9dac",
+  "locations" : [
+    {
+      "index" : 1,
+      "coordinate" : "30.0444, 31.2357",
+      "memoryTags" : [
+        "Pharaoh",
+        "Slavery",
+        "Egypt"
+      ],
+      "memoryProcessed" : "egyptpharaohslavery",
+      "positionCode" : 3,
+      "note": "Cairo, Egypt (Northern Hemisphere, Eastern Hemisphere) - Oppression and slavery"
+    },
+    {
+      "index" : 2,
+      "coordinate" : "28.5392, 33.9752",
+      "memoryTags" : [
+        "Ten Commandments",
+        "Mount Sinai"
+      ],
+      "memoryProcessed" : "mount sinaitencommandments",
+      "positionCode" : 3,
+      "note": "Mount Sinai (Northern Hemisphere, Eastern Hemisphere) - Law giving"
+    },
+    {
+      "index" : 3,
+      "coordinate" : "-33.9249, 18.4241",
+      "memoryTags" : [
+        "Southern Cross",
+        "Promised Land"
+      ],
+      "memoryProcessed" : "promised landsouthern cross",
+      "positionCode" : 5,
+      "note": "Cape Town, South Africa (SOUTHERN HEMISPHERE) - Symbolizing journey's end"
+    },
+    {
+      "index" : 4,
+      "coordinate" : "29.5581, 32.5519",
+      "memoryTags" : [
+        "Parting Sea",
+        "Red Sea"
+      ],
+      "memoryProcessed" : "partingsearedsea",
+      "positionCode" : 3,
+      "note": "Red Sea (Northern Hemisphere, Eastern Hemisphere) - Miraculous crossing"
+    },
+    {
+      "index" : 5,
+      "coordinate" : "40.7128, -74.0060",
+      "memoryTags" : [
+        "New World",
+        "Freedom"
+      ],
+      "memoryProcessed" : "freedomnewworld",
+      "positionCode" : 3,
+      "note": "New York, USA (WESTERN HEMISPHERE) - Symbol of freedom and new beginning"
+    }
+  ],
+  "keyDataHex" : "a902463d316bc5e4db20416e6b17a46e51a9d6a94ba99c9017abd83fbf66c0a7",
+  "mnemonics" : [
+    "poverty",
+    "banana",
+    "monster",
+    "glare",
+    "rough",
+    "venue",
+    "hold",
+    "amused",
+    "hover",
+    "flavor",
+    "trouble",
+    "syrup",
+    "box",
+    "twice",
+    "pioneer",
+    "inside",
+    "orient",
+    "level",
+    "turtle",
+    "race",
+    "winner",
+    "recall",
+    "action",
+    "vicious"
+  ],
+  "encryptedBackupBase64" : "V1VKSQEAA5YzUzAKAFkr7Y1WWdcQiVHVA6Xh3l2uS0Dcvjt6HY+J2sVHZQnGJPHn8alJL5f3Ouf3A21gBUaCZewdFy5TZjRXxIoNy+CXaTENlmFyN98BwKfPkyFcgRP/pYsXLmbZ8gBZYAnHunQRIRlciKTm9JAITOOczCAfe5I7wB1efM1nyUMXxn36lBKpjvO9eDpp9kCMuUj8mXbggtcfXzME0PABHy7KeaFXgaHljZtxDiYQCQ7Pu8neX19T/CAAWXCsYTShBdnU3RJysqNpO3p7XV69Bf+rT9zCpLbieIi5wB4ZgDrawGK/2CrHQ4PsW5wvRCtzS7cyxnrMQK8NicBJxJ7mknZrx01jV+Sye/EHMYXLcWCAQD6RAFkCGVTyrSTlxBWMzFV6mVu8wHeJkuswB5767+cKa9Jjtql7CyVajIHFFdTNX/fI5Jy6rKL/42AO6L/pvVkCv2mAFcuoBNYA39S9nh3lMc1l/TEs9PGtmSNpLQBZu0NA81jCYZ0kVdiBAvc5vqY6ZJ+BY9fD6ynLtQiGNd87NWJ0Vu+TNp7FvB7gK6tVpSPYJN6j0+4FoG6kowbKXfzbhhNjtm5dVDkRV+pVHC/wLqX9Drbe4GwAWSLde5AVbltzzzOU3fGwn8maGHUb//e5e/hTwfguXWuxLGbLvVKfovyl+cyS08zq+pmbB2P1HeDGFoES8p0Mruy/wIwIkjHI2Tqz3uBNpTRad1FctOKDYReoAFmDD8X/yckoNlOZ+4AtCCLbx8z3ev5oSQC55+pKlRFFJYLtRU6kz9uEwB3S3iZlNTyNxuoCcFvSe+8eRiQzfvoueLHu9axG1cvtJUZmlqvVHC3kgRa66Q0T+wBZfDxccdAkcg1nV7YwsthEpTNo5xWD/rMsmYqwZUn3AHZ9XZkkdSov/kHOdZEGd6aAQYHxB2Nw13LdaJfKyeX05uijVXQWk3ICPNEVd8Sr9e0ySXFXpMxBiZgAWSapqgYkEwMiTvfO2XSL6G2OkqN8W0TBaIusi6B5CJgvrjBHHfP14LSuEPRYsOf9KMI6xkfTGw1XcV9OusbwYZ0WFT55xHbBz5FgHygHNIsffiePMqgfPy5oAFmdYqfVznPcyq/+xJJBkvGwBAswSwEqWsfAi15zDiKtfJXCA9gO5s1bJtpe3yEDpdjRmh5oP0XyoCx9H5r7UmSn5//pogHstVHzRIQxmG+3tsJwj7c5bS1UgRdtRZw=",
+  "argon2Parameters" : {
+    "memoryKB" : 262144,
+    "iterations" : 7,
+    "parallelism" : 1
+  }
+}

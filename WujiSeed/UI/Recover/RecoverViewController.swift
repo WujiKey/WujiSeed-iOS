@@ -1497,6 +1497,9 @@ class LocationInputView: UIView {
         coordinateTextField.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16).isActive = true
         #endif
 
+        // Setup coordinate keyboard toolbar
+        setupCoordinateToolbar()
+
         // Add event listeners
         coordinateTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         memory1TagInput.onTagsChanged = { [weak self] in
@@ -1508,6 +1511,100 @@ class LocationInputView: UIView {
         #if DEBUG
         testButton.addTarget(self, action: #selector(testButtonTapped), for: .touchUpInside)
         #endif
+    }
+
+    private func setupCoordinateToolbar() {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let items: [UIBarButtonItem] = [
+            UIBarButtonItem(title: "-", style: .plain, target: self, action: #selector(insertNegative)),
+            UIBarButtonItem(title: ".", style: .plain, target: self, action: #selector(insertDecimal)),
+            UIBarButtonItem(title: ",", style: .plain, target: self, action: #selector(insertComma)),
+            UIBarButtonItem(title: "°", style: .plain, target: self, action: #selector(insertDegree)),
+            UIBarButtonItem(title: "'", style: .plain, target: self, action: #selector(insertMinute)),
+            UIBarButtonItem(title: "\"", style: .plain, target: self, action: #selector(insertSecond)),
+            UIBarButtonItem(title: "N/S", style: .plain, target: self, action: #selector(insertNS)),
+            UIBarButtonItem(title: "E/W", style: .plain, target: self, action: #selector(insertEW)),
+            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
+            UIBarButtonItem(title: Lang("common.done"), style: .done, target: self, action: #selector(dismissKeyboard))
+        ]
+        toolbar.items = items
+        coordinateTextField.inputAccessoryView = toolbar
+    }
+
+    @objc private func insertNegative() {
+        coordinateTextField.insertText("-")
+        textFieldDidChange()
+    }
+
+    @objc private func insertDecimal() {
+        coordinateTextField.insertText(".")
+        textFieldDidChange()
+    }
+
+    @objc private func insertComma() {
+        coordinateTextField.insertText(", ")
+        textFieldDidChange()
+    }
+
+    @objc private func insertDegree() {
+        coordinateTextField.insertText("°")
+        textFieldDidChange()
+    }
+
+    @objc private func insertMinute() {
+        coordinateTextField.insertText("'")
+        textFieldDidChange()
+    }
+
+    @objc private func insertSecond() {
+        coordinateTextField.insertText("\"")
+        textFieldDidChange()
+    }
+
+    @objc private func insertNS() {
+        // Toggle between N and S at cursor position
+        insertToggleDirection(["N", "S"])
+    }
+
+    @objc private func insertEW() {
+        // Toggle between E and W at cursor position
+        insertToggleDirection(["E", "W"])
+    }
+
+    /// Insert direction character, toggling if the previous char is already one of the options
+    private func insertToggleDirection(_ options: [String]) {
+        guard let text = coordinateTextField.text,
+              let selectedRange = coordinateTextField.selectedTextRange else {
+            coordinateTextField.insertText(options[0])
+            textFieldDidChange()
+            return
+        }
+
+        let cursorOffset = coordinateTextField.offset(from: coordinateTextField.beginningOfDocument, to: selectedRange.start)
+        if cursorOffset > 0 {
+            let idx = text.index(text.startIndex, offsetBy: cursorOffset - 1)
+            let prevChar = String(text[idx])
+            if let currentIndex = options.firstIndex(of: prevChar) {
+                // Toggle to next option
+                let nextOption = options[(currentIndex + 1) % options.count]
+                var newText = text
+                newText.replaceSubrange(idx...idx, with: nextOption)
+                coordinateTextField.text = newText
+                // Restore cursor position
+                if let pos = coordinateTextField.position(from: coordinateTextField.beginningOfDocument, offset: cursorOffset) {
+                    coordinateTextField.selectedTextRange = coordinateTextField.textRange(from: pos, to: pos)
+                }
+                textFieldDidChange()
+                return
+            }
+        }
+        coordinateTextField.insertText(options[0])
+        textFieldDidChange()
+    }
+
+    @objc private func dismissKeyboard() {
+        coordinateTextField.resignFirstResponder()
     }
 
     @objc private func textFieldDidChange() {
