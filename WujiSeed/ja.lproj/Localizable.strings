@@ -195,7 +195,7 @@
 "namesalt.context" = "シードフレーズに名前を付ける";
 "namesalt.error.empty" = "個人識別子を入力してください";
 "namesalt.error.too_short" = "個人識別子が短すぎます（最低2文字または4文字）";
-"namesalt.example" = "例：無忌@wujikey.com";
+"namesalt.example" = "例：無跡@wujikey.com";
 "namesalt.placeholder" = "失われない個人識別子を入力";
 "namesalt.security_warning" = "本名、ID番号、メールアドレス、ウォレットアドレスなどを使用できます\n個性的で失われない情報アンカーとして";
 "places.alert.confirm_clear_message" = "5つの場所すべてがクリアされ、元に戻せません。続けますか？";

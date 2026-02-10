@@ -1,4 +1,4 @@
-# WUJI Seed (無忌)
+# WUJI Seed (無跡)
 
 > Turn unforgettable memories into recoverable seed phrases.
 
@@ -75,4 +75,4 @@ Apache License 2.0
 
 ---
 
-**WUJI Seed** — For the Memories That Never Fade | 無忌 無記 無所顧忌
+**WUJI Seed** — For the Memories That Never Fade | 無跡 無記 無所顧忌

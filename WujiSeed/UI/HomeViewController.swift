@@ -509,7 +509,7 @@ class HomeViewController: UIViewController {
             wujiLocationButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             wujiLocationButton.heightAnchor.constraint(greaterThanOrEqualToConstant: 60),
 
-            // Debug indicator (top-right corner of "无忌")
+            // Debug indicator (top-right corner of "无迹")
             debugIndicator.leadingAnchor.constraint(equalTo: logoLabel.trailingAnchor, constant: 0),
             debugIndicator.bottomAnchor.constraint(equalTo: logoLabel.topAnchor, constant: 12),
             debugIndicator.widthAnchor.constraint(equalToConstant: 36),

@@ -195,7 +195,7 @@
 "namesalt.context" = "Add a personal ID to your seed phrase";
 "namesalt.error.empty" = "Please enter a personal identifier";
 "namesalt.error.too_short" = "Personal identifier is too short (min 2 CJK or 4 characters)";
-"namesalt.example" = "Example: 無忌@wujikey.com";
+"namesalt.example" = "Example: 無跡@wujikey.com";
 "namesalt.placeholder" = "Enter a personal identifier";
 "namesalt.security_warning" = "Use your real name, ID number, email, or even wallet address\nas a personalized anchor you'll never lose";
 "places.alert.confirm_clear_message" = "This will clear all 5 places and cannot be undone. Continue?";

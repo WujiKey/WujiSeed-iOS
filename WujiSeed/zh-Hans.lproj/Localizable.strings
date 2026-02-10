@@ -109,7 +109,7 @@
 "guide.coords.china.content" = "百度、高德、腾讯、苹果的地图坐标都被加密无法使用，推荐Google卫星图层。";
 "guide.coords.china.title" = "中国境内坐标说明：";
 "guide.coords.example" = "示例：";
-"guide.coords.f9.step1" = "1、无忌APP首页点击F9定位";
+"guide.coords.f9.step1" = "1、无迹APP首页点击F9定位";
 "guide.coords.f9.step2" = "2、在室外开阔区静置一段时间";
 "guide.coords.f9.step3" = "3、底部会显示当前坐标";
 "guide.coords.f9.tips" = "适合：现场获取，最准确";
@@ -153,7 +153,7 @@
 "guide.memory.warning.tips" = "太简单、太抽象、无意义的标签容易遗忘且容易被猜测";
 "guide.memory.warning.title" = "⚠️ 避免这样写";
 "guide.memory.warning.location" = "⚠️ 5个地点应分散在不同区域，跨度越大越安全";
-"home.app.name" = "无忌";
+"home.app.name" = "无迹";
 "home.enslogan" = "For the Memories That Never Fade.";
 "home.f9location" = "F9定位";
 "home.manual" = "使用手册";
@@ -176,8 +176,8 @@
 "manual.flow.recover.steps" = "方位码 + 个人标识 + 全部5个地点及记忆";
 "manual.flow.recover.title" = "恢复方法二";
 "manual.flow.title" = "恢复流程";
-"manual.intro.content" = "用记得住的秘密，重建你的助记词。\n传统助记词难以记忆，一旦丢失无法找回。\n无忌让助记词可记、可恢复、不可泄露。";
-"manual.intro.title" = "无忌是什么？";
+"manual.intro.content" = "用记得住的秘密，重建你的助记词。\n传统助记词难以记忆，一旦丢失无法找回。\n无迹让助记词可记、可恢复、不可泄露。";
+"manual.intro.title" = "无迹是什么？";
 "manual.principle" = "个人标识 + 5个地点及记忆\n→ 唯一的24位助记词";
 "manual.guides.coords.title" = "如何获取坐标";
 "manual.guides.memory.title" = "如何写记忆内容";
@@ -190,7 +190,7 @@
 "manual.tips.verify.title" = "测试您的记忆";
 "manual.tips.verify.content" = "纸上准备好后，等几天再凭记忆填写一遍，对比两次内容。如果一致，说明这套记忆可靠，适合用来生成助记词。";
 "manual.onboarding.title" = "查看新手引导";
-"manual.about.title" = "关于无忌";
+"manual.about.title" = "关于无迹";
 "manual.title" = "使用手册";
 "namesalt.context" = "给助记词加个人标识";
 "namesalt.error.empty" = "请输入个人标识";
@@ -389,8 +389,8 @@
 
 /* About */
 "about.current_version" = "当前版本";
-"about.title" = "关于无忌";
-"about.description" = "无忌是一个永久离线无法联网，完全开源的项目，代码公开透明，永久免费使用。";
+"about.title" = "关于无迹";
+"about.description" = "无迹是一个永久离线无法联网，完全开源的项目，代码公开透明，永久免费使用。";
 "about.open_source_title" = "开源项目地址";
 "about.open_github" = "在 GitHub 上查看";
 "about.feedback" = "有问题请到GitHub反馈";
@@ -399,19 +399,19 @@
 /* Onboarding */
 "onboarding.skip" = "跳过";
 "onboarding.page1.title" = "不需记24单词";
-"onboarding.page1.message" = "你的大脑里\n沉睡着一把远古密钥\n\n空间记忆\n人类最古老、最坚固的本能\n它由海马体点燃\n刻入大脑深层\n成为你最难丢失的记忆\n\n用无忌\n唤醒它";
+"onboarding.page1.message" = "你的大脑里\n沉睡着一把远古密钥\n\n空间记忆\n人类最古老、最坚固的本能\n它由海马体点燃\n刻入大脑深层\n成为你最难丢失的记忆\n\n用无迹\n唤醒它";
 "onboarding.page2.title" = "F9Grid网格";
 "onboarding.page2.message" = "让空间记忆真正可用\n我们把地球切成等形网格\n将混沌压缩为秩序\n\n面积误差低于14.2857%\n融合洛书九宫方位\n哪怕偏差11米\n仍归同一网格\n\n位置即密钥";
 "onboarding.page2.before.title" = "传统思路";
 "onboarding.page2.before.content" = "记住24个你永远记不住的单词";
-"onboarding.page2.after.title" = "无忌思路";
+"onboarding.page2.after.title" = "无迹思路";
 "onboarding.page2.after.content" = "用你一辈子都忘不了的记忆，生成那24个单词";
 "onboarding.page3.title" = "为什么安全？";
 "onboarding.page3.point1" = "防彩虹表攻击，引入独立名称盐";
 "onboarding.page3.point2" = "高熵信息，按指示可达245+比特";
 "onboarding.page3.point3" = "防GPU/ASIC/量子攻击，高参Argon2id派生";
 "onboarding.page3.point4" = "3-of-5门限，加密备份遗忘两个地点仍可恢复";
-"onboarding.page3.point5" = "无忌完全离线，无法联网";
+"onboarding.page3.point5" = "无迹完全离线，无法联网";
 "onboarding.page4.title" = "如何运作？";
 "onboarding.page4.step1" = "独立名称";
 "onboarding.page4.step2" = "地点坐标";
@@ -419,4 +419,4 @@
 "onboarding.page4.step4" = "24词助记词";
 "onboarding.page5.title" = "准备好了吗？";
 "onboarding.page5.message" = "开始创建你的记忆密钥";
-"onboarding.page5.button" = "开始使用无忌";
+"onboarding.page5.button" = "开始使用无迹";

@@ -109,7 +109,7 @@
 "guide.coords.china.content" = "百度、高德、騰訊、蘋果的地圖座標都被加密無法使用，推薦Google衛星圖層。";
 "guide.coords.china.title" = "中國境內座標說明：";
 "guide.coords.example" = "示例：";
-"guide.coords.f9.step1" = "1、無忌APP首頁點擊F9定位";
+"guide.coords.f9.step1" = "1、無跡APP首頁點擊F9定位";
 "guide.coords.f9.step2" = "2、在室外開闊區靜置一段時間";
 "guide.coords.f9.step3" = "3、底部會顯示當前座標";
 "guide.coords.f9.tips" = "適合：現場獲取，最準確";
@@ -153,7 +153,7 @@
 "guide.memory.warning.tips" = "太簡單、太抽象、無意義的標籤容易遺忘且容易被猜測";
 "guide.memory.warning.title" = "⚠️ 避免這樣寫";
 "guide.memory.warning.location" = "⚠️ 5個地點應分散在不同區域，跨度越大越安全";
-"home.app.name" = "無忌";
+"home.app.name" = "無跡";
 "home.enslogan" = "For the Memories That Never Fade.";
 "home.f9location" = "F9定位";
 "home.manual" = "使用手冊";
@@ -176,8 +176,8 @@
 "manual.flow.recover.steps" = "方位碼 + 個人標識 + 全部5個地點及記憶";
 "manual.flow.recover.title" = "恢復方法二";
 "manual.flow.title" = "恢復流程";
-"manual.intro.content" = "用記得住的秘密，重建你的助記詞。\n傳統助記詞難以記憶，一旦丟失無法找回。\n無忌，讓助記詞可記、可恢復、不可洩露。";
-"manual.intro.title" = "無忌是什麼？";
+"manual.intro.content" = "用記得住的秘密，重建你的助記詞。\n傳統助記詞難以記憶，一旦丟失無法找回。\n無跡，讓助記詞可記、可恢復、不可洩露。";
+"manual.intro.title" = "無跡是什麼？";
 "manual.principle" = "個人標識 + 5個地點及記憶\n→ 唯一的24位助記詞";
 "manual.guides.coords.title" = "如何獲取座標";
 "manual.guides.memory.title" = "如何寫記憶內容";
@@ -190,7 +190,7 @@
 "manual.tips.verify.title" = "測試您的記憶";
 "manual.tips.verify.content" = "紙上準備好後，等幾天再憑記憶填寫一遍，對比兩次內容。如果一致，說明這套記憶可靠，適合用來生成助記詞。";
 "manual.onboarding.title" = "查看新手引導";
-"manual.about.title" = "關於無忌";
+"manual.about.title" = "關於無跡";
 "manual.title" = "使用手冊";
 "namesalt.context" = "給助記詞加個人標識";
 "namesalt.error.empty" = "請輸入個人標識";
@@ -389,8 +389,8 @@
 
 /* About */
 "about.current_version" = "當前版本";
-"about.title" = "關於無忌";
-"about.description" = "無忌是一個永久離線無法聯網，完全開源的項目，代碼公開透明，永久免費使用。";
+"about.title" = "關於無跡";
+"about.description" = "無跡是一個永久離線無法聯網，完全開源的項目，代碼公開透明，永久免費使用。";
 "about.open_source_title" = "開源項目地址";
 "about.open_github" = "在 GitHub 上查看";
 "about.feedback" = "有問題請到GitHub反饋";
@@ -399,19 +399,19 @@
 /* Onboarding */
 "onboarding.skip" = "跳過";
 "onboarding.page1.title" = "不需記24單詞";
-"onboarding.page1.message" = "你的大腦裡\n沉睡著一把遠古密鑰\n\n空間記憶\n人類最古老、最堅固的本能\n它由海馬體點燃\n刻入大腦深層\n成為你最難丟失的記憶\n\n用無忌\n喚醒它";
+"onboarding.page1.message" = "你的大腦裡\n沉睡著一把遠古密鑰\n\n空間記憶\n人類最古老、最堅固的本能\n它由海馬體點燃\n刻入大腦深層\n成為你最難丟失的記憶\n\n用無跡\n喚醒它";
 "onboarding.page2.title" = "F9Grid網格";
 "onboarding.page2.message" = "讓空間記憶真正可用\n我們把地球切成等形網格\n將混沌壓縮為秩序\n\n面積誤差低於14.2857%\n融合洛書九宮方位\n哪怕偏差11米\n仍歸同一網格\n\n位置即密鑰";
 "onboarding.page2.before.title" = "傳統思路";
 "onboarding.page2.before.content" = "記住24個你永遠記不住的單詞";
-"onboarding.page2.after.title" = "無忌思路";
+"onboarding.page2.after.title" = "無跡思路";
 "onboarding.page2.after.content" = "用你一輩子都忘不了的記憶，生成那24個單詞";
 "onboarding.page3.title" = "為什麼安全？";
 "onboarding.page3.point1" = "防彩虹表攻擊，引入獨立名稱鹽";
 "onboarding.page3.point2" = "高熵資訊，按指示可達245+比特";
 "onboarding.page3.point3" = "防GPU/ASIC/量子攻擊，高參Argon2id派生";
 "onboarding.page3.point4" = "3-of-5門限，加密備份遺忘兩個地點仍可恢復";
-"onboarding.page3.point5" = "無忌完全離線，無法聯網";
+"onboarding.page3.point5" = "無跡完全離線，無法聯網";
 "onboarding.page4.title" = "如何運作？";
 "onboarding.page4.step1" = "獨立名稱";
 "onboarding.page4.step2" = "地點坐標";
@@ -419,4 +419,4 @@
 "onboarding.page4.step4" = "24詞助記詞";
 "onboarding.page5.title" = "準備好了嗎？";
 "onboarding.page5.message" = "開始創建你的記憶密鑰";
-"onboarding.page5.button" = "開始使用無忌";
+"onboarding.page5.button" = "開始使用無跡";
