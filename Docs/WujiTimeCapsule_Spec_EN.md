@@ -142,23 +142,6 @@ key = BLAKE2b-256(input)
 
 Where `keyMaterial` is externally pre-processed data (typically: normalized note + F9Grid cell ID).
 
-### Combinations
-
-The 10 combinations of selecting 3 from 5 locations (0-indexed):
-
-| Index | Locations |
-|-------|-----------|
-| 0     | 0, 1, 2   |
-| 1     | 0, 1, 3   |
-| 2     | 0, 1, 4   |
-| 3     | 0, 2, 3   |
-| 4     | 0, 2, 4   |
-| 5     | 0, 3, 4   |
-| 6     | 1, 2, 3   |
-| 7     | 1, 2, 4   |
-| 8     | 1, 3, 4   |
-| 9     | 2, 3, 4   |
-
 ### Associated Data (AAD)
 
 AEAD authentication covers:
