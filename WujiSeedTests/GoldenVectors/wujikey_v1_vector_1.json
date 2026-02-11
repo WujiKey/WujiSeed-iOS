@@ -8,8 +8,10 @@
     {
       "index" : 1,
       "coordinate" : "34.617090, 119.191840",
-      "memoryTags" : [
-        "女娲补天石",
+      "memory1Tags" : [
+        "女娲补天石"
+      ],
+      "memory2Tags" : [
         "水帘洞",
         "称王"
       ],
@@ -19,9 +21,11 @@
     {
       "index" : 2,
       "coordinate" : "35.066260, 107.614560",
-      "memoryTags" : [
+      "memory1Tags" : [
         "七十二变",
-        "筋斗云",
+        "筋斗云"
+      ],
+      "memory2Tags" : [
         "孙悟空"
       ],
       "memoryProcessed" : "七十二变孙悟空筋斗云",
@@ -30,8 +34,10 @@
     {
       "index" : 3,
       "coordinate" : "11.373300, 142.591700",
-      "memoryTags" : [
-        "齐天大圣",
+      "memory1Tags" : [
+        "齐天大圣"
+      ],
+      "memory2Tags" : [
         "如意金箍棒",
         "一万三千五百斤"
       ],
@@ -41,9 +47,11 @@
     {
       "index" : 4,
       "coordinate" : "29.976330, 122.389360",
-      "memoryTags" : [
+      "memory1Tags" : [
         "西海龙王三太子",
-        "白龙马",
+        "白龙马"
+      ],
+      "memory2Tags" : [
         "西天取经"
       ],
       "memoryProcessed" : "白龙马西天取经西海龙王三太子",
@@ -52,8 +60,10 @@
     {
       "index" : 5,
       "coordinate" : "24.695100, 84.991300",
-      "memoryTags" : [
-        "九九八十一难",
+      "memory1Tags" : [
+        "九九八十一难"
+      ],
+      "memory2Tags" : [
         "通天河老鼋"
       ],
       "memoryProcessed" : "九九八十一难通天河老鼋",

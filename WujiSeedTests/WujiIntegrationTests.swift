@@ -459,9 +459,9 @@ class WujiIntegrationTests: XCTestCase {
 
         // Create spots with wrong memory
         let wrongSpots: [WujiSpot] = [
-            WujiSpot(coordinates: testLocations[0].coord, memory: "错误的记忆内容一二三")!,
-            WujiSpot(coordinates: testLocations[1].coord, memory: "错误的记忆内容四五六")!,
-            WujiSpot(coordinates: testLocations[2].coord, memory: "错误的记忆内容七八九")!,
+            WujiSpot(coordinates: testVector.locations[0].coordinate, memory: "错误的记忆内容一二三")!,
+            WujiSpot(coordinates: testVector.locations[1].coordinate, memory: "错误的记忆内容四五六")!,
+            WujiSpot(coordinates: testVector.locations[2].coordinate, memory: "错误的记忆内容七八九")!,
         ]
 
         let recoveryInput = WujiReserve.RecoveryInput(

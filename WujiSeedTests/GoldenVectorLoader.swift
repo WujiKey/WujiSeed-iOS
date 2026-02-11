@@ -25,10 +25,16 @@ struct GoldenTestVector: Codable {
     struct Location: Codable {
         let index: Int
         let coordinate: String
-        let memoryTags: [String]
+        let memory1Tags: [String]
+        let memory2Tags: [String]
         let memoryProcessed: String
         let positionCode: Int
         let note: String?
+
+        /// All memory tags combined (for backward compatibility)
+        var memoryTags: [String] {
+            return memory1Tags + memory2Tags
+        }
     }
 
     struct Argon2Params: Codable {
@@ -46,10 +52,7 @@ class GoldenVectorLoader {
     /// - Returns: GoldenTestVector or nil if loading fails
     static func load(_ filename: String) -> GoldenTestVector? {
         // Try to find file in test bundle
-        guard let bundle = Bundle(for: GoldenVectorLoader.self) else {
-            print("❌ Failed to get test bundle")
-            return nil
-        }
+        let bundle = Bundle(for: GoldenVectorLoader.self)
 
         guard let path = bundle.path(forResource: filename, ofType: "json") else {
             print("❌ File not found: \(filename).json")
