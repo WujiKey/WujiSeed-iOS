@@ -100,7 +100,6 @@ build/
 # Claude Code
 .claudeconfig
 .claude/
-CLAUDE.md
 Scripts/
 Screenshots/
 
