@@ -1,0 +1,102 @@
+schema: spec-driven
+
+# WujiSeed iOS Project Configuration
+# This file contains global architecture configuration and project settings.
+
+context: |
+  # Project: WujiSeed iOS
+  # Type: iOS application for BIP39 mnemonic generation using memory-based system
+
+  ## Tech Stack
+  - Language: Swift 5.0
+  - Platform: iOS 12.0+
+  - IDE: Xcode 14.0+
+  - UI: Programmatic UIKit (no Storyboards/XIBs)
+  - Dependencies: Swift-Sodium 0.9.1, F9Grid 1.1.0
+
+  ## Architecture Pattern
+  - MVC with state managers
+  - No persistence (memory-only for security)
+  - Wizard-based user flow
+  - Offline-first (no network)
+
+  ## Build & Test
+  - Simulator: iPhone 17 (iOS 26.2) - ID: C4F92C22-C0C1-45DF-BC81-B52C77D41A22
+  - Project file: WujiSeed.xcodeproj
+  - Scheme: WujiSeed
+  - Test coverage: All WujiLib business logic
+
+  ## Core Components
+  - WujiLib: Business logic (crypto, normalization, geo encoding)
+  - UI: View controllers and state managers
+  - Common: Shared utilities (Theme, LanguageManager, etc.)
+
+  ## Key Algorithms
+  - Text Normalization: NFKC → CaseFold → Trim → CollapseWS → AsciiPunctNorm
+  - Salt Generation: BLAKE2b-256(Normalize(name) + "Forgetless-V1")
+  - Geographic Encoding: F9Grid with 9-grid position codes (1-9)
+  - Key Derivation: Argon2id (3 presets: Fast/Balanced/Intensive)
+  - Encryption: XChaCha20-Poly1305 with 3-of-5 Shamir Secret Sharing
+
+  ## Localization
+  - Supported languages: en, zh-Hans, zh-Hant, ja, es
+  - All user-facing text must have translations in all languages
+  - LanguageManager handles dynamic language switching
+
+  ## Security Principles
+  - Offline-First: All crypto operations are local
+  - No Persistence: Mnemonics never saved to disk
+  - Deterministic: Same inputs always produce same outputs
+  - BIP39 Compliant: Generated mnemonics follow standard exactly
+  - Whitepaper Authority: Spec takes precedence over code
+
+  ## Testing Strategy
+  - Golden vectors: wujikey_v1_vector_1.json, wujikey_v1_vector_2.json
+  - Regression tests ensure backward compatibility
+  - Unit tests for all WujiLib business logic
+
+# Development workflow rules
+rules:
+  proposal:
+    - Keep proposals focused on single feature or fix
+    - Always include security implications for crypto changes
+    - Reference whitepaper sections when applicable
+    - Consider backward compatibility impact
+
+  tasks:
+    - Break tasks into chunks of max 2 hours
+    - Run corresponding test suite after modifying WujiLib
+    - Update all language localizations for UI changes
+    - Verify golden vector tests pass after crypto changes
+
+  implementation:
+    - No Storyboards/XIBs - all UI is programmatic
+    - All WujiLib changes must maintain test coverage
+    - Follow existing code organization (WujiLib/, UI/, Common/)
+    - Use Theme constants for colors, fonts, layouts
+    - Crypto changes require whitepaper alignment check
+
+  verification:
+    - Run full test suite before marking tasks complete
+    - Test on iPhone 17 simulator (iOS 26.2)
+    - Verify all localizations display correctly
+    - Check golden vector regression tests pass
+    - Manual testing for UI/UX changes
+
+# File structure
+structure:
+  source:
+    - WujiSeed/WujiLib/: Business logic (no UI dependencies)
+    - WujiSeed/UI/: View controllers and UI components
+    - WujiSeed/Common/: Shared utilities and helpers
+    - WujiSeed/Assets.xcassets/: Images and color assets
+    - WujiSeed/*.lproj/: Localization strings
+
+  tests:
+    - WujiSeedTests/: Unit tests mirroring WujiLib structure
+    - WujiSeedTests/GoldenVectors/: Test vectors for regression testing
+
+  docs:
+    - openspec/: OpenSpec workflow management
+    - CLAUDE.md: AI assistant guidance (project overview)
+    - TOOLS.md: Local development notes
