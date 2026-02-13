@@ -2,9 +2,9 @@
 //  WujiNormalizerTests.swift
 //  WujiSeedTests
 //
-//  WujiNormalizer unit tests - whitepaper normalization spec validation
+//  WujiNormalizer unit tests - protocol normalization spec validation
 //
-//  Whitepaper normalization flow: AsciiPunctNorm(CollapseWS(Trim(CaseFold(NFKC(s)))))
+//  Protocol normalization flow: AsciiPunctNorm(CollapseWS(Trim(CaseFold(NFKC(s)))))
 //
 
 import XCTest
@@ -148,10 +148,10 @@ class WujiNormalizerTests: XCTestCase {
         }
     }
 
-    // MARK: - White Paper Examples
+    // MARK: - Protocol Examples
 
-    func testWhitePaperExamples() {
-        // Whitepaper formula: AsciiPunctNorm(CollapseWS(Trim(CaseFold(NFKC(s)))))
+    func testProtocolExamples() {
+        // Protocol formula: AsciiPunctNorm(CollapseWS(Trim(CaseFold(NFKC(s)))))
 
         let testCases: [(input: String, description: String)] = [
             ("My Wallet", "Mnemonic name example"),

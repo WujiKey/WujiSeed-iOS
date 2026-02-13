@@ -2,19 +2,19 @@
 //  WujiNormalizer.swift
 //  WujiSeed
 //
-//  Whitepaper normalization implementation
+//  Protocol normalization implementation
 //  Normalization flow: AsciiPunctNorm(CollapseWS(Trim(CaseFold(NFKC(s)))))
 //
 
 import Foundation
 
 /// F9 Text Normalization Utility Class
-/// Implements the whitepaper-defined normalization flow to ensure consistent output from different inputs
+/// Implements the protocol-defined normalization flow to ensure consistent output from different inputs
 class WujiNormalizer {
 
     // MARK: - Public Methods
 
-    /// Normalize text (whitepaper specification)
+    /// Normalize text (protocol specification)
     ///
     /// Processing flow: AsciiPunctNorm(CollapseWS(Trim(CaseFold(NFKC(s)))))
     /// 1. NFKC: Unicode compatibility normalization
@@ -119,7 +119,7 @@ class WujiNormalizer {
     /// Step 4: CollapseWS - Collapse whitespace characters
     ///
     /// Collapse multiple consecutive whitespace characters (spaces, tabs, newlines, etc.) into single space
-    /// Whitepaper definition: replaceAll(s,[ \t\n˚​]+, " ")
+    /// Protocol definition: replaceAll(s,[ \t\n˚​]+, " ")
     ///
     /// - Parameter text: Input text
     /// - Returns: Text with collapsed whitespace

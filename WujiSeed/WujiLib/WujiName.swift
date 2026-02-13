@@ -23,7 +23,7 @@ struct WujiName {
 
     /// Create from raw text (auto-normalizes and generates salt)
     ///
-    /// Salt generation follows whitepaper spec:
+    /// Salt generation follows protocol spec:
     /// BLAKE2b-128(Normalize(name) + "WUJI-Key-V1:Memory-Based Seed Phrases")
     ///
     /// - Parameter raw: Raw name text input
@@ -33,7 +33,7 @@ struct WujiName {
         guard !normalized.isEmpty else { return nil }
         self.normalized = normalized
 
-        // Generate 16-byte salt using BLAKE2b (with version suffix per whitepaper)
+        // Generate 16-byte salt using BLAKE2b (with version suffix per protocol spec)
         let textWithSuffix = normalized + CryptoUtils.WujiBlake2bSaltSuffix
         guard let hash = CryptoUtils.blake2b(string: textWithSuffix, outputLength: CryptoUtils.WujiArgon2idSaltLength) else {
             return nil

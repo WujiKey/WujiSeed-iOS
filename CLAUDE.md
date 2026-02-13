@@ -90,7 +90,7 @@ Use `LanguageManager` for runtime language switching.
 - ⚠️ **No Storyboards/XIBs** - All UI is programmatic
 - ⚠️ **No Persistence** - Mnemonics only in memory during session
 - ⚠️ **Offline-First** - No network calls ever
-- ⚠️ **Whitepaper Authority** - Specification takes precedence over code
+- ⚠️ **Protocol Authority** - Protocol specification takes precedence over code
 - ⚠️ **Backward Compatibility** - Current version uses F9Grid (NOT PlusCode)
 - ⚠️ **Test Coverage** - WujiLib changes require corresponding tests
 

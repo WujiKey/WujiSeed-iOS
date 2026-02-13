@@ -4,6 +4,7 @@ schema: spec-driven
 # This file contains global architecture configuration and project settings.
 
 context: |
+  Language: All artifacts must be written in Simplified Chinese (简体中文).
   # Project: WujiSeed iOS
   # Type: iOS application for BIP39 mnemonic generation using memory-based system
 
@@ -58,6 +59,7 @@ context: |
 # Development workflow rules
 rules:
   proposal:
+    - 使用中文撰写，包括标题和所有章节
     - Keep proposals focused on single feature or fix
     - Always include security implications for crypto changes
     - Reference whitepaper sections when applicable

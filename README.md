@@ -58,8 +58,8 @@ English | [中文](README.zh-CN.md)
 
 ## Documentation
 
-- [WujiSeed Protocol Specification (English)](Docs/WujiSeed-Technical-Specification.md)
-- [WujiSeed 协议规范 (中文)](Docs/WujiSeed-Technical-Specification-zh.md)
+- [WujiSeed Protocol Specification (English)](Docs/WujiSeed-Protocol.md)
+- [WujiSeed 协议规范 (中文)](Docs/WujiSeed-Protocol-zh.md)
 
 ## Security Notes
 

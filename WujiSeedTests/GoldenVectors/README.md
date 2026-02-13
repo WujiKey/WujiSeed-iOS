@@ -12,7 +12,7 @@ Each JSON file contains:
 
 - **name**: The raw identifier string
 - **normalizedName**: The identifier after normalization
-- **nameSaltHex**: BLAKE2b-256 hash of (normalized name + "Forgetless-V1") in hexadecimal
+- **nameSaltHex**: BLAKE2b-128 hash of (normalized name + "WUJI-Key-V1:Memory-Based Seed Phrases") in hexadecimal
 - **locations**: Array of 5 geographic locations with:
   - **coordinate**: Lat/lng coordinate string
   - **memoryTags**: Array of keyword tags (before processing)
@@ -87,12 +87,12 @@ These are the exact parameters used in the production app for maximum security.
 ## Validation Checklist
 
 ✅ Name normalization: NFKC → CaseFold → Trim → CollapseWS → AsciiPunctNorm
-✅ Name salt: BLAKE2b-256(normalized name + "Forgetless-V1")
+✅ Name salt: BLAKE2b-128(normalized name + "WUJI-Key-V1:Memory-Based Seed Phrases")
 ✅ Memory processing: normalize tags → deduplicate → Unicode sort → concatenate
 ✅ F9Grid: Coordinates → cell index + position code (1-9)
 ✅ Argon2id: Derive 32-byte key from memory + name salt
 ✅ BIP39: Generate 24 words from 256-bit key
-✅ Encryption: XChaCha20-Poly1305 backup with 3-of-5 Shamir sharing
+✅ Encryption: XChaCha20-Poly1305 backup with memory fault tolerance (10 independent blocks)
 
 ## Important Notes
 
@@ -119,7 +119,7 @@ When implementing WujiSeed on a new platform:
 
 1. Start by implementing the basic algorithms:
    - Text normalization (Unicode, case folding, whitespace handling)
-   - BLAKE2b-256 hashing
+   - BLAKE2b hashing (128-bit output for name salt)
    - WujiMemoryTagProcessor (normalize, dedupe, sort, concat)
    - F9Grid position codes
 
