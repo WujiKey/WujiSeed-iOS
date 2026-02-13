@@ -48,7 +48,7 @@ xcodebuild test -project WujiSeed.xcodeproj -scheme WujiSeed \
 Text Normalization: AsciiPunctNorm(CollapseWS(Trim(CaseFold(NFKC(s)))))
 Salt Generation:    BLAKE2b-256(Normalize(name) + "Forgetless-V1")
 Geographic:         F9Grid cell index + 9-grid position code (1-9 layout)
-KDF:                Argon2id (3 presets: Fast/Balanced/Intensive)
+KDF:                Argon2id (standard: 256MB memory, 7 iterations, 1 thread)
 ```
 
 **9-Grid Position Layout:**

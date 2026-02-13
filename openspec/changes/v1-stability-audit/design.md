@@ -8,7 +8,7 @@ WujiSeed V1 版本已经投入生产使用，核心算法流程包括：
 2. **盐生成** → BLAKE2b-128(Normalize(name) + "WUJI-Key-V1:Memory-Based Seed Phrases")
 3. **地理编码** → F9Grid 单元格索引 + 9 宫格位置代码（1-9 布局）
 4. **记忆处理** → 归一化 → 去重 → Unicode 排序 → 拼接
-5. **密钥派生** → Argon2id（3 种预设：Fast/Balanced/Intensive）
+5. **密钥派生** → Argon2id（标准参数：256MB 内存、7 次迭代、1 线程）
 6. **助记词生成** → BIP39 标准（256 位熵 → 24 个单词）
 7. **加密备份** → XChaCha20-Poly1305 记忆容错机制（10 个独立加密块）
 

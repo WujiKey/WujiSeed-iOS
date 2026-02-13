@@ -60,21 +60,21 @@
 - **WHEN** 使用接近极地或国际日期变更线的坐标
 - **THEN** F9Grid 编码必须产生有效且可重现的结果
 
-### Requirement: Argon2id 参数验证
+### Requirement: Argon2id 参数稳定性验证
 
-系统必须验证所有 Argon2id 参数预设（Fast/Balanced/Intensive）的稳定性和一致性。
+系统必须验证 Argon2id 标准参数的稳定性和一致性。
 
-#### Scenario: 生产参数验证（Intensive）
-- **WHEN** 使用生产环境参数（256MB/7 iterations/1 parallelism）
+#### Scenario: 标准参数验证
+- **WHEN** 使用标准参数（256MB/7 iterations/1 parallelism）
 - **THEN** 必须与黄金向量的 argon2Parameters 完全匹配
 
-#### Scenario: Fast 预设稳定性
-- **WHEN** 使用 Fast 预设参数
-- **THEN** 相同输入必须产生可重现的密钥输出
+#### Scenario: 参数确定性验证
+- **WHEN** 使用相同的密码、盐和标准参数
+- **THEN** 所有版本必须产生完全相同的 32 字节密钥输出
 
-#### Scenario: Balanced 预设稳定性
-- **WHEN** 使用 Balanced 预设参数
-- **THEN** 相同输入必须产生可重现的密钥输出
+#### Scenario: 参数不可变性验证
+- **WHEN** 检查 CryptoUtils.Argon2Parameters.standard
+- **THEN** 参数值必须始终为 256MB/7/1，不能随版本改变
 
 ### Requirement: 向后兼容性测试矩阵
 
