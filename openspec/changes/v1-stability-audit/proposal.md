@@ -1,44 +1,56 @@
-## 为什么 (Why)
+## 为什么要做这个
 
-WujiSeed-Protocol V1 版本已投入生产使用，用户已经基于当前实现生成了助记词和加密备份。在未来版本升级过程中，必须确保向后兼容性：相同的输入参数必须始终生成完全相同的助记词，已有的加密备份必须能够成功恢复。需要建立完整的稳定性审计机制和回归测试保障体系，防止代码重构或算法优化破坏兼容性。
+V1 已经上线了，用户用它生成了助记词和加密备份。现在的问题是：
 
-## 要改变什么 (What Changes)
+**如果升级代码，会不会把用户的助记词搞坏？**
 
-- 建立 V1 版本核心算法的稳定性基准（文本归一化、BLAKE2b-128 盐生成、F9Grid 编码、Argon2id 密钥派生、BIP39 生成、XChaCha20-Poly1305 加密）
-- 审计现有两个黄金测试向量（Journey to the West、Moses Exodus）的覆盖完整性
-- 验证所有关键数据转换路径的确定性和可重现性
-- 识别可能影响向后兼容性的潜在风险点（依赖库升级、平台差异、算法实现变更）
-- 制定防御性编码规范和测试要求，确保未来修改不破坏 V1 兼容性
-- 建立跨平台兼容性验证机制（iOS、Android、JavaScript 等）
+- 重构代码可能改变输出
+- 依赖库升级可能改变算法行为
+- 平台差异（iOS 版本、Swift 编译器）可能影响结果
+- 文档和代码不一致（比如盐后缀写的是 "Forgetless-V1" 但实际是 "WUJI-Key-V1:Memory-Based Seed Phrases"）
 
-## 能力范围 (Capabilities)
+现在需要**审计一遍**，搞清楚哪些东西绝对不能改，把测试补全，防止以后出问题。
 
-### 新增能力 (New Capabilities)
+## 要做什么
 
-- `v1-stability-baseline`: 建立 V1 版本核心算法的稳定性基准和验证规范
-- `compatibility-testing`: 完整的向后兼容性测试框架和黄金向量验证机制
-- `encryption-recovery-audit`: 加密备份生成和恢复的端到端审计验证
+### 核心任务
+1. **检查 7 个核心算法**是否和黄金向量一致
+   - 文本归一化、BLAKE2b-128 盐、F9Grid 编码、记忆标签处理、Argon2id、BIP39、XChaCha20-Poly1305 加密
 
-### 修改的能力 (Modified Capabilities)
+2. **验证 2 个黄金向量**（西游记、Moses Exodus）能不能覆盖所有情况
 
-*（暂无需要修改现有规范的能力，此次变更专注于审计和验证）*
+3. **找出风险点**
+   - Swift-Sodium 0.9.1 和 F9Grid 1.1.0 能不能升级？
+   - 新版本 iOS 会不会改变 Unicode 排序？
+   - 负坐标（南半球、西半球）处理对不对？
 
-## 影响范围 (Impact)
+4. **补测试**
+   - 单元测试：每个算法单独测
+   - 回归测试：黄金向量完整跑一遍
+   - CI/CD：测试不通过就不让合并代码
 
-**受影响的代码模块：**
-- `WujiLib/WujiNormalizer.swift`: 文本归一化算法（AsciiPunctNorm、CollapseWS、Trim、CaseFold、NFKC）
-- `WujiLib/CryptoUtils.swift`: BLAKE2b-128 盐生成、Argon2id 密钥派生、XChaCha20-Poly1305 加密
-- `WujiLib/WujiMemoryTagProcessor.swift`: 记忆标签处理器（归一化、去重、Unicode 排序、拼接）
-- `Common/BIP39Helper.swift`: BIP39 助记词生成（256 位熵 → 24 个单词）
-- `WujiSeedTests/GoldenVectors/`: 黄金测试向量（wujikey_v1_vector_1.json、wujikey_v1_vector_2.json）
-- `WujiSeedTests/WujiRegressionTests.swift`: 回归测试套件
+5. **写清楚规矩**
+   - 哪些代码改了要特别小心
+   - 依赖库怎么升级
+   - 黄金向量怎么用
 
-**依赖项：**
-- Swift-Sodium 0.9.1（Libsodium 加密库绑定）
-- F9Grid 1.1.0（地理网格编码库）
+## 会改动哪些地方
 
-**系统级影响：**
-- 测试框架需要确保覆盖所有关键数据转换路径
-- 文档需要明确标注 V1 版本的稳定性保证和兼容性承诺
-- 代码审查流程需要增加向后兼容性检查清单
-- CI/CD 流程需要强制执行黄金向量回归测试
+**代码文件**（只检查，不改算法）
+- `WujiLib/WujiNormalizer.swift` - 文本归一化
+- `WujiLib/CryptoUtils.swift` - 加密相关
+- `WujiLib/WujiMemoryTagProcessor.swift` - 记忆标签处理
+- `Common/BIP39Helper.swift` - 助记词生成
+
+**测试文件**（会补充测试）
+- `WujiSeedTests/GoldenVectors/` - 黄金向量
+- `WujiSeedTests/WujiRegressionTests.swift` - 回归测试
+
+**依赖库**（锁死版本）
+- Swift-Sodium 0.9.1
+- F9Grid 1.1.0
+
+**流程**（会加强制要求）
+- CI/CD 必须跑黄金向量测试
+- 代码审查要检查兼容性
+- 文档要写清楚 V1 稳定性保证
