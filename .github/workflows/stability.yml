@@ -73,7 +73,7 @@ jobs:
           "WujiSeed/WujiLib/WujiNormalizer.swift"
           "WujiSeed/WujiLib/CryptoUtils.swift"
           "WujiSeed/WujiLib/WujiMemoryTagProcessor.swift"
-          "WujiSeed/Common/BIP39Helper.swift"
+          "WujiSeed/WujiLib/BIP39Helper.swift"
           "WujiSeed/WujiLib/WujiReserve.swift"
         )
 
