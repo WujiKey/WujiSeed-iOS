@@ -160,7 +160,7 @@ class WujiRegressionTests: XCTestCase {
             "Decrypted mnemonics must match golden vector")
     }
 
-    /// Test Vector 1: Recovery from golden backup with 3 spots (Shamir 3-of-5)
+    /// Test Vector 1: Recovery from golden backup with 3 spots (3-of-5 threshold)
     func testVector1_RecoverBackupWith3Spots() {
         let spots = vector1.spots
         guard let wujiName = vector1.wujiName else {
@@ -186,7 +186,7 @@ class WujiRegressionTests: XCTestCase {
         let result = WujiReserve.decryptWithRecovery(input: input)
 
         guard case .success(let recovered) = result else {
-            XCTFail("Recovery with 3 spots failed — Shamir recovery broken! Error: \(result)")
+            XCTFail("Recovery with 3 spots failed — threshold recovery broken! Error: \(result)")
             return
         }
 
@@ -299,7 +299,7 @@ class WujiRegressionTests: XCTestCase {
             "Decrypted mnemonics must match golden vector")
     }
 
-    /// Test Vector 2: Recovery from golden backup with 3 spots (Shamir 3-of-5)
+    /// Test Vector 2: Recovery from golden backup with 3 spots (3-of-5 threshold)
     func testVector2_RecoverBackupWith3Spots() {
         let spots = vector2.spots
         guard let wujiName = vector2.wujiName else {
@@ -325,7 +325,7 @@ class WujiRegressionTests: XCTestCase {
         let result = WujiReserve.decryptWithRecovery(input: input)
 
         guard case .success(let recovered) = result else {
-            XCTFail("Recovery with 3 spots failed — Shamir recovery broken! Error: \(result)")
+            XCTFail("Recovery with 3 spots failed — threshold recovery broken! Error: \(result)")
             return
         }
 

@@ -36,7 +36,7 @@ xcodebuild test -project WujiSeed.xcodeproj -scheme WujiSeed \
 2. **Places & Memories** → F9Grid encoding + position codes (1-9) → Tag processing
 3. **Key Derivation** → Argon2id (password=locations+memories, salt=name salt)
 4. **Mnemonic Generation** → BIP39 24-word phrase
-5. **Backup** → XChaCha20-Poly1305 encryption + 3-of-5 Shamir secret sharing
+5. **Backup** → XChaCha20-Poly1305 encryption + 3-of-5 threshold recovery
 
 ### Key Components
 - **WujiLib/**: Business logic (crypto, normalization, geo encoding)

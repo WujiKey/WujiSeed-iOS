@@ -37,7 +37,7 @@ context: |
   - Salt Generation: BLAKE2b-256(Normalize(name) + "Forgetless-V1")
   - Geographic Encoding: F9Grid with 9-grid position codes (1-9)
   - Key Derivation: Argon2id (3 presets: Fast/Balanced/Intensive)
-  - Encryption: XChaCha20-Poly1305 with 3-of-5 Shamir Secret Sharing
+  - Encryption: XChaCha20-Poly1305 with 3-of-5 threshold recovery
 
   ## Localization
   - Supported languages: en, zh-Hans, zh-Hant, ja, es
