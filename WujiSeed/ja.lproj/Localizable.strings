@@ -400,16 +400,6 @@
 "about.feedback" = "ご質問はGitHubでフィードバック";
 "about.feedback_channel" = "WujiSeed/issues";
 
-/* Donation */
-"donation.current_version" = "現在のバージョン";
-"donation.title" = "WUJI Seed を応援";
-"donation.description" = "WUJI Seed は完全オープンソースのプロジェクトです。\nコードは公開され、永久に無料で使用できます。\n\nこのツールが役に立ったら、\n開発者にコーヒーをおごってください ☕";
-"donation.supported_coins" = "BTC / ETH / USDT / USDC / SOL / ADA / XRP に対応";
-"donation.address_title" = "寄付アドレス";
-"donation.copy_address" = "アドレスをコピー";
-"donation.copied" = "コピーしました ✓";
-"donation.thanks" = "ご支援ありがとうございます！\nあなたの応援がプロジェクトを支えています ❤️";
-
 /* Onboarding */
 "onboarding.skip" = "スキップ";
 "onboarding.page1.title" = "24単語を覚える必要なし";

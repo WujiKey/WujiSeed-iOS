@@ -27,6 +27,7 @@
 "backup.geek.description" = "Información de recuperación avanzada";
 "backup.geek.locations" = "Información de ubicaciones";
 "backup.geek.title" = "Modo avanzado";
+"backup.geek.unnamed" = "Sin nombre";
 "backup.hint.public_storage" = "El código QR puede ser público.";
 "backup.loading" = "Cargando...";
 "backup.loading_failed" = "Error de carga";
@@ -400,14 +401,6 @@
 "about.feedback_channel" = "WujiSeed/issues";
 
 /* Donation */
-"donation.current_version" = "Versión actual";
-"donation.title" = "Apoya WUJI Seed";
-"donation.description" = "WUJI Seed es un proyecto de código abierto,\ntransparente y gratuito para siempre.\n\nSi esta herramienta te resulta útil,\nconsidera invitar al desarrollador a un café ☕";
-"donation.supported_coins" = "Acepta BTC / ETH / USDT / USDC / SOL / ADA / XRP";
-"donation.address_title" = "Dirección de donación";
-"donation.copy_address" = "Copiar dirección";
-"donation.copied" = "Copiado ✓";
-"donation.thanks" = "¡Gracias por tu apoyo!\nTu aliento mantiene vivo este proyecto ❤️";
 
 /* Onboarding */
 "onboarding.skip" = "Omitir";
