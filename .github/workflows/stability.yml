@@ -21,9 +21,8 @@ jobs:
     - name: Show Xcode version
       run: xcodebuild -version
 
-    - name: Boot simulator
+    - name: Resolve simulator
       run: |
-        xcrun simctl boot "iPhone 16" || true
         SIM_UDID=$(xcrun simctl list devices booted -j | python3 -c "
 import json, sys
 devices = json.load(sys.stdin)['devices']
@@ -32,6 +31,20 @@ for ds in devices.values():
         if d['state'] == 'Booted':
             print(d['udid'])
 " | head -1)
+        if [ -z "$SIM_UDID" ]; then
+          echo "No booted simulator found, booting iPhone 16..."
+          xcrun simctl boot "iPhone 16"
+          SIM_UDID=$(xcrun simctl list devices booted -j | python3 -c "
+import json, sys
+devices = json.load(sys.stdin)['devices']
+for ds in devices.values():
+    for d in ds:
+        if d['state'] == 'Booted':
+            print(d['udid'])
+" | head -1)
+        else
+          echo "Using existing booted simulator: $SIM_UDID"
+        fi
         echo "SIM_UDID=$SIM_UDID" >> $GITHUB_ENV
 
     - name: Run Golden Vector Regression Tests
@@ -145,9 +158,8 @@ for ds in devices.values():
     - name: Select Xcode version
       run: sudo xcode-select -s /Applications/Xcode_26.0.app/Contents/Developer
 
-    - name: Boot simulator
+    - name: Resolve simulator
       run: |
-        xcrun simctl boot "iPhone 16" || true
         SIM_UDID=$(xcrun simctl list devices booted -j | python3 -c "
 import json, sys
 devices = json.load(sys.stdin)['devices']
@@ -156,6 +168,20 @@ for ds in devices.values():
         if d['state'] == 'Booted':
             print(d['udid'])
 " | head -1)
+        if [ -z "$SIM_UDID" ]; then
+          echo "No booted simulator found, booting iPhone 16..."
+          xcrun simctl boot "iPhone 16"
+          SIM_UDID=$(xcrun simctl list devices booted -j | python3 -c "
+import json, sys
+devices = json.load(sys.stdin)['devices']
+for ds in devices.values():
+    for d in ds:
+        if d['state'] == 'Booted':
+            print(d['udid'])
+" | head -1)
+        else
+          echo "Using existing booted simulator: $SIM_UDID"
+        fi
         echo "SIM_UDID=$SIM_UDID" >> $GITHUB_ENV
 
     - name: Run All Tests

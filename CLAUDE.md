@@ -15,8 +15,7 @@ WujiSeed is an iOS application that generates BIP39 mnemonic phrases using a mem
 ## Quick Commands
 
 ```bash
-# Boot simulator and export UDID (run once per session)
-xcrun simctl boot C4F92C22-C0C1-45DF-BC81-B52C77D41A22 || true
+# Resolve simulator UDID (reuse booted, or boot iPhone 16 if none)
 export SIM_UDID=$(xcrun simctl list devices booted -j | python3 -c "
 import json, sys
 devices = json.load(sys.stdin)['devices']
@@ -25,6 +24,17 @@ for ds in devices.values():
         if d['state'] == 'Booted':
             print(d['udid'])
 " | head -1)
+if [ -z "$SIM_UDID" ]; then
+  xcrun simctl boot "iPhone 16"
+  export SIM_UDID=$(xcrun simctl list devices booted -j | python3 -c "
+import json, sys
+devices = json.load(sys.stdin)['devices']
+for ds in devices.values():
+    for d in ds:
+        if d['state'] == 'Booted':
+            print(d['udid'])
+" | head -1)
+fi
 
 # Build (Debug)
 xcodebuild -project WujiSeed.xcodeproj -scheme WujiSeed -configuration Debug \
