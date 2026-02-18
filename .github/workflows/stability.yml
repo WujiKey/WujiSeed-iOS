@@ -9,7 +9,7 @@ on:
 jobs:
   golden-vector-regression:
     name: Golden Vector Regression Tests
-    runs-on: macos-14
+    runs-on: macos-15
 
     steps:
     - name: Checkout code
@@ -125,7 +125,7 @@ jobs:
 
   all-tests:
     name: Full Test Suite
-    runs-on: macos-14
+    runs-on: macos-15
 
     steps:
     - name: Checkout code
