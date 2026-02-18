@@ -23,7 +23,7 @@
       "index": 2,
       "coordinate": "28.5392, 33.9752",
       "memoryProcessed": "mount sinaiten commandments",
-      "positionCode": 3,
+      "positionCode": 5,
       "note": "Mount Sinai (Northern Hemisphere, Eastern Hemisphere) - Law giving",
       "memory1Tags": [
         "Ten Commandments"
@@ -36,7 +36,7 @@
       "index": 3,
       "coordinate": "-33.9249, 18.4241",
       "memoryProcessed": "promised landsouthern cross",
-      "positionCode": 5,
+      "positionCode": 3,
       "note": "Cape Town, South Africa (SOUTHERN HEMISPHERE) - Symbolizing journey's end",
       "memory1Tags": [
         "Southern Cross"
@@ -72,6 +72,7 @@
       ]
     }
   ],
+  "positionCodes": [3, 3, 5, 3, 3],
   "keyDataHex": "a902463d316bc5e4db20416e6b17a46e51a9d6a94ba99c9017abd83fbf66c0a7",
   "mnemonics": [
     "poverty",

@@ -17,6 +17,7 @@ struct GoldenTestVector: Codable {
     let normalizedName: String
     let nameSaltHex: String
     let locations: [Location]
+    let positionCodes: [Int]
     let keyDataHex: String
     let mnemonics: [String]
     let encryptedBackupBase64: String
@@ -106,11 +107,9 @@ class GoldenVectorLoader {
 
     /// Get expected position codes from golden test vector
     /// - Parameter vector: Golden test vector
-    /// - Returns: Array of position codes in sorted order
+    /// - Returns: Array of position codes in keyMaterial-sorted order
     static func getPositionCodes(from vector: GoldenTestVector) -> [Int] {
-        return vector.locations
-            .sorted { $0.index < $1.index }
-            .map { $0.positionCode }
+        return vector.positionCodes
     }
 }
 
@@ -136,11 +135,6 @@ extension GoldenTestVector {
     /// Get encrypted backup data
     var encryptedData: Data? {
         return GoldenVectorLoader.getEncryptedBackup(from: self)
-    }
-
-    /// Get position codes array
-    var positionCodes: [Int] {
-        return GoldenVectorLoader.getPositionCodes(from: self)
     }
 
     /// Get name salt as Data

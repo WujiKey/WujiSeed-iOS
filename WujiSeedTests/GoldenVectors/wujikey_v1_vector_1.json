@@ -16,7 +16,7 @@
         "称王"
       ],
       "memoryProcessed" : "女娲补天石水帘洞称王",
-      "positionCode" : 9
+      "positionCode" : 6
     },
     {
       "index" : 2,
@@ -42,7 +42,7 @@
         "一万三千五百斤"
       ],
       "memoryProcessed" : "一万三千五百斤如意金箍棒齐天大圣",
-      "positionCode" : 5
+      "positionCode" : 9
     },
     {
       "index" : 4,
@@ -55,7 +55,7 @@
         "西天取经"
       ],
       "memoryProcessed" : "白龙马西天取经西海龙王三太子",
-      "positionCode" : 6
+      "positionCode" : 9
     },
     {
       "index" : 5,
@@ -67,9 +67,10 @@
         "通天河老鼋"
       ],
       "memoryProcessed" : "九九八十一难通天河老鼋",
-      "positionCode" : 9
+      "positionCode" : 5
     }
   ],
+  "positionCodes" : [9, 8, 5, 6, 9],
   "keyDataHex" : "315d51fcf9651fdded6afb49f2bdc5ea0e701a77ca7a12c36d1f00a99f9e1867",
   "mnemonics" : [
     "course",
