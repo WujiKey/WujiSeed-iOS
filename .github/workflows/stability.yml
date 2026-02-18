@@ -18,52 +18,11 @@ jobs:
     - name: Select Xcode version
       run: sudo xcode-select -s /Applications/Xcode_26.0.app/Contents/Developer
 
-    - name: Show Xcode version
-      run: xcodebuild -version
-
-    - name: Resolve simulator
-      run: |
-        SIM_UDID=$(xcrun simctl list devices booted -j | python3 -c "
-import json, sys
-devices = json.load(sys.stdin)['devices']
-for ds in devices.values():
-    for d in ds:
-        if d['state'] == 'Booted':
-            print(d['udid'])
-" | head -1)
-        if [ -z "$SIM_UDID" ]; then
-          echo "No booted simulator found, booting iPhone 16..."
-          xcrun simctl boot "iPhone 16"
-          SIM_UDID=$(xcrun simctl list devices booted -j | python3 -c "
-import json, sys
-devices = json.load(sys.stdin)['devices']
-for ds in devices.values():
-    for d in ds:
-        if d['state'] == 'Booted':
-            print(d['udid'])
-" | head -1)
-        else
-          echo "Using existing booted simulator: $SIM_UDID"
-        fi
-        echo "SIM_UDID=$SIM_UDID" >> $GITHUB_ENV
+    - name: Show Swift version
+      run: swift --version
 
     - name: Run Golden Vector Regression Tests
-      run: |
-        xcodebuild test \
-          -project WujiSeed.xcodeproj \
-          -scheme WujiSeed \
-          -destination "platform=iOS Simulator,id=$SIM_UDID" \
-          -parallel-testing-enabled NO \
-          -only-testing:WujiSeedTests/WujiRegressionTests \
-          -resultBundlePath TestResults.xcresult
-
-    - name: Upload test results
-      if: failure()
-      uses: actions/upload-artifact@v4
-      with:
-        name: test-results
-        path: TestResults.xcresult
-        retention-days: 30
+      run: swift test --filter WujiRegressionTests
 
   dependency-version-check:
     name: Dependency Version Lock Check
@@ -158,45 +117,5 @@ for ds in devices.values():
     - name: Select Xcode version
       run: sudo xcode-select -s /Applications/Xcode_26.0.app/Contents/Developer
 
-    - name: Resolve simulator
-      run: |
-        SIM_UDID=$(xcrun simctl list devices booted -j | python3 -c "
-import json, sys
-devices = json.load(sys.stdin)['devices']
-for ds in devices.values():
-    for d in ds:
-        if d['state'] == 'Booted':
-            print(d['udid'])
-" | head -1)
-        if [ -z "$SIM_UDID" ]; then
-          echo "No booted simulator found, booting iPhone 16..."
-          xcrun simctl boot "iPhone 16"
-          SIM_UDID=$(xcrun simctl list devices booted -j | python3 -c "
-import json, sys
-devices = json.load(sys.stdin)['devices']
-for ds in devices.values():
-    for d in ds:
-        if d['state'] == 'Booted':
-            print(d['udid'])
-" | head -1)
-        else
-          echo "Using existing booted simulator: $SIM_UDID"
-        fi
-        echo "SIM_UDID=$SIM_UDID" >> $GITHUB_ENV
-
     - name: Run All Tests
-      run: |
-        xcodebuild test \
-          -project WujiSeed.xcodeproj \
-          -scheme WujiSeed \
-          -destination "platform=iOS Simulator,id=$SIM_UDID" \
-          -parallel-testing-enabled NO \
-          -resultBundlePath AllTestResults.xcresult
-
-    - name: Upload test results
-      if: failure()
-      uses: actions/upload-artifact@v4
-      with:
-        name: all-test-results
-        path: AllTestResults.xcresult
-        retention-days: 30
+      run: swift test

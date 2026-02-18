@@ -88,7 +88,7 @@ class LatLngParser {
         }
 
         // Unrecognized format
-        return ParseResult(latitude: 0, longitude: 0, isValid: false, errorMessage: Lang("places.coord_format_error"))
+        return ParseResult(latitude: 0, longitude: 0, isValid: false, errorMessage: "Invalid coordinate format")
     }
 
     // MARK: - Format parsing methods
@@ -281,7 +281,7 @@ class LatLngParser {
         let lonValid = longitude >= -180 && longitude <= 180
 
         if !latValid || !lonValid {
-            return ParseResult(latitude: latitude, longitude: longitude, isValid: false, errorMessage: Lang("places.coord_range_error"))
+            return ParseResult(latitude: latitude, longitude: longitude, isValid: false, errorMessage: "Coordinate out of valid range")
         }
 
         return ParseResult(latitude: latitude, longitude: longitude, isValid: true, errorMessage: nil)

@@ -28,7 +28,7 @@ class CryptoUtils {
     // MARK: - Singleton
 
     /// Shared Sodium instance
-    private static let sodium = Sodium()
+    private nonisolated(unsafe) static let sodium = Sodium()
 
     // MARK: - BLAKE2b
 

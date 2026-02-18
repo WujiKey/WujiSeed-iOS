@@ -52,13 +52,22 @@ class GoldenVectorLoader {
     /// - Parameter filename: JSON filename (without path, e.g., "test_vector_1")
     /// - Returns: GoldenTestVector or nil if loading fails
     static func load(_ filename: String) -> GoldenTestVector? {
-        // Try to find file in test bundle
+        // Find JSON file: use Bundle.module for SPM (swift test), Bundle(for:) for Xcode
+        #if SWIFT_PACKAGE
+        let bundle = Bundle.module
+        let path = bundle.path(forResource: filename, ofType: "json", inDirectory: "GoldenVectors")
+                ?? bundle.path(forResource: filename, ofType: "json")
+        guard let path else {
+            print("❌ File not found: \(filename).json")
+            return nil
+        }
+        #else
         let bundle = Bundle(for: GoldenVectorLoader.self)
-
         guard let path = bundle.path(forResource: filename, ofType: "json") else {
             print("❌ File not found: \(filename).json")
             return nil
         }
+        #endif
 
         do {
             let data = try Data(contentsOf: URL(fileURLWithPath: path))

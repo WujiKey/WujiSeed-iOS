@@ -22,7 +22,7 @@ context: |
   - Offline-first (no network)
 
   ## Build & Test
-  - Simulator: iPhone 17 (iOS 26.2) - ID: C4F92C22-C0C1-45DF-BC81-B52C77D41A22
+  - Tests: swift test (native macOS, no simulator required)
   - Project file: WujiSeed.xcodeproj
   - Scheme: WujiSeed
   - Test coverage: All WujiLib business logic
@@ -80,7 +80,7 @@ rules:
 
   verification:
     - Run full test suite before marking tasks complete
-    - Test on iPhone 17 simulator (iOS 26.2)
+    - Run swift test to verify all tests pass
     - Verify all localizations display correctly
     - Check golden vector regression tests pass
     - Manual testing for UI/UX changes
