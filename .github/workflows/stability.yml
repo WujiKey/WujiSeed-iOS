@@ -1,0 +1,151 @@
+name: V1 Stability Check
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  golden-vector-regression:
+    name: Golden Vector Regression Tests
+    runs-on: macos-14
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Select Xcode version
+      run: sudo xcode-select -s /Applications/Xcode_16.0.app/Contents/Developer
+
+    - name: Show Xcode version
+      run: xcodebuild -version
+
+    - name: Show available simulators
+      run: xcrun simctl list devices available
+
+    - name: Run Golden Vector Regression Tests
+      run: |
+        xcodebuild test \
+          -project WujiSeed.xcodeproj \
+          -scheme WujiSeed \
+          -destination 'platform=iOS Simulator,name=iPhone 15 Pro' \
+          -only-testing:WujiSeedTests/WujiRegressionTests \
+          -resultBundlePath TestResults.xcresult
+
+    - name: Upload test results
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-results
+        path: TestResults.xcresult
+        retention-days: 30
+
+  dependency-version-check:
+    name: Dependency Version Lock Check
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Verify Swift-Sodium version lock
+      run: |
+        if ! grep -q '"version" : "0.9.1"' WujiSeed.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved; then
+          echo "❌ ERROR: Swift-Sodium version has changed from 0.9.1"
+          echo "This breaks V1 stability. See STABILITY.md for upgrade process."
+          exit 1
+        fi
+        echo "✅ Swift-Sodium locked at 0.9.1"
+
+    - name: Verify F9Grid version lock
+      run: |
+        if ! grep -q '"version" : "1.1.0"' WujiSeed.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved; then
+          echo "❌ ERROR: F9Grid version has changed from 1.1.0"
+          echo "This breaks V1 stability. See STABILITY.md for upgrade process."
+          exit 1
+        fi
+        echo "✅ F9Grid locked at 1.1.0"
+
+    - name: Check for Package.resolved changes
+      run: |
+        if git diff --name-only origin/main | grep -q "Package.resolved"; then
+          echo "⚠️  WARNING: Package.resolved has changed"
+          echo "Verify that golden vector tests pass before merging."
+        fi
+
+  code-review-reminder:
+    name: High-Risk File Change Detection
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Check for high-risk file modifications
+      run: |
+        HIGH_RISK_FILES=(
+          "WujiSeed/WujiLib/WujiNormalizer.swift"
+          "WujiSeed/WujiLib/CryptoUtils.swift"
+          "WujiSeed/WujiLib/WujiMemoryTagProcessor.swift"
+          "WujiSeed/Common/BIP39Helper.swift"
+          "WujiSeed/WujiLib/WujiReserve.swift"
+        )
+
+        CHANGED_FILES=$(git diff --name-only origin/main...HEAD)
+        HIGH_RISK_CHANGED=false
+
+        for file in "${HIGH_RISK_FILES[@]}"; do
+          if echo "$CHANGED_FILES" | grep -q "$file"; then
+            echo "⚠️  HIGH RISK: $file has been modified"
+            HIGH_RISK_CHANGED=true
+          fi
+        done
+
+        if [ "$HIGH_RISK_CHANGED" = true ]; then
+          echo ""
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "⚠️  CRITICAL: High-risk V1 algorithm files modified"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo ""
+          echo "REQUIRED CHECKS before merging:"
+          echo "  ✅ Golden vector regression tests MUST pass"
+          echo "  ✅ Review CODE_REVIEW_CHECKLIST.md"
+          echo "  ✅ Verify intermediate outputs match test vectors"
+          echo "  ✅ Document reason for modification"
+          echo ""
+          echo "See STABILITY.md for compatibility requirements."
+          echo ""
+          # Don't fail the build, just warn
+        else
+          echo "✅ No high-risk V1 algorithm files modified"
+        fi
+
+  all-tests:
+    name: Full Test Suite
+    runs-on: macos-14
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Select Xcode version
+      run: sudo xcode-select -s /Applications/Xcode_16.0.app/Contents/Developer
+
+    - name: Run All Tests
+      run: |
+        xcodebuild test \
+          -project WujiSeed.xcodeproj \
+          -scheme WujiSeed \
+          -destination 'platform=iOS Simulator,name=iPhone 15 Pro' \
+          -resultBundlePath AllTestResults.xcresult
+
+    - name: Upload test results
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: all-test-results
+        path: AllTestResults.xcresult
+        retention-days: 30

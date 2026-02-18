@@ -42,6 +42,17 @@ English | [中文](README.zh-CN.md)
 | Geographic Encoding | F9Grid hierarchical grid system |
 | Mnemonic | BIP39 standard (256 bits + 8-bit checksum) |
 
+## V1 Protocol Stability
+
+**Backward Compatibility Guarantee**: All mnemonics and encrypted backups generated with V1 will remain recoverable indefinitely.
+
+- ✅ **Frozen Algorithms**: The 7 core algorithms (text normalization, BLAKE2b salt, F9Grid encoding, tag processing, Argon2id, BIP39, XChaCha20-Poly1305) are immutable for V1
+- ✅ **Locked Dependencies**: Swift-Sodium 0.9.1, F9Grid 1.1.0 — upgrades require golden vector validation
+- ✅ **Regression Testing**: All changes must pass golden vector tests (see [WujiSeedTests/GoldenVectors/](WujiSeedTests/GoldenVectors/))
+- ✅ **Cross-Platform Verification**: Reference test vectors ensure consistency across iOS, Android, and JavaScript implementations
+
+For details, see [STABILITY.md](STABILITY.md).
+
 ## Build
 
 ### Requirements

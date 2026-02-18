@@ -32,7 +32,7 @@ xcodebuild test -project WujiSeed.xcodeproj -scheme WujiSeed \
 ## Architecture Summary
 
 ### Core Flow
-1. **Name Input** → Text normalization → BLAKE2b-256 salt generation
+1. **Name Input** → Text normalization → BLAKE2b-128 salt generation
 2. **Places & Memories** → F9Grid encoding + position codes (1-9) → Tag processing
 3. **Key Derivation** → Argon2id (password=locations+memories, salt=name salt)
 4. **Mnemonic Generation** → BIP39 24-word phrase
@@ -46,7 +46,7 @@ xcodebuild test -project WujiSeed.xcodeproj -scheme WujiSeed \
 ### Critical Algorithms
 ```
 Text Normalization: AsciiPunctNorm(CollapseWS(Trim(CaseFold(NFKC(s)))))
-Salt Generation:    BLAKE2b-256(Normalize(name) + "Forgetless-V1")
+Salt Generation:    BLAKE2b-128(Normalize(name) + "WUJI-Key-V1:Memory-Based Seed Phrases")
 Geographic:         F9Grid cell index + 9-grid position code (1-9 layout)
 KDF:                Argon2id (standard: 256MB memory, 7 iterations, 1 thread)
 ```

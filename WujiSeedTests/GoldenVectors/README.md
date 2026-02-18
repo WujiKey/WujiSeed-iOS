@@ -2,6 +2,18 @@
 
 This directory contains golden test vectors for WujiSeed cross-platform verification.
 
+## V1 Stability Commitment
+
+**These golden vectors define the immutable V1 protocol specification.**
+
+- ✅ **Backward Compatibility Guarantee**: Any mnemonic or encrypted backup generated with V1 will **always** be recoverable by future versions
+- ✅ **Algorithm Stability**: The 7 core algorithms (normalization, BLAKE2b, F9Grid, tag processing, Argon2id, BIP39, XChaCha20-Poly1305) are **frozen** for V1
+- ✅ **Dependency Locking**: Swift-Sodium 0.9.1 and F9Grid 1.1.0 are locked - upgrades require golden vector validation
+- ✅ **CI Enforcement**: All code changes must pass golden vector regression tests before merge
+- ⚠️ **Breaking Changes Prohibited**: Modifying these vectors or core algorithms constitutes a breaking change to V1
+
+If you need to change core behavior, you must create a V2 protocol with migration support.
+
 ## Purpose
 
 These JSON files serve as the **source of truth** for verifying that all platform implementations (iOS, Android, JavaScript, etc.) produce identical results for the same inputs.
