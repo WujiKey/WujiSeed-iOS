@@ -10,9 +10,6 @@ let package = Package(
     platforms: [
         .macOS(.v12)
     ],
-    products: [
-        .library(name: "WujiSeed", targets: ["WujiSeed"])
-    ],
     dependencies: [
         .package(url: "https://github.com/WujiKey/F9Grid.git", exact: Version(1, 1, 0)),
         .package(url: "https://github.com/jedisct1/swift-sodium", exact: Version(0, 9, 1)),
