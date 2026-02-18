@@ -512,7 +512,7 @@
 			repositoryURL = "https://github.com/WujiKey/F9Grid.git";
 			requirement = {
 				kind = exactVersion;
-				version = 1.1.0;
+				version = 1.2.0;
 			};
 		};
 		D7C50BC12EACBF7F006E1FBC /* XCRemoteSwiftPackageReference "swift-sodium" */ = {
