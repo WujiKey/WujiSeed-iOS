@@ -22,14 +22,24 @@ jobs:
       run: xcodebuild -version
 
     - name: Boot simulator
-      run: xcrun simctl boot "iPhone 16" || true
+      run: |
+        xcrun simctl boot "iPhone 16" || true
+        SIM_UDID=$(xcrun simctl list devices booted -j | python3 -c "
+import json, sys
+devices = json.load(sys.stdin)['devices']
+for ds in devices.values():
+    for d in ds:
+        if d['state'] == 'Booted':
+            print(d['udid'])
+" | head -1)
+        echo "SIM_UDID=$SIM_UDID" >> $GITHUB_ENV
 
     - name: Run Golden Vector Regression Tests
       run: |
         xcodebuild test \
           -project WujiSeed.xcodeproj \
           -scheme WujiSeed \
-          -destination 'platform=iOS Simulator,id=booted' \
+          -destination "platform=iOS Simulator,id=$SIM_UDID" \
           -parallel-testing-enabled NO \
           -only-testing:WujiSeedTests/WujiRegressionTests \
           -resultBundlePath TestResults.xcresult
@@ -136,14 +146,24 @@ jobs:
       run: sudo xcode-select -s /Applications/Xcode_26.0.app/Contents/Developer
 
     - name: Boot simulator
-      run: xcrun simctl boot "iPhone 16" || true
+      run: |
+        xcrun simctl boot "iPhone 16" || true
+        SIM_UDID=$(xcrun simctl list devices booted -j | python3 -c "
+import json, sys
+devices = json.load(sys.stdin)['devices']
+for ds in devices.values():
+    for d in ds:
+        if d['state'] == 'Booted':
+            print(d['udid'])
+" | head -1)
+        echo "SIM_UDID=$SIM_UDID" >> $GITHUB_ENV
 
     - name: Run All Tests
       run: |
         xcodebuild test \
           -project WujiSeed.xcodeproj \
           -scheme WujiSeed \
-          -destination 'platform=iOS Simulator,id=booted' \
+          -destination "platform=iOS Simulator,id=$SIM_UDID" \
           -parallel-testing-enabled NO \
           -resultBundlePath AllTestResults.xcresult
 
