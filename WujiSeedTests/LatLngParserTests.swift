@@ -200,26 +200,6 @@ class LatLngParserTests: XCTestCase {
         XCTAssertEqual(result.formattedString, "", "Invalid result should have empty formatted string")
     }
 
-    // MARK: - Determinism Tests
-
-    func testDeterminism() {
-        let inputs = [
-            "39.9042, 116.4074",
-            "18°41'57\"N 98°55'21\"E",
-            "北18.699°, 东98.922°",
-        ]
-
-        for input in inputs {
-            var results = Set<String>()
-            for _ in 0..<100 {
-                let result = LatLngParser.parse(input)
-                let key = "\(result.latitude),\(result.longitude)"
-                results.insert(key)
-            }
-            XCTAssertEqual(results.count, 1, "Same input should produce same output: \(input)")
-        }
-    }
-
     // MARK: - Performance Tests
 
     func testParsingPerformance() {

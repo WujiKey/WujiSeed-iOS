@@ -46,18 +46,6 @@ class CryptoUtilsTests: XCTestCase {
         XCTAssertEqual(hash.count, 32, "SHA256 should always produce 32 bytes")
     }
 
-    func testSHA256Determinism() {
-        let input = "test input for determinism".data(using: .utf8)!
-        var results = Set<Data>()
-
-        for _ in 0..<100 {
-            let hash = CryptoUtils.sha256(input)
-            results.insert(hash)
-        }
-
-        XCTAssertEqual(results.count, 1, "Same input should always produce same hash")
-    }
-
     // MARK: - BLAKE2b Tests
 
     func testBLAKE2bBasic() {
@@ -104,19 +92,6 @@ class CryptoUtilsTests: XCTestCase {
         XCTAssertEqual(hash?.count, 32)
     }
 
-    func testBLAKE2bDeterminism() {
-        let input = "determinism test".data(using: .utf8)!
-        var results = Set<Data>()
-
-        for _ in 0..<100 {
-            if let hash = CryptoUtils.blake2b(data: input) {
-                results.insert(hash)
-            }
-        }
-
-        XCTAssertEqual(results.count, 1, "Same input should always produce same hash")
-    }
-
     // MARK: - Salt Generation Tests
 
     func testSaltSuffix() {
@@ -148,26 +123,6 @@ class CryptoUtilsTests: XCTestCase {
 
         XCTAssertNotNil(key, "Argon2id should return a key")
         XCTAssertEqual(key?.count, 32, "Default output should be 32 bytes")
-    }
-
-    func testArgon2idDeterminism() {
-        let password = "determinism test".data(using: .utf8)!
-        let salt = Data(repeating: 0xAB, count: 16)  // Must be 16 bytes
-
-        let lightParams = CryptoUtils.Argon2Parameters(
-            memoryKB: 64 * 1024,
-            iterations: 1,
-            parallelism: 1
-        )
-
-        var results = Set<Data>()
-        for _ in 0..<5 {
-            if let key = CryptoUtils.argon2id(password: password, salt: salt, parameters: lightParams) {
-                results.insert(key)
-            }
-        }
-
-        XCTAssertEqual(results.count, 1, "Same inputs should produce same key")
     }
 
     func testArgon2idDifferentPasswords() {

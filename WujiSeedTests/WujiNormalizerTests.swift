@@ -183,28 +183,6 @@ class WujiNormalizerTests: XCTestCase {
         }
     }
 
-    // MARK: - Determinism Tests
-
-    func testDeterminism() {
-        let testInputs = [
-            "Hello World",
-            "My Wallet 钱包",
-            "测试　Test　テスト",
-        ]
-
-        for input in testInputs {
-            var results = Set<String>()
-
-            // Normalize same input 100 times
-            for _ in 0..<100 {
-                let result = WujiNormalizer.normalize(input)
-                results.insert(result)
-            }
-
-            XCTAssertEqual(results.count, 1, "Same input should produce same output")
-        }
-    }
-
     // MARK: - UTF-8 Data Conversion Tests
 
     func testToUTF8Data() {

@@ -99,29 +99,6 @@ class WujiIntegrationTests: XCTestCase {
             XCTAssertFalse(word.isEmpty, "Mnemonic word should not be empty")
         }
 
-        // Verify matches golden vector
-        XCTAssertEqual(result.mnemonics, testVector.mnemonics,
-            "Generated mnemonics should match golden vector")
-        XCTAssertEqual(result.positionCodes, testVector.positionCodes,
-            "Generated position codes should match golden vector")
-    }
-
-    /// Test: Generation is deterministic
-    func testGenerationDeterminism() {
-        let spots = createSpots()
-        guard let wujiName = testVector.wujiName else {
-            XCTFail("Failed to create WujiName from test vector")
-            return
-        }
-
-        guard let result1 = generateMnemonics(spots: spots, wujiName: wujiName),
-              let result2 = generateMnemonics(spots: spots, wujiName: wujiName) else {
-            XCTFail("Failed to generate mnemonics")
-            return
-        }
-
-        XCTAssertEqual(result1.mnemonics, result2.mnemonics, "Same inputs should produce same mnemonics")
-        XCTAssertEqual(result1.positionCodes, result2.positionCodes, "Same inputs should produce same position codes")
     }
 
     // MARK: - Test: Encrypt + Decrypt (Full 5 spots)

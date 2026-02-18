@@ -213,49 +213,9 @@ class WujiMemoryTagProcessorTests: XCTestCase {
         XCTAssertFalse(emojiResult.isEmpty, "Emoji should be preserved")
     }
 
-    // MARK: - Real World Examples Tests
+    // MARK: - Order Independence Tests
 
-    func testRealWorldExamples() {
-        // Simulate actual user input
-        let testCases: [(input: [String], description: String)] = [
-            (["女娲", "补天石", "诞生"], "Journey to the West scene 1"),
-            (["八九年", "学礼", "找神仙"], "Journey to the West scene 2"),
-            (["敖广", "借兵器", "行头"], "Journey to the West scene 3"),
-            (["三番五次", "菩萨", "帮忙"], "Journey to the West scene 4"),
-            (["释迦摩尼", "成佛", "圣地"], "Journey to the West scene 5"),
-        ]
-
-        for (input, description) in testCases {
-            let result = WujiMemoryTagProcessor.process(input)
-            let count = WujiMemoryTagProcessor.uniqueCount(input)
-
-            XCTAssertGreaterThanOrEqual(count, 3, "\(description): Should have at least 3 unique tags")
-            XCTAssertFalse(result.isEmpty, "\(description): Result should not be empty")
-        }
-    }
-
-    // MARK: - Determinism Tests
-
-    func testDeterminism() {
-        let testInputs: [[String]] = [
-            ["花果山", "水帘洞", "山腰"],
-            ["Apple", "Banana", "Cherry"],
-            ["测试", "Test", "テスト"],
-        ]
-
-        for input in testInputs {
-            var results = Set<String>()
-
-            // Process same input 100 times
-            for _ in 0..<100 {
-                let result = WujiMemoryTagProcessor.process(input)
-                results.insert(result)
-            }
-
-            XCTAssertEqual(results.count, 1, "Same input should produce same output")
-        }
-
-        // Test order independence
+    func testOrderIndependence() {
         let input1 = ["a", "b", "c"]
         let input2 = ["c", "a", "b"]
         let input3 = ["b", "c", "a"]

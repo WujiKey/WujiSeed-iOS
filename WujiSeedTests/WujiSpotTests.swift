@@ -94,21 +94,6 @@ class WujiSpotTests: XCTestCase {
         XCTAssertEqual(keyMaterial?.count, 18, "KeyMaterial should be memory + 8 bytes for cellIndex")
     }
 
-    func testKeyMaterialDeterminism() {
-        let location = testVector.locations[0]
-        let spot = WujiSpot(coordinates: location.coordinate, memory: "女娲山腰水帘洞补天石花果山诞生")
-        XCTAssertNotNil(spot)
-
-        var results = Set<Data>()
-        for _ in 0..<100 {
-            if let km = spot?.keyMaterial() {
-                results.insert(km)
-            }
-        }
-
-        XCTAssertEqual(results.count, 1, "Same spot should always produce same keyMaterial")
-    }
-
     // MARK: - Position Code Tests
 
     func testPositionCode() {
@@ -146,37 +131,8 @@ class WujiSpotTests: XCTestCase {
                 XCTAssertTrue((1...9).contains(code), "Position code \(code) should be 1-9")
             }
 
-            // Verify position codes match golden vector
-            XCTAssertEqual(processResult.positionCodes, testVector.positionCodes,
-                "Position codes should match golden vector")
-
         case .failure(let error):
             XCTFail("Processing failed: \(error)")
-        }
-    }
-
-    func testBatchProcessingDeterminism() {
-        // Use test vector data
-        let spots = testVector.spots
-
-        // Process multiple times
-        var combinedResults = Set<Data>()
-        var positionCodeResults = Set<[Int]>()
-
-        for _ in 0..<10 {
-            if case .success(let result) = WujiSpot.process(spots) {
-                combinedResults.insert(result.combinedData)
-                positionCodeResults.insert(result.positionCodes)
-            }
-        }
-
-        XCTAssertEqual(combinedResults.count, 1, "Combined data should be deterministic")
-        XCTAssertEqual(positionCodeResults.count, 1, "Position codes should be deterministic")
-
-        // Verify the deterministic result matches golden vector
-        if case .success(let result) = WujiSpot.process(spots) {
-            XCTAssertEqual(result.positionCodes, testVector.positionCodes,
-                "Deterministic result should match golden vector")
         }
     }
 

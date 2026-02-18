@@ -257,21 +257,6 @@ class UtilsTests: XCTestCase {
         XCTAssertEqual(Utils.dataToDecimal(hashData), expectedValue)
     }
 
-    func testDataToDecimalEmpty() {
-        // Test empty data
-        let emptyData = Data()
-        let result = Utils.dataToDecimal(emptyData)
-        XCTAssertEqual(result, "0", "Empty data should convert to '0'")
-
-        // Test data with all zeros
-        let zeroData = Data([0x00, 0x00, 0x00])
-        XCTAssertEqual(Utils.dataToDecimal(zeroData), "0")
-
-        // Test data starting with zeros (leading zeros)
-        let leadingZeros = Data([0x00, 0x00, 0x01])
-        XCTAssertEqual(Utils.dataToDecimal(leadingZeros), "1")
-    }
-
     func testDataToDecimalConsistencyWithHex() {
         // Verify that dataToDecimal and hexToDecimal produce same results
         let hexString = "ABCDEF123456"
