@@ -1,13 +1,13 @@
 {
-  "originHash" : "bbd22bf08f6aa3f16a1d2c58887b696f6d195094cb76c8931fca6ba26939d778",
+  "originHash" : "ba137855167e0a581dd15fd0033b027b870a41ef9fba610ed275a225316e98d1",
   "pins" : [
     {
       "identity" : "f9grid",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/WujiKey/F9Grid.git",
       "state" : {
-        "revision" : "17d15058ddb10ff6d556725b63b84005ea2f1c79",
-        "version" : "1.1.0"
+        "revision" : "98e9d63679d62b6cc77a7135c0d4320a4b756893",
+        "version" : "1.2.0"
       }
     },
     {
@@ -17,15 +17,6 @@
       "state" : {
         "revision" : "4f9164a0a2c9a6a7ff53a2833d54a5c79c957342",
         "version" : "0.9.1"
-      }
-    },
-    {
-      "identity" : "tomldecoder",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/dduan/TOMLDecoder.git",
-      "state" : {
-        "revision" : "f4388e05c035d6430e94022c353123abc020f1c4",
-        "version" : "0.4.3"
       }
     }
   ],

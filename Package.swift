@@ -11,7 +11,7 @@ let package = Package(
         .macOS(.v12)
     ],
     dependencies: [
-        .package(url: "https://github.com/WujiKey/F9Grid.git", exact: Version(1, 1, 0)),
+        .package(url: "https://github.com/WujiKey/F9Grid.git", exact: Version(1, 2, 0)),
         .package(url: "https://github.com/jedisct1/swift-sodium", exact: Version(0, 9, 1)),
     ],
     targets: [

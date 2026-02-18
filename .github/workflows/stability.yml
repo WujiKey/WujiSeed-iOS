@@ -34,7 +34,7 @@ jobs:
 
     - name: Verify Swift-Sodium version lock
       run: |
-        if ! grep -q '"version" : "0.9.1"' WujiSeed.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved; then
+        if ! grep -q '"version" : "0.9.1"' Package.resolved; then
           echo "❌ ERROR: Swift-Sodium version has changed from 0.9.1"
           echo "This breaks V1 stability. See STABILITY.md for upgrade process."
           exit 1
@@ -43,12 +43,12 @@ jobs:
 
     - name: Verify F9Grid version lock
       run: |
-        if ! grep -q '"version" : "1.1.0"' WujiSeed.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved; then
-          echo "❌ ERROR: F9Grid version has changed from 1.1.0"
+        if ! grep -q '"version" : "1.2.0"' Package.resolved; then
+          echo "❌ ERROR: F9Grid version has changed from 1.2.0"
           echo "This breaks V1 stability. See STABILITY.md for upgrade process."
           exit 1
         fi
-        echo "✅ F9Grid locked at 1.1.0"
+        echo "✅ F9Grid locked at 1.2.0"
 
     - name: Check for Package.resolved changes
       run: |
