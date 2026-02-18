@@ -157,6 +157,40 @@ Same as Swift-Sodium, with special focus on:
 - Negative coordinate handling (Southern/Western hemispheres)
 - Position code determinism for all 10 test vector locations
 
+## Dependency Upgrade Test Log
+
+### Swift-Sodium 0.9.1 — Upgrade Evaluation (2026-02-18)
+
+**Tested by**: v1-stability-audit (isolated branch)
+**Verdict**: **STAY ON 0.9.1 — No upgrade needed**
+
+| Check | Result |
+|-------|--------|
+| Golden Vector 1 (nameSaltHex) | ✅ Match |
+| Golden Vector 1 (keyDataHex) | ✅ Match |
+| Golden Vector 1 (mnemonics) | ✅ Match |
+| Golden Vector 1 (encryptedBackupBase64) | ✅ Match |
+| Golden Vector 2 (all fields) | ✅ Match |
+| Security vulnerabilities fixed in newer version | None identified |
+| Required features in newer version | None needed |
+
+**Conclusion**: Current 0.9.1 is stable, secure, and fully compatible. No urgent motivation to upgrade. Any future upgrade must re-run full golden vector regression before merging.
+
+### F9Grid 1.1.0 — Upgrade Evaluation (2026-02-18)
+
+**Tested by**: v1-stability-audit (isolated branch)
+**Verdict**: **STAY ON 1.1.0 — No upgrade needed**
+
+| Check | Result |
+|-------|--------|
+| Golden Vector 1 positionCodes (5 locations) | ✅ Match |
+| Golden Vector 2 positionCodes (5 locations) | ✅ Match |
+| Negative latitude handling (Southern hemisphere) | ✅ Correct |
+| Negative longitude handling (Western hemisphere) | ✅ Correct |
+| New version API compatibility | Not evaluated (no current need) |
+
+**Conclusion**: Current 1.1.0 produces correct, deterministic position codes for all tested coordinates including both hemispheres. No upgrade required.
+
 ## Risk Assessment
 
 ### HIGH RISK: Code Changes That Break Compatibility
@@ -272,6 +306,7 @@ If a breaking change is unavoidable:
 | Date | Version | Audit Type | Result | Notes |
 |------|---------|------------|--------|-------|
 | 2026-02-13 | 1.0 | Initial Stability Baseline | ✅ PASS | All golden vectors pass, dependencies locked |
+| 2026-02-18 | 1.0 | Full V1 Stability Audit | ✅ PASS | 118 tests pass; Swift-Sodium 0.9.1 and F9Grid 1.1.0 confirmed compatible; CI pipeline verified |
 
 ## References
 
@@ -281,6 +316,6 @@ If a breaking change is unavoidable:
 
 ---
 
-**Last Updated**: 2026-02-13
+**Last Updated**: 2026-02-18
 **Protocol Version**: V1
 **Audit Status**: ✅ Baseline Established
