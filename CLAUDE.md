@@ -15,17 +15,22 @@ WujiSeed is an iOS application that generates BIP39 mnemonic phrases using a mem
 ## Quick Commands
 
 ```bash
+# Boot simulator (run once before testing)
+xcrun simctl boot C4F92C22-C0C1-45DF-BC81-B52C77D41A22 || true
+
 # Build (Debug)
 xcodebuild -project WujiSeed.xcodeproj -scheme WujiSeed -configuration Debug \
-  -destination 'platform=iOS Simulator,id=C4F92C22-C0C1-45DF-BC81-B52C77D41A22' build
+  -destination 'platform=iOS Simulator,id=booted' build
 
-# Run all tests
+# Run all tests (fast: uses booted simulator, no clone overhead)
 xcodebuild test -project WujiSeed.xcodeproj -scheme WujiSeed \
-  -destination 'platform=iOS Simulator,id=C4F92C22-C0C1-45DF-BC81-B52C77D41A22'
+  -destination 'platform=iOS Simulator,id=booted' \
+  -parallel-testing-enabled NO
 
 # Run specific test class
 xcodebuild test -project WujiSeed.xcodeproj -scheme WujiSeed \
-  -destination 'platform=iOS Simulator,id=C4F92C22-C0C1-45DF-BC81-B52C77D41A22' \
+  -destination 'platform=iOS Simulator,id=booted' \
+  -parallel-testing-enabled NO \
   -only-testing:WujiSeedTests/WujiRegressionTests
 ```
 
