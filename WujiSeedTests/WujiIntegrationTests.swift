@@ -7,11 +7,28 @@
 //
 //  Data source: wujikey_v1_vector_1.json (Journey to the West)
 //
+//  Argon2id strategy:
+//  - Most tests use fastParams (~64KB/1iter) to test business logic without KDF overhead.
+//  - testEncryptAndDecryptWith5Spots uses production params (256MB/7iter) to verify the
+//    full end-to-end flow works with real parameters. KDF output correctness is separately
+//    guaranteed by WujiRegressionTests (golden vectors).
+//
 
 import XCTest
 @testable import WujiSeed
 
 class WujiIntegrationTests: XCTestCase {
+
+    // MARK: - Argon2id Parameters
+
+    /// Fast parameters for logic testing (~448× faster than production).
+    /// Use these for tests that verify business logic (recovery combinations, coordinate
+    /// drift, failure cases) — not for tests that verify exact crypto output.
+    private static let fastParams = CryptoUtils.Argon2Parameters(
+        memoryKB: 64,
+        iterations: 1,
+        parallelism: 1
+    )
 
     // MARK: - Test Vector
 
@@ -40,8 +57,14 @@ class WujiIntegrationTests: XCTestCase {
         return testVector.spots
     }
 
-    /// Generate mnemonics from spots and name (full generation flow)
-    private func generateMnemonics(spots: [WujiSpot], wujiName: WujiName) -> (mnemonics: [String], keyMaterials: [Data], positionCodes: [Int])? {
+    /// Generate mnemonics from spots and name (full generation flow).
+    /// - Parameter params: Argon2id parameters. Defaults to fastParams for speed;
+    ///   pass testVector.argon2Params when testing production-param correctness.
+    private func generateMnemonics(
+        spots: [WujiSpot],
+        wujiName: WujiName,
+        params: CryptoUtils.Argon2Parameters = WujiIntegrationTests.fastParams
+    ) -> (mnemonics: [String], keyMaterials: [Data], positionCodes: [Int])? {
         // Process spots
         guard case .success(let processResult) = WujiSpot.process(spots) else {
             return nil
@@ -51,11 +74,11 @@ class WujiIntegrationTests: XCTestCase {
         let keyMaterials = processResult.keyMaterials
         let positionCodes = processResult.positionCodes
 
-        // Argon2id: combinedData + nameSalt → keyData (using test vector params)
+        // Argon2id: combinedData + nameSalt → keyData
         guard let keyData = CryptoUtils.argon2id(
             password: passwordData,
             salt: wujiName.salt,
-            parameters: testVector.argon2Params
+            parameters: params
         ) else {
             return nil
         }
@@ -70,7 +93,8 @@ class WujiIntegrationTests: XCTestCase {
 
     // MARK: - Test: Full Generation Flow
 
-    /// Test: Name + 5 places → 24 mnemonics (deterministic)
+    /// Test: Name + 5 places → 24 mnemonics (deterministic).
+    /// Uses fastParams — verifies generation logic, not KDF output values.
     func testGenerationProduces24Mnemonics() {
         let spots = createSpots()
         XCTAssertEqual(spots.count, 5, "Should create 5 spots")
@@ -98,20 +122,22 @@ class WujiIntegrationTests: XCTestCase {
         for word in result.mnemonics {
             XCTAssertFalse(word.isEmpty, "Mnemonic word should not be empty")
         }
-
     }
 
-    // MARK: - Test: Encrypt + Decrypt (Full 5 spots)
+    // MARK: - Test: Encrypt + Decrypt with production parameters
 
-    /// Test: Encrypt with 5 spots, decrypt with same 5 spots
+    /// Test: Encrypt with 5 spots, decrypt with same 5 spots — using PRODUCTION Argon2id params.
+    /// This is the single integration test that exercises the full flow with real KDF parameters.
+    /// Exact output values are separately verified by WujiRegressionTests (golden vectors).
     func testEncryptAndDecryptWith5Spots() {
+        let params = testVector.argon2Params   // production: 256 MB / 7 iter
         let spots = createSpots()
         guard let wujiName = testVector.wujiName else {
             XCTFail("Failed to create WujiName from test vector")
             return
         }
 
-        guard let genResult = generateMnemonics(spots: spots, wujiName: wujiName) else {
+        guard let genResult = generateMnemonics(spots: spots, wujiName: wujiName, params: params) else {
             XCTFail("Failed to generate mnemonics")
             return
         }
@@ -122,7 +148,7 @@ class WujiIntegrationTests: XCTestCase {
             keyMaterials: genResult.keyMaterials,
             positionCodes: genResult.positionCodes,
             nameSalt: wujiName.salt,
-            argon2Params: testVector.argon2Params
+            argon2Params: params
         )
 
         guard case .success(let encrypted) = encryptResult else {
@@ -138,7 +164,7 @@ class WujiIntegrationTests: XCTestCase {
             spots: spots,
             positionCodes: genResult.positionCodes,
             nameSalt: wujiName.salt,
-            argon2Params: testVector.argon2Params
+            argon2Params: params
         )
 
         guard case .success(let decrypted) = decryptResult else {
@@ -151,15 +177,17 @@ class WujiIntegrationTests: XCTestCase {
 
     // MARK: - Test: Recovery with 3 spots (exact coordinates)
 
-    /// Test: Encrypt with 5 spots, recover with only 3 spots (exact coordinates)
+    /// Test: Encrypt with 5 spots, recover with only 3 spots (exact coordinates).
+    /// Uses fastParams — verifies recovery logic.
     func testRecoveryWith3SpotsExact() {
+        let params = WujiIntegrationTests.fastParams
         let spots = createSpots()
         guard let wujiName = testVector.wujiName else {
             XCTFail("Failed to create WujiName from test vector")
             return
         }
 
-        guard let genResult = generateMnemonics(spots: spots, wujiName: wujiName) else {
+        guard let genResult = generateMnemonics(spots: spots, wujiName: wujiName, params: params) else {
             XCTFail("Failed to generate mnemonics")
             return
         }
@@ -170,7 +198,7 @@ class WujiIntegrationTests: XCTestCase {
             keyMaterials: genResult.keyMaterials,
             positionCodes: genResult.positionCodes,
             nameSalt: wujiName.salt,
-            argon2Params: testVector.argon2Params
+            argon2Params: params
         )
 
         guard case .success(let encrypted) = encryptResult else {
@@ -185,7 +213,7 @@ class WujiIntegrationTests: XCTestCase {
             allPositionCodes: genResult.positionCodes,
             nameSalt: wujiName.salt,
             capsuleData: encrypted.data,
-            argon2Params: testVector.argon2Params
+            argon2Params: params
         )
 
         let recoveryResult = WujiReserve.decryptWithRecovery(input: recoveryInput)
@@ -198,15 +226,17 @@ class WujiIntegrationTests: XCTestCase {
         XCTAssertEqual(recovered.mnemonics, genResult.mnemonics, "Recovered mnemonics should match original")
     }
 
-    /// Test: Recovery works with any 3 out of 5 spots
+    /// Test: Recovery works with any 3 out of 5 spots.
+    /// Uses fastParams — verifies all C(5,3)=10 combinations of the recovery logic.
     func testRecoveryWithAny3Of5Spots() {
+        let params = WujiIntegrationTests.fastParams
         let spots = createSpots()
         guard let wujiName = testVector.wujiName else {
             XCTFail("Failed to create WujiName from test vector")
             return
         }
 
-        guard let genResult = generateMnemonics(spots: spots, wujiName: wujiName) else {
+        guard let genResult = generateMnemonics(spots: spots, wujiName: wujiName, params: params) else {
             XCTFail("Failed to generate mnemonics")
             return
         }
@@ -217,7 +247,7 @@ class WujiIntegrationTests: XCTestCase {
             keyMaterials: genResult.keyMaterials,
             positionCodes: genResult.positionCodes,
             nameSalt: wujiName.salt,
-            argon2Params: testVector.argon2Params
+            argon2Params: params
         )
 
         guard case .success(let encrypted) = encryptResult else {
@@ -238,7 +268,7 @@ class WujiIntegrationTests: XCTestCase {
                 allPositionCodes: genResult.positionCodes,
                 nameSalt: wujiName.salt,
                 capsuleData: encrypted.data,
-                argon2Params: testVector.argon2Params
+                argon2Params: params
             )
 
             let result = WujiReserve.decryptWithRecovery(input: recoveryInput)
@@ -255,15 +285,17 @@ class WujiIntegrationTests: XCTestCase {
 
     // MARK: - Test: Recovery with coordinate drift (F9Grid tolerance)
 
-    /// Test: Recovery succeeds when coordinates are slightly offset but within the same F9Grid cell
+    /// Test: Recovery succeeds when coordinates are slightly offset but within the same F9Grid cell.
+    /// Uses fastParams — verifies coordinate drift tolerance logic.
     func testRecoveryWithCoordinateDrift() {
+        let params = WujiIntegrationTests.fastParams
         let spots = createSpots()
         guard let wujiName = testVector.wujiName else {
             XCTFail("Failed to create WujiName from test vector")
             return
         }
 
-        guard let genResult = generateMnemonics(spots: spots, wujiName: wujiName) else {
+        guard let genResult = generateMnemonics(spots: spots, wujiName: wujiName, params: params) else {
             XCTFail("Failed to generate mnemonics")
             return
         }
@@ -274,7 +306,7 @@ class WujiIntegrationTests: XCTestCase {
             keyMaterials: genResult.keyMaterials,
             positionCodes: genResult.positionCodes,
             nameSalt: wujiName.salt,
-            argon2Params: testVector.argon2Params
+            argon2Params: params
         )
 
         guard case .success(let encrypted) = encryptResult else {
@@ -302,16 +334,12 @@ class WujiIntegrationTests: XCTestCase {
         }
 
         // Verify drifted spots resolve to same cellIndex via position code correction
-        // During generation: cellIndex() (no correction) is used
-        // During recovery: cellIndex(correctedBy:) is used to find the original cell
         for (i, driftedSpot) in driftedSpots.enumerated() {
             let originalSpot = spots[i]
             let originalIndex = originalSpot.place.cellIndex()
             let driftedIndex = driftedSpot.place.cellIndex(correctedBy: genResult.positionCodes[i])
             XCTAssertNotNil(originalIndex, "Original spot \(i) should have a cellIndex")
             XCTAssertNotNil(driftedIndex, "Drifted spot \(i) should have a corrected cellIndex")
-            // Note: These may differ if the drift is too large. The real test is whether
-            // decryptWithRecovery succeeds, which handles all the correction logic internally.
         }
 
         // Recovery with drifted coordinates
@@ -320,7 +348,7 @@ class WujiIntegrationTests: XCTestCase {
             allPositionCodes: genResult.positionCodes,
             nameSalt: wujiName.salt,
             capsuleData: encrypted.data,
-            argon2Params: testVector.argon2Params
+            argon2Params: params
         )
 
         let recoveryResult = WujiReserve.decryptWithRecovery(input: recoveryInput)
@@ -334,15 +362,18 @@ class WujiIntegrationTests: XCTestCase {
             "Recovered mnemonics should match even with coordinate drift")
     }
 
-    /// Test: Recovery with larger drift that crosses F9Grid cell boundary but stays within position code correction range
+    /// Test: Recovery with larger drift that crosses F9Grid cell boundary but stays within
+    /// position code correction range.
+    /// Uses fastParams — verifies the correction logic for larger drifts.
     func testRecoveryWithLargerDrift() {
+        let params = WujiIntegrationTests.fastParams
         let spots = createSpots()
         guard let wujiName = testVector.wujiName else {
             XCTFail("Failed to create WujiName from test vector")
             return
         }
 
-        guard let genResult = generateMnemonics(spots: spots, wujiName: wujiName) else {
+        guard let genResult = generateMnemonics(spots: spots, wujiName: wujiName, params: params) else {
             XCTFail("Failed to generate mnemonics")
             return
         }
@@ -353,7 +384,7 @@ class WujiIntegrationTests: XCTestCase {
             keyMaterials: genResult.keyMaterials,
             positionCodes: genResult.positionCodes,
             nameSalt: wujiName.salt,
-            argon2Params: testVector.argon2Params
+            argon2Params: params
         )
 
         guard case .success(let encrypted) = encryptResult else {
@@ -362,8 +393,6 @@ class WujiIntegrationTests: XCTestCase {
         }
 
         // Larger drift: ~0.000125° = one F9Grid sub-cell step
-        // This may cross into an adjacent position code zone but findOriginalCell
-        // should correct it back to the original cell using the stored position code
         let driftedLocations: [(coord: String, memory: String)] = [
             ("34.617200, 119.191960", testVector.locations[0].memoryProcessed),  // ~12m drift
             ("35.066370, 107.614680", testVector.locations[1].memoryProcessed),  // ~12m drift
@@ -379,7 +408,6 @@ class WujiIntegrationTests: XCTestCase {
             driftedSpots.append(spot)
         }
 
-        // Verify drifted spots can be corrected (may or may not match exactly)
         for (i, driftedSpot) in driftedSpots.enumerated() {
             let correctedIndex = driftedSpot.place.cellIndex(correctedBy: genResult.positionCodes[i])
             XCTAssertNotNil(correctedIndex, "Drifted spot \(i) should be correctable")
@@ -391,7 +419,7 @@ class WujiIntegrationTests: XCTestCase {
             allPositionCodes: genResult.positionCodes,
             nameSalt: wujiName.salt,
             capsuleData: encrypted.data,
-            argon2Params: testVector.argon2Params
+            argon2Params: params
         )
 
         let recoveryResult = WujiReserve.decryptWithRecovery(input: recoveryInput)
@@ -407,15 +435,17 @@ class WujiIntegrationTests: XCTestCase {
 
     // MARK: - Test: Negative cases
 
-    /// Test: Recovery fails with wrong memory
+    /// Test: Recovery fails with wrong memory.
+    /// Uses fastParams — verifies the failure case logic.
     func testRecoveryFailsWithWrongMemory() {
+        let params = WujiIntegrationTests.fastParams
         let spots = createSpots()
         guard let wujiName = testVector.wujiName else {
             XCTFail("Failed to create WujiName from test vector")
             return
         }
 
-        guard let genResult = generateMnemonics(spots: spots, wujiName: wujiName) else {
+        guard let genResult = generateMnemonics(spots: spots, wujiName: wujiName, params: params) else {
             XCTFail("Failed to generate mnemonics")
             return
         }
@@ -426,7 +456,7 @@ class WujiIntegrationTests: XCTestCase {
             keyMaterials: genResult.keyMaterials,
             positionCodes: genResult.positionCodes,
             nameSalt: wujiName.salt,
-            argon2Params: testVector.argon2Params
+            argon2Params: params
         )
 
         guard case .success(let encrypted) = encryptResult else {
@@ -446,7 +476,7 @@ class WujiIntegrationTests: XCTestCase {
             allPositionCodes: genResult.positionCodes,
             nameSalt: wujiName.salt,
             capsuleData: encrypted.data,
-            argon2Params: testVector.argon2Params
+            argon2Params: params
         )
 
         let recoveryResult = WujiReserve.decryptWithRecovery(input: recoveryInput)
@@ -457,15 +487,17 @@ class WujiIntegrationTests: XCTestCase {
         // Expected: failure (decryption should not succeed with wrong key material)
     }
 
-    /// Test: Recovery fails with wrong name
+    /// Test: Recovery fails with wrong name.
+    /// Uses fastParams — verifies the failure case logic.
     func testRecoveryFailsWithWrongName() {
+        let params = WujiIntegrationTests.fastParams
         let spots = createSpots()
         guard let wujiName = testVector.wujiName else {
             XCTFail("Failed to create WujiName from test vector")
             return
         }
 
-        guard let genResult = generateMnemonics(spots: spots, wujiName: wujiName) else {
+        guard let genResult = generateMnemonics(spots: spots, wujiName: wujiName, params: params) else {
             XCTFail("Failed to generate mnemonics")
             return
         }
@@ -476,7 +508,7 @@ class WujiIntegrationTests: XCTestCase {
             keyMaterials: genResult.keyMaterials,
             positionCodes: genResult.positionCodes,
             nameSalt: wujiName.salt,
-            argon2Params: testVector.argon2Params
+            argon2Params: params
         )
 
         guard case .success(let encrypted) = encryptResult else {
@@ -496,7 +528,7 @@ class WujiIntegrationTests: XCTestCase {
             allPositionCodes: genResult.positionCodes,
             nameSalt: wrongName.salt,
             capsuleData: encrypted.data,
-            argon2Params: testVector.argon2Params
+            argon2Params: params
         )
 
         let recoveryResult = WujiReserve.decryptWithRecovery(input: recoveryInput)
