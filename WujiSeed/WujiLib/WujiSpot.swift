@@ -50,15 +50,19 @@ struct WujiSpot {
     ///
     /// Format: memory(UTF-8) + cellIndex(8 bytes big-endian)
     ///
+    /// When using place name mode (no coordinates), cellIndex is fixed to 0.
+    /// The place name is included as a tag in the memory string instead.
+    ///
     /// - Parameter positionCode: Optional position code for cellIndex correction
     /// - Returns: KeyMaterial Data or nil if cellIndex cannot be determined
     func keyMaterial(correctedBy positionCode: Int? = nil) -> Data? {
         guard let index = place.cellIndex(correctedBy: positionCode) else {
             return nil
         }
-        // Memory data (already merged and sorted)
+        // Memory data (already merged and sorted, with \u{1F} separator)
         var data = Data(memory.normalized.utf8)
         // Append cellIndex as 8-byte big-endian
+        // Note: For place name mode, cellIndex = 0 (all zeros)
         var bigEndianIndex = index.bigEndian
         data.append(Data(bytes: &bigEndianIndex, count: 8))
         return data

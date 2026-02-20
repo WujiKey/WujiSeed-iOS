@@ -29,8 +29,8 @@ class WujiMemoryTagProcessor {
     /// Then:
     /// - Filter empty tags
     /// - Remove duplicates (case-insensitive after normalization)
-    /// - Sort by Unicode order
-    /// - Concatenate without separator
+    /// - Sort by UTF-8 byte order (cross-platform deterministic)
+    /// - Concatenate with Unit Separator (0x1F) delimiter
     ///
     /// - Parameter tags: Array of raw tag strings (can be normalized or raw)
     /// - Returns: Final normalized string for crypto operations
@@ -39,8 +39,8 @@ class WujiMemoryTagProcessor {
             .map { normalizeTag($0) }
             .filter { !$0.isEmpty }
             .uniqued()
-            .sorted()
-            .joined()
+            .sorted(by: utf8ByteOrder)
+            .joined(separator: "\u{1F}")
     }
 
     /// Normalize tags without sorting or concatenating
@@ -137,6 +137,21 @@ class WujiMemoryTagProcessor {
             .count
     }
 
+    // MARK: - Private Methods
+
+    /// UTF-8 byte order comparison for cross-platform deterministic sorting
+    /// This ensures identical sort order on iOS, Android, Web regardless of locale
+    private static func utf8ByteOrder(_ a: String, _ b: String) -> Bool {
+        let aBytes = Array(a.utf8)
+        let bBytes = Array(b.utf8)
+        let minLen = min(aBytes.count, bBytes.count)
+        for i in 0..<minLen {
+            if aBytes[i] != bBytes[i] {
+                return aBytes[i] < bBytes[i]
+            }
+        }
+        return aBytes.count < bBytes.count
+    }
 }
 
 // MARK: - Array Extension for Unique
